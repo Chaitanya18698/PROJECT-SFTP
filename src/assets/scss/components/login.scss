@@ -1,0 +1,76 @@
+.login-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    .login-set{
+        .login-logo{
+            width: 200px;
+            height: 75px;
+            border-radius: $border-radius-lg;
+            margin: auto auto 24px auto;
+            img{
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+    .login-footer{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-block-start: 6px;
+    }
+    .login-inline-actions{
+        text-align: right;
+        button{
+            &:not(:last-child){
+                margin-inline-end: 10px;
+            }
+        }
+    }
+}
+
+.login-card{
+    background: $base-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-regular;
+    overflow: hidden;
+    padding: 40px 36px;
+    width: 500px;
+    margin: auto;
+    &-head{
+        text-align: center;
+        margin-block-end: 36px;
+        &-title{
+            font-size: $text-size-xl;
+            font-weight: $font-weight-bold;
+            line-height: $line-height-xl;
+            color: $base-text-900;
+            margin-block-end: 6px;
+        }
+        &-sub-title{
+            font-size: $text-size-reg;
+            font-weight: $font-weight-regular;
+            line-height: $line-height-regular;
+            color: $base-text-100;
+        }
+    }
+}
+
+.otp-set{
+    display: flex;
+    align-items: center;
+    &-input{
+        width: 50px;
+        input{
+            border-color: $border-color-700;
+            font-size: $text-size-lg;
+            text-align: center;
+        }
+        &:not(:last-child){
+            margin-inline-end: 24px;
+        }
+    }
+}

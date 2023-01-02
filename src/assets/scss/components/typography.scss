@@ -1,0 +1,10 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    font-family: "Poppins" !important;
+    font-size: $text-size-reg !important;
+    font-weight: $font-weight-regular !important;
+    background: $base-bg !important;
+  }

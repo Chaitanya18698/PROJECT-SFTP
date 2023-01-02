@@ -1,0 +1,266 @@
+<div class="page-wrapper">
+    <!-- page header -->
+    <!-- page topmenu -->
+    <!-- page main content -->
+
+    <!-- footer -->
+
+    <div class="login-wrapper">
+        <div class="login-set">
+            <div class="login-logo">
+                <img src="../../assets/images/akrivia_logo2.png" alt="Company Name">
+            </div>
+
+            <!-- LOGIN -->
+            <div class="login-card" *ngIf="login_type == 'login'"> 
+                <div class="login-card-head">
+                    <div class="login-card-head-title">
+                        Welcome Back
+                    </div>
+                    <div class="login-card-head-sub-title">
+                        Enter your credentials to access your account
+                    </div>
+                </div>
+                <div class="login-card-body">
+                    <div class="form-group lg">
+                        <label for="username" class="form-label field-required">Username</label>
+                        <input id="username" type="text" class="form-control is-invalid" placeholder="Enter your username">
+                        <div class="invalid-feedback">
+                            Please provide a valid zip.
+                          </div>
+                    </div>
+                    <div class="form-group lg">
+                        <label for="password" class="form-label field-required">Password</label>
+                        <div class="input-group-append">
+                            <input id="password" type="{{hidePassword ? 'password' : 'text'}}" class="form-control"
+                                placeholder="Enter your password" [(ngModel)]="password_status">
+                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && !hidePassword"
+                                (click)="togglePassword()">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && hidePassword"
+                                (click)="togglePassword()">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </span>
+                        </div>
+                        <small id="passwordHelpInline" class="text-muted">
+                            Must be 8-20 characters long.
+                          </small>
+                          
+                        <!-- <div class="invalid-feedback">
+                            Please provide a valid password.
+                          </div>
+                        <div class="valid-feedback">
+                            Valid password.
+                          </div> -->
+
+                    </div>
+                    <button class="btn btn-block btn-primary" id="login">
+                        Log In
+                    </button>
+                </div>
+                <div class="login-footer">
+                    <div class="login-footer-left">
+                        <button class="btn btn-text btn-sm" id="forgot-password"
+                            (click)="handleLogin('forgot_password')">Forgot
+                            password</button>
+                    </div>
+                    <div class="login-footer-right">
+                        <button class="btn btn-text btn-sm" id="new-user" (click)="handleLogin('register')">New
+                            user?</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORGOT PASSWORD -->
+            <div class="login-card" *ngIf="login_type == 'forgot_password'"> 
+                <div class="login-card-head">
+                    <div class="login-card-head-title">
+                        Password Reset
+                    </div>
+                    <div class="login-card-head-sub-title">
+                        Enter your email to continue with the password reset process
+                    </div>
+                </div>
+                <div class="login-card-body">
+                    <div class="form-group lg">
+                        <label for="username" class="form-label field-required">Username</label>
+                        <input id="username" type="text" class="form-control" placeholder="Enter your username">
+                    </div>
+                    <div class="login-inline-actions">
+                        <button class="btn btn-outline-primary" id="cancel-forgot-password"
+                            (click)="handleLogin('login')">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary" id="send-email" (click)="handleLogin('otp')">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OTP -->
+            <div class="login-card" *ngIf="login_type == 'otp'"> 
+                <div class="login-card-head">
+                    <div class="login-card-head-title">
+                        Enter OTP
+                    </div>
+                    <!-- <div class="login-card-head-sub-title">
+                        Enter your email to continue with the password reset process
+                    </div> -->
+                </div>
+                <div class="login-card-body">
+                    <div class="form-group lg">
+                        <label for="otp" class="form-label field-required">OTP</label>
+                        <div class="otp-set">
+                            <div class="otp-set-input">
+                                <input type="text" (change)="handleOTP($event)" class="form-control" maxlength="1" autocomplete="off" data-next="2"
+                                    id="1">
+                            </div>
+                            <div class="otp-set-input">
+                                <input type="text" (change)="handleOTP($event)" class="form-control" maxlength="1" autocomplete="off" data-next="3"
+                                    id="2">
+                            </div>
+                            <div class="otp-set-input">
+                                <input type="text" (change)="handleOTP($event)" class="form-control" maxlength="1" autocomplete="off" data-next="4"
+                                    id="3">
+                            </div>
+                            <div class="otp-set-input">
+                                <input type="text" (change)="handleOTP($event)" class="form-control" maxlength="1" autocomplete="off" data-next="5"
+                                    id="4">
+                            </div>
+                            <div class="otp-set-input">
+                                <input type="text" class="form-control" maxlength="1" autocomplete="off" id="5">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-primary" id="otp-confirm" (click)="handleLogin('new_password')">
+                        Confirm
+                    </button>
+                </div>
+                <div class="login-footer">
+                    <div class="login-footer-left">
+                        <button class="btn btn-text btn-sm" id="forgot-password" (click)="handleLogin('login')">Back to
+                            Login</button>
+                    </div>
+                    <div class="login-footer-right">
+                        <button class="btn btn-text btn-sm" id="new-user">Resent OTP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CREATE NEW PASSWORD -->
+            <div class="login-card" *ngIf="login_type == 'new_password'"> 
+                <div class="login-card-head">
+                    <div class="login-card-head-title">
+                        Create new password
+                    </div>
+                    <!-- <div class="login-card-head-sub-title">
+                        Create new password 
+                    </div> -->
+                </div>
+                <div class="login-card-body">
+                    <div class="form-group lg">
+                        <label for="password" class="form-label field-required">New Password</label>
+                        <div class="input-group-append">
+                            <input id="password" type="{{hidePassword ? 'password' : 'text'}}" class="form-control"
+                                placeholder="Enter your new password" [(ngModel)]="password_status">
+                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && !hidePassword"
+                                (click)="togglePassword()">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && hidePassword"
+                                (click)="togglePassword()">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group lg">
+                        <label for="confirm password" class="form-label field-required">Confirm Password</label>
+                        <div class="input-group-append">
+                            <input id="password" type="{{hidePassword1 ? 'password' : 'text'}}" class="form-control"
+                                placeholder="Confirm password" [(ngModel)]="password_status1">
+                            <span id="toggle-password" class="icon" *ngIf="password_status1 != '' && !hidePassword1"
+                                (click)="togglePassword1()">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                            <span id="toggle-password" class="icon" *ngIf="password_status1 != '' && hidePassword1"
+                                (click)="togglePassword1()">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-primary" id="otp-confirm" (click)="handleLogin('login')">
+                        Confirm
+                    </button>
+                </div>
+                <!-- <div class="login-footer">
+                    <div class="login-footer-left">
+                        <button class="btn btn-text btn-sm" id="forgot-password" (click)="handleLogin()">Cancel</button>
+                    </div>
+                    <div class="login-footer-right">
+                        <button class="btn btn-text btn-sm" id="new-user" (click)="handleLogin()">Resent OTP</button>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- NEW USER -->
+            <div class="login-card" *ngIf="login_type == 'register'">
+                <div class="login-card-head">
+                    <div class="login-card-head-title">
+                        Create an account
+                    </div>
+                    <div class="login-card-head-sub-title">
+                        Enter your details to create an account.
+                    </div>
+                </div>
+                <div class="login-card-body">
+                    <div class="form-group lg"> 
+                        <label for="email" class="form-label field-required">Email</label>
+                        <input id="email" type="text" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group lg">
+                        <label for="password" class="form-label field-required">Password</label>
+                        <div class="input-group-append">
+                            <input id="password" type="{{hidePassword ? 'password' : 'text'}}" class="form-control"
+                                placeholder="Enter your password" [(ngModel)]="password_status">
+                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && !hidePassword"
+                                (click)="togglePassword()">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && hidePassword"
+                                (click)="togglePassword()">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group lg">
+                        <label for="confirm password" class="form-label field-required">Confirm Password</label>
+                        <div class="input-group-append">
+                            <input id="password" type="{{hidePassword1 ? 'password' : 'text'}}" class="form-control"
+                                placeholder="Confirm password" [(ngModel)]="password_status1">
+                            <span id="toggle-password" class="icon" *ngIf="password_status1 != '' && !hidePassword1"
+                                (click)="togglePassword1()">
+                                <i class="fa-solid fa-eye"></i>
+                            </span>
+                            <span id="toggle-password" class="icon" *ngIf="password_status1 != '' && hidePassword1"
+                                (click)="togglePassword1()">
+                                <i class="fa-solid fa-eye-slash"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="login-inline-actions">
+                        <button class="btn btn-outline-primary" id="cancel-registration" (click)="handleLogin('login')">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary" id="submit-registration" (click)="handleLogin('login')">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

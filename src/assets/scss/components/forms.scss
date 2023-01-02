@@ -1,0 +1,65 @@
+input {
+    &.form-control {
+        border-radius: $border-radius-reg;
+        border-color: $border-color;
+        padding: 4px 10px;
+        color: $base-text-900;
+        transition: all ease 0.1s;
+        height: 44px;
+        font-size: $text-size-reg;
+
+        &::placeholder {
+            color: $base-text-100;
+        }
+
+        &:focus,
+        &:active,
+        &.active {
+            border-color: $primary-blue-900;
+            background: transparent;
+        }
+    }
+}
+
+.form-label {
+    font-size: $text-size-reg;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-regular;
+    color: $base-text-400;
+    margin-block-end: 4px;
+    display: block;
+
+    &.field-required {
+        &:after {
+            content: '*';
+            display: inline-block;
+            vertical-align: top;
+            color: $base-red;
+            padding-inline-start: 2px;
+        }
+    }
+}
+
+.form-group {
+    margin-block-end: 16px;
+
+    &.lg {
+        margin-block-end: 24px;
+    }
+}
+
+.input-group-append {
+    position: relative;
+
+    .icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        font-size: $text-size-sm;
+        text-align: center;
+    }
+}

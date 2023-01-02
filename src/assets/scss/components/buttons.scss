@@ -1,0 +1,26 @@
+.btn{
+    height: 44px;
+    font-size: $text-size-reg;
+    line-height: $line-height-regular;
+    font-weight: $font-weight-regular;
+    color: $base-white;
+    &.btn-sm{
+        font-size: $text-size-sm;
+        line-height: $line-height-sm;
+        font-weight: $font-weight-regular;
+    }
+    &.btn-block{
+        display: block;
+        width: 100%;
+    }
+    &.btn-text{
+        padding: 0;
+        border: none;
+        background: transparent;
+        color: $primary-blue-900;
+        &:hover,&:focus,&.active{
+            background: transparent;
+            color: $primary-blue-900;
+        }
+    }
+}

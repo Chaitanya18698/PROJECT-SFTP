@@ -1,4 +1,4 @@
-.btn{
+button.btn{
     height: 44px;
     font-size: $text-size-reg;
     line-height: $line-height-regular;
@@ -13,8 +13,8 @@
     }
     &.btn-xs{
         font-size: $text-size-sm;
+        line-height: $line-height-sm;
         font-weight: $font-weight-regular;
-        line-height: 28px;
         height: 28px;
         padding: 0 12px;
     }
@@ -51,6 +51,12 @@
         &:hover,&:focus,&:active{
             background: $primary-blue-100 !important;
             color: $primary-blue-900 !important;
+        }
+        &.btn-red{
+            color: $base-red-900 !important;
+            &:hover,&:focus,&:active{
+                background: $base-red-100 !important;
+            }
         }
     }
     &.btn-tertiary-gray{

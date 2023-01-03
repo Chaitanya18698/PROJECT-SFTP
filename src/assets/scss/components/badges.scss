@@ -21,3 +21,17 @@ span.badge{
         background: $base-orange-100;
     }
 }
+
+.badge-white-filter{
+    color: $base-text-600;
+    padding: 4px 8px;
+    font-weight: $font-weight-regular;
+    border-width: 1px;
+    border-style: solid;
+    background: $base-white;
+    border-color: $base-gray;
+    display: inline-block;
+    white-space: nowrap;
+    line-height: $line-height-sm;
+    border-radius: $border-radius-reg;
+}

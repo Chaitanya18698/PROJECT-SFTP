@@ -63,3 +63,49 @@ input {
         text-align: center;
     }
 }
+
+.input-group{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    &-prepend{
+        margin-inline-end: -1px;
+        display: flex;
+        .input-group-text{
+            background-color: $base-white;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #adb2b8!important;
+            color: #adb2b8;
+            font-size: $text-size-reg;
+            font-weight: $font-weight-regular;
+            border-right: 0px;
+            transition: border-color .15s ease-in-out,
+            box-shadow .15s ease-in-out;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+    &-append{
+        margin-inline-end: -1px;
+        display: flex;
+        .input-group-text{
+            background-color: $base-white;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #adb2b8!important;
+            color: #adb2b8;
+            font-size: $text-size-reg;
+            font-weight: $font-weight-regular;
+            border-left: 0px;
+            transition: border-color .15s ease-in-out,
+            box-shadow .15s ease-in-out;
+        }
+    }
+    input{
+        height: 44px;
+        padding: 6px;
+    }
+}

@@ -8,3 +8,13 @@
     font-weight: $font-weight-regular !important;
     background: $base-bg !important;
   }
+
+  .border-bottom{
+    border-bottom: 1px solid #ececec;
+  }
+
+  .text-truncate{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }

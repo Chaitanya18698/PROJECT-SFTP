@@ -19,8 +19,8 @@
             <div class="card-header">
                 <div class="card-header-title">
                     <a href="" class="card-header-title-back">
-                        <i class="far fa-chevron-left"></i>
-                        Add Competency
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Add User
                     </a>
                 </div>
             </div>
@@ -28,20 +28,144 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="ip-generation" class="form-label">IP Generation</label>
-                            <input type="text" class="form-control" placeholder="Generate IP">
+                            <label for="id-generation" class="form-label field-required">Generate ID</label>
+                            <input id="id-generation" type="text" class="form-control is-invalid"
+                                placeholder="Enter ID">
+                            <div class="invalid-feedback">
+                                Please provide an ID.
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="Generate for" class="form-label">Generate For</label>
-                            <div class="radio">
-                                <input type="radio" name="implementor" id="implementor">
-                                <label for="implementor">Implementor</label>
+                            <label for="username" class="form-label field-required">Username</label>
+                            <input id="username" type="text" class="form-control" placeholder="Enter username">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="Generate for" class="form-label field-required">Generate For</label>
+                                    <div class="radio">
+                                        <input type="radio" name="generate-for" id="implementor">
+                                        <label for="implementor">Implementor</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="generate-for" id="client">
+                                        <label for="client">Client</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="radio">
-                                <input type="radio" name="client" id="client">
-                                <label for="client">Client</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngFor="let item of [].constructor(4);let i = index">
+                        <div class="row border-bottom form-group">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="username" class="form-label field-required">Select Implementor</label>
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            {{selectedImplementor ? selectedImplementor : 'Select Implementor'}}
+                                            <div class="clear" (click)="clear(selectedImplementor,$event)"
+                                                *ngIf="selectedImplementor != ''">
+                                                <i class="fa-solid fa-times"></i>
+                                            </div>
+                                            <div class="clear" (click)="clear(selectedImplementor,$event)"
+                                                *ngIf="selectedImplementor != ''">
+                                                <i class="fa-solid fa-times"></i>
+                                            </div>
+                                        </a>
+
+                                        <div class="dropdown-menu">
+                                            <ul>
+                                                <li *ngFor="let item of implementationList;let i = index"
+                                                    [ngClass]="{'active': item.itemName == selectedImplementor}">
+                                                    <a class="dropdown-item" (click)="selectImplementor(item)">
+                                                        {{item.itemName}}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Client -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="username" class="form-label field-required">Select Client</label>
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            {{selectedClient ? selectedClient : 'Select Client'}}
+                                            <div class="clear" (click)="clear('Client',$event)"
+                                                *ngIf="selectedClient != ''">
+                                                <i class="fa-solid fa-times"></i>
+                                            </div>
+                                        </a>
+
+                                        <div class="dropdown-menu">
+                                            <ul>
+                                                <li *ngFor="let item of clientsList;let i = index"
+                                                    [ngClass]="{'active': item.itemName == selectedClient}">
+                                                    <a class="dropdown-item" (click)="selectClient(item)">
+                                                        {{item.itemName}}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modules -->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="username" class="form-label field-required">Select Module</label>
+                                    <div class="dropdown multi-dropdown"><a type="button" id="multiSelect" data-bs-hover="dropdown"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                                            class="dropdown-toggle">
+                                            <div class="multi-selective">
+                                                <div class="badge-white-filter"><span
+                                                        class="text-truncate multi-select-text"> Default </span><a
+                                                        name="filter_badge"><i class="fa-solid fa-times"></i></a></div>
+                                            </div>
+                                        </a>
+                                        <div aria-labelledby="multiSelect" class="dropdown-menu is-no-scroll">
+                                            <div class="multi-search">
+                                                <div class="input-group input-group-both">
+                                                    <div class="input-group-prepend"><span class="input-group-text"><i
+                                                                class="fa-solid fa-search"></i></span>
+                                                    </div><input autocomplete="off" type="text" placeholder="Search"
+                                                        class="form-control ng-valid ng-dirty ng-touched">
+                                                    <div class="input-group-append"><span
+                                                            class="input-group-text"></span></div>
+                                                </div>
+                                            </div>
+                                            <div class="multi-selection">
+                                                <div class="checkbox-wrap"><input autocomplete="off" type="checkbox"
+                                                        id="mselect-kjn1x28n9-all"
+                                                        class="ng-untouched ng-valid ng-dirty"><label
+                                                        for="mselect-kjn1x28n9-all">Unselect
+                                                        All</label></div>
+                                            </div>
+                                            <ul>
+                                                <li class="dropdown-item">
+                                                    <div class="checkbox-wrap"><input autocomplete="off"
+                                                            type="checkbox" id="mselect-kjn1x28n9-1"><label
+                                                            for="mselect-kjn1x28n9-1"><span
+                                                                class="break-word">Default</span></label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 form-group text-end">
+                                <button class="btn btn-xs btn-icon btn-tertiary">
+                                    Add</button>
+                                <button class="btn btn-xs btn-icon btn-tertiary btn-red">Delete</button>
                             </div>
                         </div>
                     </div>

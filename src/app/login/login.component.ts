@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 declare var $:any;
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   hidePassword1:any = true;
   login_type:any = 'login';
 
-  constructor() { }
+  constructor(public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     $('.otp-set-input').keyup((e:any) => {

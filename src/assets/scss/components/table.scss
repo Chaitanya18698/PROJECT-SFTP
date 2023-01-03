@@ -1,0 +1,50 @@
+.table{
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    thead{
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        tr{
+            th{
+                color: $base-text-600;
+                text-transform: capitalize;
+                font-size: $text-size-sm;
+                font-weight: $font-weight-regular;
+                padding: 16px;
+                vertical-align: middle;
+                text-align: left;
+                white-space: nowrap;
+            }
+        }
+    }
+    tbody{
+        display: block;
+        overflow-y: overlay;
+        tr{
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            &:last-child{
+                td{
+                    border: 0;
+                }
+            }
+            td{
+                padding: 16px;
+                vertical-align: middle;
+            }
+        }
+    }
+    tfoot{
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+}
+
+.table-action{
+    width: 180px;
+    text-align: left;
+}

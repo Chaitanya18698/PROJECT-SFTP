@@ -1,0 +1,12 @@
+.page-wrapper{
+    height: auto;
+    position: relative;
+    background: $base-bg;
+    min-height: 100%;
+}
+
+.page-container{
+    padding: 24px;
+    max-width: $screen-width;
+    margin: auto;
+}

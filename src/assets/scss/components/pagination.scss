@@ -1,0 +1,17 @@
+.pagination-set{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 14px 24px;
+    border: none;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #2d2e4f14;
+    .pagination-result{
+        font-size: $text-size-sm;
+        font-weight: $font-weight-regular;
+        line-height: $line-height-sm;
+        color: $base-text-600;
+    }
+}

@@ -1,0 +1,32 @@
+.table-card{
+    background: $base-white;
+    border-radius: $border-radius-reg;
+    padding: 20px 0 0 20px;
+    box-shadow: 0 2px 8px #2d2e4f0a;
+}
+
+.table-responsive{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.card{
+    background: $base-white;
+    border-radius: $border-radius-reg;
+    &-header{
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &-body{
+        padding: 24px;
+    }
+    &-footer{
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}

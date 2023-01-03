@@ -1,0 +1,114 @@
+<div class="page-wrapper">
+    <app-header></app-header>
+    <div class="page-container">
+        <div class="page-header">
+            <div class="page-heading">
+                <div class="page-title"> Modules </div>
+            </div>
+            <div class="page-options">
+                <div class="page-options-set">
+                    <button class="btn btn-icon btn-outline-primary btn-sm" tabindex="0" data-bs-toggle="modal"
+                        data-bs-target="#addNewModal">
+                        <i class="fa-solid fa-plus"></i> Add New
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="table-card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First</th>
+                        <th>Last</th>
+                        <th>Status</th>
+                        <th class="table-action"></th>
+                    </tr>
+                </thead>
+                <tbody [ngStyle]="{'max-height': _sharedService.getTableMaxHeight() + 'px'}">
+                    <tr *ngFor="let item of [].constructor(15); let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>
+                            <span class="badge success">Active</span>
+                            <!-- <span class="badge failed">Failed</span>
+                            <span class="badge pending">Pending</span> -->
+                        </td>
+                        <td class="table-action">
+                            <div class="table-action-dropdown">
+                                <a class="" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-tertiary btn-xs btn-toggle">Actions</button>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item">
+                                            Update
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item">
+                                            Delete
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <div class="pagination-set">
+                        <div class="pagination-set-results">Entries 1 to 25 out of 52</div>
+                        <div class="pagination-set-center">
+                            <!-- <ul class="pagination-stage-set">
+                                <li class="pagination-stage-set-item">
+
+                                </li>
+                            </ul> -->
+
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addNewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addNewModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="addNewModal">Add Module</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="module-name" class="form-label field-required">Module name</label>
+                    <input type="text" class="form-control" placeholder="Enter module name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-tertiary-gray btn-sm" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary btn-sm">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

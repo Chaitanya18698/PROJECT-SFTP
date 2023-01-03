@@ -1,0 +1,23 @@
+span.badge{
+    padding: 2px 8px;
+    font-size: $text-size-sm;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-sm;
+    border-radius: $border-radius-reg;
+    background: $base-gray;
+    color: $base-text-600;
+    display: inline-block;
+    white-space: nowrap;
+    &.success{
+        color: $base-green-900;
+        background: $base-green-100;
+    }
+    &.failed{
+        color: $base-red-900;
+        background: $base-red-100;
+    }
+    &.pending{
+        color: $base-orange-900;
+        background: $base-orange-100;
+    }
+}

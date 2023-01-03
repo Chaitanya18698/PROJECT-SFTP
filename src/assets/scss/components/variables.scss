@@ -1,20 +1,20 @@
 // THEME COLORS
-$base-bg: #E6EEFF;
-$primary-blue-100: #E6EEFF;
+$base-bg: #f5f8ff;
+$primary-blue-100: #EDF6F9;
 $primary-blue-400: #6EA0FF;
 $primary-blue-600: #2662FF;
 $primary-blue-900: #0536FF;
 
 // FONT COLORS
-$base-text-900: #222222;
-$base-text-600: #2d2d2d;
+$base-text-900: #293032;
+$base-text-600: #5c6672;
 $base-text-400: #474747;
 $base-text-100: #b0b0b0;
 
 // FONT WEIGHTS
 $font-weight-regular: 400;
-$font-weight-medium: 600;
-$font-weight-bold: 900;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
 
 // LINE HEIGHTS
 $line-height-sm: 18px;
@@ -25,6 +25,13 @@ $line-height-xl: 30px;
 
 // BASIC COLORS r
 $base-white: #ffffff;
+$base-gray: #e8e8e8;
+$base-green-900: #3f907c;
+$base-green-100: #ECF4F2;
+$base-orange-900: #ff9f2d;
+$base-orange-100: #FEF6EB;
+$base-red-900: #d24e63;
+$base-red-100: #FBEEF0;
 
 // TEXT SIZES
 $text-size-xs: 10px;
@@ -45,6 +52,10 @@ $border-color-700: #aeaeae;
 
 // BOX SHADOW
 $box-shadow-regular: 0 3px 10px rgb(0 0 0 / 0.2);
+$box-shadow-bottom: inset 0 -1px #2d2e4f1a;
 
 // COLORS
-$base-red: #d21c1c
+$base-red: #d21c1c;
+
+// COLORS
+$screen-width: 1200px;

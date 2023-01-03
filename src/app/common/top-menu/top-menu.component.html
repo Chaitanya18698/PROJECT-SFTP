@@ -1,0 +1,34 @@
+<div class="topmenu">
+    <ul class="topmenu-set">
+        <li class="topmenu-set-item">
+            <a href="" [ngClass]="{'active': routeActive == 'Modules'}" (click)="handleRoute('Modules')"
+                class="topmenu-set-item-link active" [routerLink]="'/modules'" queryParamsHandling="merge">
+                Modules
+            </a>
+        </li>
+        <li class="topmenu-set-item">
+            <a href="" [ngClass]="{'active': routeActive == 'Clients'}" (click)="handleRoute('Clients')"
+                class="topmenu-set-item-link" [routerLink]="'/clients'" queryParamsHandling="merge">
+                Clients
+            </a>
+        </li>
+        <li class="topmenu-set-item">
+            <a href="" [ngClass]="{'active': routeActive == 'Implementors'}" (click)="handleRoute('Implementors')"
+                class="topmenu-set-item-link" [routerLink]="'/implementors'" queryParamsHandling="merge">
+                Implementors
+            </a>
+        </li>
+        <li class="topmenu-set-item">
+            <a href="" [ngClass]="{'active': routeActive == 'Users'}" (click)="handleRoute('Users')"
+                class="topmenu-set-item-link" [routerLink]="'/users'" queryParamsHandling="merge">
+                Users
+            </a>
+        </li>
+        <li class="topmenu-set-item">
+            <a href="" [ngClass]="{'active': routeActive == 'Logs'}" (click)="handleRoute('Logs')"
+                class="topmenu-set-item-link" [routerLink]="'/logs'" queryParamsHandling="merge">
+                Logs
+            </a>
+        </li>
+    </ul>
+</div>

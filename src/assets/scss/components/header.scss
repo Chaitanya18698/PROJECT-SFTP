@@ -1,0 +1,90 @@
+.header{
+    min-height: 96px;
+    .header-wrap{
+        display: block;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        background: $base-white;
+        .nav-bar{
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: $base-white;
+            box-shadow: $box-shadow-bottom;
+            &-logo{
+                display: inline-block;
+                font-size: $text-size-lg;
+                line-height: normal;
+                white-space: nowrap;
+                color: $base-text-600;
+                font-weight: $font-weight-medium;
+                &-img{
+                    max-width: 200px;
+                    line-height: 36px;
+                    height: 36px;
+                    background-color: $base-white;
+                    border-radius: $border-radius-lg;
+                    padding: 0;
+                    img{
+                        max-height: 100%;
+                        max-width: 100%;
+                        object-fit: contain;
+                    }
+                }
+            }
+            &-right{
+                display: flex;
+                flex-basis: auto;
+                flex-grow: 1;
+                align-items: center;
+                &-set{
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                    padding: 0 16px 0 0;
+                    list-style: none;
+                    margin: 0 0 0 auto;
+                    .profile-set{
+                        width: 24px;
+                        height: 24px;
+                        position: relative;
+                        background: #F4F7F9;
+                        text-align: center;
+                        border-radius: 50%;
+                        -webkit-user-select: none;
+                        user-select: none;
+                        margin-right: 2px;
+                        overflow: hidden;
+                        font-size: $text-size-sm;
+                        line-height: 24px;
+                        color: $primary-blue-900;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// PAGE HEADER STYLE
+.page-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: 32px;
+    .page-title{
+        font-size: $text-size-lg;
+        font-weight: $font-weight-medium;
+        line-height: $line-height-large;
+        color: $base-text-900;
+    }
+    .page-options{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        &-set{
+            margin-inline-end: 16px;
+        }
+    }
+}

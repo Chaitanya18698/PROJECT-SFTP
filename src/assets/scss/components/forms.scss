@@ -4,7 +4,6 @@ input {
         border-color: $border-color;
         padding: 4px 10px;
         color: $base-text-900;
-        transition: all ease 0.1s;
         height: 44px;
         font-size: $text-size-reg;
 
@@ -17,6 +16,7 @@ input {
         &.active {
             border-color: $primary-blue-900;
             background: transparent;
+            box-shadow: none;
         }
     }
 }

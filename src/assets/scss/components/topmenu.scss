@@ -1,0 +1,44 @@
+.topmenu{
+    min-height: 46px;
+    background: #ffffff;
+    box-shadow: 0 2px 8px #2d2e4f0a;
+    padding-inline-start: 24px;
+    width: 100%;
+    &-set{
+        // margin: 0;
+        padding: 0;
+        max-width: $screen-width;
+        margin: auto;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        &-item{
+            padding-inline: 14px;
+            &:not(:last-child){
+                margin-inline-end: 14px;
+            }
+            &-link{
+                font-size: $text-size-reg;
+                font-weight: $font-weight-regular;
+                line-height: $line-height-regular;
+                color: $base-text-600;
+                text-decoration: none;
+                border-bottom-style: solid;
+                border-bottom-width: 2px;
+                border-bottom-color: transparent;
+                display: block;
+                padding-block: 12px;
+                transition: all ease .2s;
+                cursor: pointer;
+                position: relative;
+                &:hover{
+                    color: $primary-blue-900;
+                }
+                &.active{
+                    color: $primary-blue-900;
+                    border-color: $primary-blue-900;
+                }
+            }
+        }
+    }
+}

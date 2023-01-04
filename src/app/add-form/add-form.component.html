@@ -15,15 +15,20 @@
             </div>
         </div> -->
 
-        <div class="card">
-            <div class="card-header">
-                <div class="card-header-title">
-                    <a href="" class="card-header-title-back">
-                        <i class="fa-solid fa-chevron-left"></i>
+        <div class="page-header">
+            <div class="page-header-title">
+                <a href="" class="page-header-title-icon">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </a>
+                <div class="page-title">
+                    <div class="title">
                         Add User
-                    </a>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -122,9 +127,9 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="username" class="form-label field-required">Select Module</label>
-                                    <div class="dropdown multi-dropdown"><a type="button" id="multiSelect" data-bs-hover="dropdown"
-                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-                                            class="dropdown-toggle">
+                                    <div class="dropdown multi-dropdown"><a type="button" id="multiSelect"
+                                            data-bs-hover="dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="true" class="dropdown-toggle">
                                             <div class="multi-selective">
                                                 <div class="badge-white-filter"><span
                                                         class="text-truncate multi-select-text"> Default </span><a
@@ -150,9 +155,10 @@
                                                         All</label></div>
                                             </div>
                                             <ul>
-                                                <li class="dropdown-item">
-                                                    <div class="checkbox-wrap"><input autocomplete="off"
-                                                            type="checkbox" id="mselect-kjn1x28n9-1"><label
+                                                <li class="dropdown-item"
+                                                    *ngFor="let item of modulesList; let i = index">
+                                                    <div class="checkbox-wrap"><input autocomplete="off" type="checkbox"
+                                                            id="mselect-kjn1x28n9-1"><label
                                                             for="mselect-kjn1x28n9-1"><span
                                                                 class="break-word">Default</span></label>
                                                     </div>
@@ -163,13 +169,17 @@
                                 </div>
                             </div>
                             <div class="col-md-12 form-group text-end">
+                                <button class="btn btn-xs btn-icon btn-tertiary btn-red">Delete</button>
                                 <button class="btn btn-xs btn-icon btn-tertiary">
                                     Add</button>
-                                <button class="btn btn-xs btn-icon btn-tertiary btn-red">Delete</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-tertiary-gray">Cancel</button>
+                <button class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>

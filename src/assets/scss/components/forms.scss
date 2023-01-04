@@ -91,6 +91,10 @@ input {
     &-append{
         margin-inline-end: -1px;
         display: flex;
+        & > .input-group-text{
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
         .input-group-text{
             background-color: $base-white;
             border-width: 1px;
@@ -107,5 +111,45 @@ input {
     input{
         height: 44px;
         padding: 6px;
+        border-color: #adb2b8;
+    }
+}
+
+.input-group-both{
+    .form-control{
+        border-left: 0;
+        border-right: 0;
+    }
+    .input-gruop-append{
+        background-color: $base-white;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #adb2b8!important;
+        color: #adb2b8;
+        font-size: $text-size-reg;
+        font-weight: $font-weight-regular;
+        border-left: 0px;
+        transition: border-color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
+    }
+    .input-gruop-prepend{
+        background-color: $base-white;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #adb2b8!important;
+        color: #adb2b8;
+        font-size: $text-size-reg;
+        font-weight: $font-weight-regular;
+        border-right: 0px;
+        transition: border-color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
+    }
+}
+
+.input-group-both:focus-within{
+    .input-group-prepend,.input-group-append{
+        .input-group-text{
+            border-color: $primary-blue-900 !important;
+        }
     }
 }

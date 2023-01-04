@@ -24,9 +24,10 @@
                 <div class="login-card-body">
                     <div class="form-group lg">
                         <label for="username" class="form-label field-required">Username</label>
-                        <input id="username" type="text" class="form-control is-invalid"
-                            placeholder="Enter your username">
-                        <div class="invalid-feedback">
+                        <input id="username" type="text" class="form-control"
+                            placeholder="Enter your username" [(ngModel)]="username" 
+                            [ngClass]="{'is-invalid' : errMsg && error,  'disabled' : loading}">
+                        <div class="invalid-feedback" *ngIf="error">
                             Please enter username.
                         </div>
                     </div>
@@ -34,12 +35,12 @@
                         <label for="password" class="form-label field-required">Password</label>
                         <div class="input-group-append">
                             <input id="password" type="{{hidePassword ? 'password' : 'text'}}" class="form-control"
-                                placeholder="Enter your password" [(ngModel)]="password_status">
-                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && !hidePassword"
+                                placeholder="Enter your password" [(ngModel)]="password1">
+                            <span id="toggle-password" class="icon" *ngIf="password1 != '' && !hidePassword"
                                 (click)="togglePassword()">
                                 <i class="fa-solid fa-eye"></i>
                             </span>
-                            <span id="toggle-password" class="icon" *ngIf="password_status != '' && hidePassword"
+                            <span id="toggle-password" class="icon" *ngIf="password1 != '' && hidePassword"
                                 (click)="togglePassword()">
                                 <i class="fa-solid fa-eye-slash"></i>
                             </span>
@@ -56,9 +57,8 @@
                           </div> -->
 
                     </div>
-                    <button class="btn btn-block btn-primary" id="login" [routerLink]="'/admin'"
-                        queryParamsHandling="merge">
-                        Log In
+                    <!-- [routerLink]="'/admin'" queryParamsHandling="merge" -->
+                    <button class="btn btn-block btn-primary" id="login" (click)="login()"> Log In
                     </button>
                 </div>
                 <div class="login-footer">

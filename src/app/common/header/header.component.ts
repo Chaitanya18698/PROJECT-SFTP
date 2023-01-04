@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router, ActivatedRoute} from '@angular/router'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor( public _route: Router,
+    public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+  }
+
+  logOut() {
+    sessionStorage.clear();
+    this._route.navigate(['/login'])
   }
 
 }

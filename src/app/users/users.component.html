@@ -1,93 +1,97 @@
 <div class="page-wrapper">
     <app-header></app-header>
-    <div class="page-container">
-        <div class="page-header">
-            <div class="page-heading">
-                <div class="page-title"> Users </div>
-            </div>
-            <div class="page-options">
-                <div class="page-options-set">
-                    <button class="btn btn-icon btn-outline-primary btn-sm" tabindex="0" [routerLink]="'/add-form'"
-                        queryParamsHandling="merge">
-                        <i class="fa-solid fa-plus"></i> Add New
-                    </button>
+    <ng-container *ngIf="actionType  === 'table'">
+        <div class="page-container">
+            <div class="page-header">
+                <div class="page-heading">
+                    <div class="page-title"> Users </div>
+                </div>
+                <div class="page-options">
+                    <div class="page-options-set">
+                        <button class="btn btn-icon btn-outline-primary btn-sm" tabindex="0" (click)="openForm()">
+                            <i class="fa-solid fa-plus"></i> Add New
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="table-card">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>First</th>
-                        <th>Last</th>
-                        <th>Status</th>
-                        <th class="table-action"></th>
-                    </tr>
-                </thead>
-                <tbody [ngStyle]="{'max-height': _sharedService.getTableMaxHeight() + 'px'}">
-                    <tr *ngFor="let item of [].constructor(15); let i = index">
-                        <td>{{i + 1}}</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>
-                            <span class="badge success">Active</span>
-                            <!-- <span class="badge failed">Failed</span>
-                            <span class="badge pending">Pending</span> -->
-                        </td>
-                        <td class="table-action">
-                            <div class="table-action-dropdown dropdown">
-                                <a class="" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <button class="btn btn-tertiary btn-xs btn-toggle">Actions</button>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <ul>
-                                        <li>
-                                            <a class="dropdown-item">
-                                                Update
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item">
-                                                Delete
-                                            </a>
-                                        </li>
-                                    </ul>
+            <div class="table-card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First</th>
+                            <th>Last</th>
+                            <th>Status</th>
+                            <th class="table-action"></th>
+                        </tr>
+                    </thead>
+                    <tbody [ngStyle]="{'max-height': _sharedService.getTableMaxHeight() + 'px'}">
+                        <tr *ngFor="let item of [].constructor(15); let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>
+                                <span class="badge success">Active</span>
+                                <!-- <span class="badge failed">Failed</span>
+                                <span class="badge pending">Pending</span> -->
+                            </td>
+                            <td class="table-action">
+                                <div class="table-action-dropdown dropdown">
+                                    <a class="" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-tertiary btn-xs btn-toggle">Actions</button>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <ul>
+                                            <li>
+                                                <a class="dropdown-item">
+                                                    Update
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item">
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <div class="pagination-set">
+                            <div class="pagination-set-results">Entries 1 to 25 out of 52</div>
+                            <div class="pagination-set-center">
+                                <!-- <ul class="pagination-stage-set">
+                                    <li class="pagination-stage-set-item">
+    
+                                    </li>
+                                </ul> -->
+    
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+    
                             </div>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <div class="pagination-set">
-                        <div class="pagination-set-results">Entries 1 to 25 out of 52</div>
-                        <div class="pagination-set-center">
-                            <!-- <ul class="pagination-stage-set">
-                                <li class="pagination-stage-set-item">
-
-                                </li>
-                            </ul> -->
-
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-
                         </div>
-                    </div>
-                </tfoot>
-            </table>
+                    </tfoot>
+                </table>
+            </div>
         </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="actionType  === 'form'">
+        <app-add-form [userData]="userData", (closeForm)="redirect($event)"></app-add-form>
+    </ng-container>
 </div>

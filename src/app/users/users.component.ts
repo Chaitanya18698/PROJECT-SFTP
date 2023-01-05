@@ -13,6 +13,8 @@ declare var $: any;
 export class UsersComponent implements OnInit {
   modulesData: any = [];
   spinner = false;
+  actionType: any = 'table';
+  userData: any = '';
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -50,6 +52,15 @@ export class UsersComponent implements OnInit {
         this.spinner = false;
       }
     })
+  }
+
+  openForm() {
+    this.actionType = 'form'
+  }
+
+  redirect(event: any) {
+    console.log(event, 'form close event')
+    this.actionType === 'table'
   }
 
 }

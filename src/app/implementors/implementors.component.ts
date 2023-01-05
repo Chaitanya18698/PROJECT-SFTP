@@ -13,6 +13,8 @@ declare var $: any;
 export class ImplementorsComponent implements OnInit {
   implementorsData: any = [];
   spinner = false;
+  actionType = 'table';
+  userData: any = '';
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -52,4 +54,8 @@ export class ImplementorsComponent implements OnInit {
     })
   }
 
+  redirect(event: any) {
+    console.log(event, 'form close event')
+    this.actionType === 'table'
+  }
 }

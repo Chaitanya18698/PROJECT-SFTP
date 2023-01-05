@@ -14,6 +14,7 @@ import { UsersComponent } from './users/users.component';
 import { LogsComponent } from './logs/logs.component';
 import { ImplementorsComponent } from './implementors/implementors.component';
 import { FilesComponent } from './files/files.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FilesComponent } from './files/files.component';
     UsersComponent,
     LogsComponent,
     ImplementorsComponent,
-    FilesComponent
+    FilesComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
             </div>
             <div class="page-options">
                 <div class="page-options-set">
-                    <button class="btn btn-icon btn-outline-primary btn-sm" tabindex="0" data-bs-toggle="modal"
+                    <button class="btn btn-icon btn-outline-primary btn-xs" tabindex="0" data-bs-toggle="modal"
                         data-bs-target="#addNewModal">
                         <i class="fa-solid fa-plus"></i> Add New
                     </button>
@@ -29,14 +29,14 @@
                     <tr *ngFor="let item of clientList; let i = index">
                         <!-- <td>{{i + 1}}</td> -->
                         <td> 
-                            <div class="icon-text-set">
+                            {{item.client_name}}
+                            <!-- <div class="icon-text-set">
                                 <div class="icon">
                                     <i class="fa-regular fa-user"></i>
                                 </div>
                                 <div class="text">
-                                    {{item.client_name}}
                                 </div>
-                            </div>
+                            </div> -->
                         </td>
                         <td>Otto</td>
                         <td>
@@ -99,6 +99,7 @@
             </table>
         </div>
     </div>
+    <app-footer></app-footer>
 </div>
 
 <!-- Modal -->

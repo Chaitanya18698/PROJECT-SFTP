@@ -13,15 +13,15 @@
             </a>
         </li>
         <li class="topmenu-set-item">
-            <a href="" [ngClass]="{'active': routeActive == 'Clients'}" (click)="handleRoute('Clients')"
-                class="topmenu-set-item-link" [routerLink]="'/clients'" queryParamsHandling="merge">
-                Client Logins
+            <a href="" [ngClass]="{'active': routeActive == 'client-users'}" (click)="handleRoute('client-users')"
+                class="topmenu-set-item-link" [routerLink]="'/client-users'" queryParamsHandling="merge">
+                Client Users
             </a>
         </li>
         <li class="topmenu-set-item">
             <a href="" [ngClass]="{'active': routeActive == 'Implementors'}" (click)="handleRoute('Implementors')"
                 class="topmenu-set-item-link" [routerLink]="'/implementors'" queryParamsHandling="merge">
-                Implementor Logins
+                Implementors
             </a>
         </li>
         <!-- <li class="topmenu-set-item">

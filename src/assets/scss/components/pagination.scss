@@ -8,6 +8,9 @@
     border-top-width: 1px;
     border-top-style: solid;
     border-top-color: #2d2e4f14;
+    .pagination{
+        margin: 0;
+    }
     .pagination-result{
         font-size: $text-size-sm;
         font-weight: $font-weight-regular;

@@ -78,6 +78,12 @@
         font-weight: $font-weight-medium;
         line-height: $line-height-large;
         color: $base-text-900;
+        transition: all ease 0.1s;
+        .cursor-pointer{
+            &:hover{
+                color: $base-text-600;
+            }
+        }
     }
     .page-options{
         display: flex;

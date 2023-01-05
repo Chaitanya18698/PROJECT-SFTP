@@ -18,17 +18,26 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>First</th>
+                        <!-- <th>#</th> -->
+                        <th>Client</th>
                         <th>Last</th>
                         <th>Status</th>
                         <th class="table-action"></th>
                     </tr>
                 </thead>
                 <tbody [ngStyle]="{'max-height': _sharedService.getTableMaxHeight() + 'px'}">
-                    <tr *ngFor="let item of [].constructor(15); let i = index">
-                        <td>{{i + 1}}</td>
-                        <td>Mark</td>
+                    <tr *ngFor="let item of clientList; let i = index">
+                        <!-- <td>{{i + 1}}</td> -->
+                        <td> 
+                            <div class="icon-text-set">
+                                <div class="icon">
+                                    <i class="fa-regular fa-user"></i>
+                                </div>
+                                <div class="text">
+                                    {{item.client_name}}
+                                </div>
+                            </div>
+                        </td>
                         <td>Otto</td>
                         <td>
                             <span class="badge success">Active</span>

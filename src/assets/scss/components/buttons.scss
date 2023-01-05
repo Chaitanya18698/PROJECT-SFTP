@@ -42,6 +42,7 @@ button{
         }
         &.btn-outline-primary{
             color: $primary-blue-900 !important;
+            // font-weight: $font-weight-bold;
             &:hover,&:focus,&:active{
                 background: $primary-blue-100 !important;
                 color: $primary-blue-900 !important;
@@ -50,6 +51,7 @@ button{
         &.btn-tertiary{
             border: 0;
             color: $primary-blue-900 !important;
+            // font-weight: $font-weight-bold;
             &:hover,&:focus,&:active{
                 background: $primary-blue-100 !important;
                 color: $primary-blue-900 !important;

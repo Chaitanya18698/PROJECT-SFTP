@@ -12,6 +12,7 @@ declare var $: any;
 export class ClientsComponent implements OnInit {
   clientName:  any = '';
   clientData: any = [];
+  clientList: any = [];
   spinner = false;
   constructor(
     public _sharedService: SharedService,
@@ -23,6 +24,17 @@ export class ClientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getClients();
+    this.clientList = [
+      {
+        client_name: 'MC Donald',
+      },
+      {
+        client_name: 'Shemaroo',
+      },
+      {
+        client_name: 'Meloraa',
+      },
+    ]
   }
 
 

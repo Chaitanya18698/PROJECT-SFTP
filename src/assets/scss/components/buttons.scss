@@ -1,81 +1,83 @@
-button.btn{
-    height: 44px;
-    font-size: $text-size-reg;
-    line-height: $line-height-regular;
-    font-weight: $font-weight-regular;
-    color: $base-white;
-    &.btn-sm{
+button{
+    &.btn{
+        height: 44px;
         font-size: $text-size-reg;
         line-height: $line-height-regular;
         font-weight: $font-weight-regular;
-        height: 36px;
-        padding: 8px 12px;
-    }
-    &.btn-xs{
-        font-size: $text-size-sm;
-        line-height: $line-height-sm;
-        font-weight: $font-weight-regular;
-        height: 28px;
-        padding: 0 12px;
-    }
-    &.btn-block{
-        display: block;
-        width: 100%;
-    }
-    &.btn-text{
-        padding: 0;
-        border: none;
-        background: transparent;
-        color: $primary-blue-900;
-        height: auto;
-        line-height: initial;
-        &:hover,&:focus,&.active{
+        color: $base-white;
+        &.btn-sm{
+            font-size: $text-size-reg;
+            line-height: $line-height-regular;
+            font-weight: $font-weight-regular;
+            height: 36px;
+            padding: 8px 12px;
+        }
+        &.btn-xs{
+            font-size: $text-size-sm;
+            line-height: $line-height-sm;
+            font-weight: $font-weight-regular;
+            height: 28px;
+            padding: 0 12px;
+        }
+        &.btn-block{
+            display: block;
+            width: 100%;
+        }
+        &.btn-text{
+            padding: 0;
+            border: none;
             background: transparent;
             color: $primary-blue-900;
-        }
-    }
-    &.btn-icon{
-        i,svg{
-            margin-inline-end: 6px;
-        }
-    }
-    &.btn-outline-primary{
-        color: $primary-blue-900 !important;
-        &:hover,&:focus,&:active{
-            background: $primary-blue-100 !important;
-            color: $primary-blue-900 !important;
-        }
-    }
-    &.btn-tertiary{
-        border: 0;
-        color: $primary-blue-900 !important;
-        &:hover,&:focus,&:active{
-            background: $primary-blue-100 !important;
-            color: $primary-blue-900 !important;
-        }
-        &.btn-red{
-            color: $base-red-900 !important;
-            &:hover,&:focus,&:active{
-                background: $base-red-100 !important;
+            height: auto;
+            line-height: initial;
+            &:hover,&:focus,&.active{
+                background: transparent;
+                color: $primary-blue-900;
             }
         }
-    }
-    &.btn-tertiary-gray{
-        border: 0;
-        color: $base-text-600 !important;
-        &:hover,&:focus,&:active{
-            background: $base-gray !important;
-            color: $base-text-600 !important;
+        &.btn-icon{
+            i,svg{
+                margin-inline-end: 6px;
+            }
         }
-    }
-    &.btn-toggle{
-        // &:after{
-        //     content: "\f107";
-        //     font-family: "Font Awesome 6";
-        //     font-size: 10px;
-        //     line-height: 12px;
-        //     transition: all .2s ease;
-        //     margin-left: 5px;
-        // }
+        &.btn-outline-primary{
+            color: $primary-blue-900 !important;
+            &:hover,&:focus,&:active{
+                background: $primary-blue-100 !important;
+                color: $primary-blue-900 !important;
+            }
+        }
+        &.btn-tertiary{
+            border: 0;
+            color: $primary-blue-900 !important;
+            &:hover,&:focus,&:active{
+                background: $primary-blue-100 !important;
+                color: $primary-blue-900 !important;
+            }
+            &.btn-red{
+                color: $base-red-900 !important;
+                &:hover,&:focus,&:active{
+                    background: $base-red-100 !important;
+                }
+            }
+        }
+        &.btn-tertiary-gray{
+            border: 0;
+            color: $base-text-600 !important;
+            &:hover,&:focus,&:active{
+                background: $base-gray !important;
+                color: $base-text-600 !important;
+            }
+        }
+        &.btn-toggle{
+            // &:after{
+            //     content: "\f107";
+            //     font-family: "Font Awesome 6";
+            //     font-size: 10px;
+            //     line-height: 12px;
+            //     transition: all .2s ease;
+            //     margin-left: 5px;
+            // }
+        }
     }
 }

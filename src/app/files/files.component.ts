@@ -6,15 +6,14 @@ import {Router, ActivatedRoute} from '@angular/router'
 declare var $: any;
 
 @Component({
-  selector: 'app-modules',
-  templateUrl: './modules.component.html',
-  styleUrls: ['./modules.component.scss']
+  selector: 'app-files',
+  templateUrl: './files.component.html',
+  styleUrls: ['./files.component.scss']
 })
-export class ModulesComponent implements OnInit {
+export class FilesComponent implements OnInit {
   modulesData: any = [];
   modulesList: any = [];
   spinner = false;
-  isFileView = false;
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,

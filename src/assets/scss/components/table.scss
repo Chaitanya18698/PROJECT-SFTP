@@ -48,3 +48,30 @@
     width: 180px;
     text-align: left;
 }
+
+.icon-text-set{
+    display: flex;
+    align-items: center;
+    .icon{
+        width: 16px;
+        height: 16px;
+        line-height: $line-height-icon;
+        text-align: center;
+        margin-inline-end: 10px;
+        i,svg{
+            font-size: $text-size-reg;
+            color: $primary-blue-900;
+        }
+    }
+    .text{
+        font-size: $text-size-reg;
+        font-weight: $font-weight-medium;
+        line-height: $line-height-regular;
+        color: $base-text-900;
+        width: calc(100% - 26px);
+    }
+}
+
+.table-col-width{
+    width: 240px;
+}

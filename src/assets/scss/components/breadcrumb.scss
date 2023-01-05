@@ -1,0 +1,15 @@
+.breadcrumb-set {
+    .breadcrumb-text{
+        font-size: $text-size-reg;
+        font-weight: $font-weight-regular;
+        line-height: $line-height-regular;
+        color: $base-text-600;
+        &:before {
+            content: '\f054';
+            display: inline-block;
+            font: var(--fa-font-solid);
+            padding-inline: 10px;
+        }
+    }
+
+}

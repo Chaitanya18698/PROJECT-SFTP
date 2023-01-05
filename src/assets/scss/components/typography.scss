@@ -22,3 +22,10 @@
   a{
     text-decoration: none;
   }
+
+  .text-small{
+    font-size: $text-size-sm;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-sm;
+    color: $base-text-600;
+  }

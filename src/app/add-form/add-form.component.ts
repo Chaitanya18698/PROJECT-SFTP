@@ -1,14 +1,16 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Injectable, Input, OnInit, Output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from  '@angular/forms'
 import  { CommonService } from '../common.service';
 import { EncryptionService } from '../encryption.service';
 import { DOCUMENT } from '@angular/common'
 declare var $:any;
 
+@Injectable()
 @Component({
   selector: 'app-add-form',
   templateUrl: './add-form.component.html',
-  styleUrls: ['./add-form.component.scss']
+  styleUrls: ['./add-form.component.scss'],
+  providers: [Document]
 })
 export class AddFormComponent implements OnInit {
   @Input() userData: any = '';

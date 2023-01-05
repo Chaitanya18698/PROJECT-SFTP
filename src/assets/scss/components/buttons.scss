@@ -40,6 +40,7 @@ button.btn{
         }
     }
     &.btn-outline-primary{
+        color: $primary-blue-900 !important;
         &:hover,&:focus,&:active{
             background: $primary-blue-100 !important;
             color: $primary-blue-900 !important;

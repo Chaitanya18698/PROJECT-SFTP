@@ -127,6 +127,16 @@ export class AddFormComponent implements OnInit {
     this.addUserForm.controls[formName].markAsTouched();
   }
 
+  checkValidation(){
+    this.addUserForm.markAllAsTouched();
+    console.log(this.addUserForm, 'userform')
+    if(this.addUserForm.userName.valid && this.addUserForm.userId.valid && this.addUserForm.client.valid && this.addUserForm.implementors.valid) {
+
+    }
+
+
+  }
+
   addUser() {
     const formData = this.addUserForm.value;
     const body = {

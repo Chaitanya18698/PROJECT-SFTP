@@ -13,6 +13,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { UsersComponent } from './users/users.component';
 import { LogsComponent } from './logs/logs.component';
 import { ImplementorsComponent } from './implementors/implementors.component';
+import { FilesComponent } from './files/files.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ImplementorsComponent } from './implementors/implementors.component';
     ClientsComponent,
     UsersComponent,
     LogsComponent,
-    ImplementorsComponent
+    ImplementorsComponent,
+    FilesComponent
   ],
   imports: [
     BrowserModule,

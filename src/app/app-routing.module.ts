@@ -38,6 +38,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'files',
+    component: LoginComponent
+  },
+  {
     path: '**', redirectTo: 'login', pathMatch: 'full'
   }
 ];

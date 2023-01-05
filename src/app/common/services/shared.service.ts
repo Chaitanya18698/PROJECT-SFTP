@@ -15,7 +15,7 @@ export class SharedService implements OnInit {
         let output = 0;
         const wh:any = $(window).height();
         let removeHeight = 0;
-        removeHeight = 344 + val;
+        removeHeight = 347 + val;
         output = wh - removeHeight;
         if(output < 300){
             output = 300;

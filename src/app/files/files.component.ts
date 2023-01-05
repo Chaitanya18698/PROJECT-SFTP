@@ -11,8 +11,8 @@ declare var $: any;
   styleUrls: ['./files.component.scss']
 })
 export class FilesComponent implements OnInit {
-  modulesData: any = [];
-  modulesList: any = [];
+  filesData: any = [];
+  filesList: any = [];
   spinner = false;
   constructor(
     public _sharedService: SharedService,
@@ -22,50 +22,50 @@ export class FilesComponent implements OnInit {
     public route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getModules();
-    this.modulesList = [
+    this.getfiles();
+    this.filesList = [
       {
-        module_name: 'Employee Management',
-        module_id: 1
+        file_name: 'bulk_upload.pdf',
+        file_id: 1
       },
       {
-        module_name: 'Leave Management',
-        module_id: 2
+        file_name: 'employee_profile_picture.png',
+        file_id: 2
       },
       {
-        module_name: 'Time & Attendace',
-        module_id: 3
+        file_name: 'payslip.pdf',
+        file_id: 3
       },
     ]
   }
 
-  addModules() {
+  addfiles() {
     const body = {
-      module_name : '',
+      file_name : '',
     }
-    this._commonService.add_module(body).subscribe((response) => {
-      response = this._encDec.decrypt(response.edc)
-      if (response.success) {
-        this.getModules();
-      } else {
-        this.spinner = false
-      }
-    })
+    // this._commonService.add_file(body).subscribe((response) => {
+    //   response = this._encDec.decrypt(response.edc)
+    //   if (response.success) {
+    //     this.getfiles();
+    //   } else {
+    //     this.spinner = false
+    //   }
+    // })
   }
 
-  getModules() {
+  getfiles() {
     this.spinner = true;
     const body = {}
-    this._commonService.get_modules(body).subscribe((response) => {
-      response = this._encDec.decrypt(response.edc)
-      if (response.success) {
-        this.modulesData = response.data;
-        this.spinner = false;
-        console.log(this.modulesData);        
-      } else {
-        this.spinner = false;
-      }
-    })
+    // this._commonService.get_files(body).subscribe((response) => {
+    //   response = this._encDec.decrypt(response.edc)
+    //   if (response.success) {
+    //     this.filesData = response.data;
+    //     this.spinner = false;
+    //     console.log(this.filesData);        
+    //   } else {
+    //     this.spinner = false;
+    //   }
+    // })
   }
 
 }

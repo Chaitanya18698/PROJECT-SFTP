@@ -1,7 +1,7 @@
 .table-card{
     background: $base-white;
-    border-radius: $border-radius-reg;
-    padding: 20px 0 0 20px;
+    border-radius: $border-radius-card;
+    padding: 6px 0 0 16px;
     box-shadow: 0 2px 8px #2d2e4f0a;
 }
 
@@ -13,7 +13,7 @@
 
 div.card{
     background: $base-white;
-    border-radius: $border-radius-reg;
+    border-radius: $border-radius-card;
     margin-bottom: 24px;
     border-color: $border-color;
     &-header{
@@ -35,42 +35,6 @@ div.card{
         button{
             &:not(:last-child){
                 margin-right: 10px;
-            }
-        }
-    }
-}
-
-.page-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 8px;
-    margin-block-end: 24px;
-    .page-header-title{
-        display: flex;
-        align-items: center;
-        width: 50%;
-        .page-header-title-icon{
-            width: 28px;
-            height: 28px;
-            line-height: 32px;
-            text-align: center;
-            margin-inline-end: 4px;
-            cursor: pointer;
-            i,svg{
-                font-size: $text-size-lg;
-                font-weight: $font-weight-regular;
-                line-height: $line-height-large;
-                color: #7b8698 !important;
-            }
-        }
-        .page-title{
-            width: calc(100% - 32px);
-            .title{
-                font-size: $text-size-lg;
-                font-weight: $font-weight-medium;
-                line-height: $line-height-large;
-                color: $base-dark;
             }
         }
     }

@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     height: 60px;
-    padding: 14px 24px;
+    padding: 14px 10px;
     border: none;
     border-top-width: 1px;
     border-top-style: solid;
@@ -11,7 +11,7 @@
     .pagination{
         margin: 0;
     }
-    .pagination-result{
+    .pagination-set-results{
         font-size: $text-size-sm;
         font-weight: $font-weight-regular;
         line-height: $line-height-sm;

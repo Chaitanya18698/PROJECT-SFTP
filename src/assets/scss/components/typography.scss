@@ -7,6 +7,8 @@
     font-size: $text-size-reg !important;
     font-weight: $font-weight-regular !important;
     background: $base-bg !important;
+    height: 100%;
+    position: relative;
   }
 
   .border-bottom{
@@ -28,4 +30,8 @@
     font-weight: $font-weight-regular;
     line-height: $line-height-sm;
     color: $base-text-600;
+  }
+
+  .cursor-pointer{
+    cursor: pointer;
   }

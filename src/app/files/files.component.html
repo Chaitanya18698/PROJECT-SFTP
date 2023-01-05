@@ -12,14 +12,14 @@
   <tbody
     [ngStyle]="{ 'max-height': _sharedService.getTableMaxHeight() + 'px' }"
   >
-    <tr *ngFor="let item of modulesList; let i = index">
+    <tr *ngFor="let item of filesList; let i = index">
       <!-- <td>{{i + 1}}</td> -->
       <td>
         <!-- class="table-col-width" -->
         <div class="icon-text-set">
           <div class="icon"><i class="fa-regular fa-file-alt"></i></div>
           <div class="text">
-            {{ item.module_name }}
+            {{ item.file_name }}
           </div>
         </div>
       </td>

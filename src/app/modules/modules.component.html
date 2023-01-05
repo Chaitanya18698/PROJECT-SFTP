@@ -4,8 +4,10 @@
     <div class="page-header">
       <div class="page-heading">
         <div class="page-title">
-          Modules
-          <span class="breadcrumb-set">
+          <span [ngClass]="{'cursor-pointer': isFileView}" (click)="isFileView = false">
+            Modules
+          </span>
+          <span class="breadcrumb-set" *ngIf="isFileView">
             <span class="breadcrumb-text">Files</span>
           </span>
         </div>
@@ -13,7 +15,7 @@
       <div class="page-options">
         <div class="page-options-set">
           <button
-            class="btn btn-icon btn-outline-primary btn-sm"
+            class="btn btn-icon btn-outline-primary btn-xs"
             tabindex="0"
             data-bs-toggle="modal"
             data-bs-target="#addNewModal"
@@ -45,7 +47,7 @@
             <td>
               <!-- class="table-col-width" -->
               <div class="icon-text-set">
-                <div class="icon"><i class="fa-solid fa-folder"></i></div>
+                <div class="icon"><i class="fa-regular fa-folder"></i></div>
                 <div class="text">
                   {{ item.module_name }}
                 </div>
@@ -114,6 +116,7 @@
       <app-files *ngIf="isFileView"></app-files>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>
 
 <!-- Modal -->

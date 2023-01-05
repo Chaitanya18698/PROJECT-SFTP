@@ -1,0 +1,36 @@
+.footer-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    right: 0;
+    left: 0;
+    padding: 0 24px;
+    bottom: 16px;
+    transition: .3s all ease-in-out;
+    &-left{
+        display: flex;
+        align-items: center;
+        .company-info{
+            display: flex;
+            .company-logo{
+                height: 32px;
+                width: 36px;
+                overflow: hidden;
+                img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+        .company-data{
+            .name,.copyright{
+                font-size: $text-size-sm;
+                font-weight: $font-weight-bold;
+                line-height: normal;
+                color: $base-text-600;
+            }
+        }
+    }
+}

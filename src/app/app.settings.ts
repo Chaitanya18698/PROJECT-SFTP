@@ -2,7 +2,7 @@ import { environment } from "src/environments/environment";
 
 export class AppSettings {
     public static API = {
-        LOGIN_APP: environment.apiUrl + '/',
+        LOGIN_APP: environment.apiUrl + '/login',
         GET_MODULES: environment.apiUrl + '/',
         ADD_MODULES: environment.apiUrl + '/',
         GET_LOGS: environment.apiUrl + '/',

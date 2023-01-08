@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
                     queryParams : {returnUrl : state.url}
                 })
             }
-            this.loginType = sessionStorage.getItem('login_type')
+            this.loginType = sessionStorage.getItem('role')
             if(route.data['roles'].includes(this.loginType)) {
                 return true;
             } else {

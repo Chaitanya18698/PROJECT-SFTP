@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../common/services/shared.service';
 import { EncryptionService } from '../encryption.service'
 import { CommonService } from '../common.service'
-import {Router, ActivatedRoute} from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 declare var $: any;
 @Component({
   selector: 'app-clients',
@@ -10,57 +11,149 @@ declare var $: any;
   styleUrls: ['./clients.component.scss']
 })
 export class ClientsComponent implements OnInit {
-  clientName:  any = '';
+  clientName: any = '';
   clientData: any = [];
-  clientList: any = [];
+  selectedItem: any = null
   spinner = false;
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
     public _commonService: CommonService,
     public _route: Router,
-    public route: ActivatedRoute) { }
-  
-
-  ngOnInit(): void {
-    this.getClients();
-    this.clientList = [
-      {
-        client_name: 'MC Donald',
-      },
-      {
-        client_name: 'Shemaroo',
-      },
-      {
-        client_name: 'Meloraa',
-      },
-    ]
+    public route: ActivatedRoute, public _fb: FormBuilder) {
+    this.createClientForm()
   }
 
+  clientForm: any = FormGroup
 
-  addClients() {
-    const body = {
-      client_name : '',
-    }
-    this._commonService.add_client(body).subscribe((response) => {
-      response = this._encDec.decrypt(response.edc)
-      if (response.success) {
-        this.getClients();
-      } else {
-      }
+
+  ngOnInit(): void {
+
+    this.getClients();
+
+  }
+
+  // Form creation
+  createClientForm() {
+    this.clientForm = this._fb.group({
+      client_name: ['', [Validators.required, Validators.min(4), Validators.max(200)]],
+      code: null,
+      id: null,
+      status: 1
     })
   }
 
+  // Get clients list calling functions
   getClients() {
+    this.spinner = true;
     const body = {}
     this._commonService.get_client(body).subscribe((response) => {
       response = this._encDec.decrypt(response.edc)
+      console.log(response)
       if (response.success) {
+        this.spinner = false;
         this.clientData = response.data;
-        this.spinner = true;
       } else {
         this.spinner = false;
       }
     })
   }
+
+  // click button for ADD, Update, Active  & Deactive
+  clickToAction(type: string, item: any = null) {
+    this.createClientForm()
+    this.selectedItem = item
+    switch (type) {
+      case 'add':
+        this.selectedItem = null;
+        break;
+      case 'update':
+        this.clientForm.patchValue({
+          client_name: item.name,
+          code: item.code,
+          status: item.status,
+          id: item.id
+        })
+        break
+      case 'acdc':
+        this.clientForm.patchValue({
+          client_name: item.name,
+          code: item.code,
+          status: item.status,
+          id: item.id
+        })
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  // Add  Client Data
+  addClients() {
+    if (this.clientForm.valid) {
+      const data = this.clientForm.value
+
+      if (!this.selectedItem) {
+
+        const body = {
+          name: data.client_name,
+          code: this._commonService.codeGeneration(data.client_name)
+        }
+        this._commonService.add_client(body).subscribe((response) => {
+          response = this._encDec.decrypt(response.edc)
+          console.log(response)
+          if (response.success) {
+            alert('Added successfully...!')
+            $('#addNewModal').modal('hide')
+            this.getClients();
+          } else {
+            alert('Something went wrong...!')
+          }
+        })
+      } else {
+        const body = {
+          id: data.id,
+          name: data.client_name
+        }
+        this._commonService.update_client(body).subscribe((response) => {
+          response = this._encDec.decrypt(response.edc)
+          console.log(response)
+          if (response.success) {
+            this.getClients();
+            alert('Update successfully...!')
+            $('#addNewModal').modal('hide')
+
+          } else {
+            alert('Something went wrong...!')
+          }
+        })
+      }
+    } else {
+      alert('Please fill all requried fields')
+    }
+  }
+
+
+  acdcSubmit() {
+    if (this.clientForm.valid) {
+      const data = this.clientForm.value;
+      const body = {
+        id: data.id,
+        status: this.selectedItem.status ? 0 : 1
+      }
+      this._commonService.acdc_client(body).subscribe((response) => {
+        response = this._encDec.decrypt(response.edc)
+        console.log(response)
+        if (response.success) {
+          alert('Updated successfully...!')
+          $('#acdcNewModal').modal('hide')
+          this.getClients();
+        } else {
+          alert('Something went wrong...!')
+        }
+      })
+    }
+  }
+
 }

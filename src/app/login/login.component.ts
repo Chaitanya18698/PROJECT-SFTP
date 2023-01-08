@@ -62,8 +62,8 @@ export class LoginComponent implements OnInit {
     }
 
     const body = {
-      username: this.username,
-      value: this._encDec.encrypt(this.password1),
+      display_id: this.username,
+      password: this._encDec.encrypt(this.password1),
 
     }
     console.log(body);

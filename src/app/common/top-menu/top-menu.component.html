@@ -1,12 +1,16 @@
 <div class="topmenu">
     <ul class="topmenu-set">
-        <li class="topmenu-set-item">
-            <a href="" [ngClass]="{'active': routeActive == 'Modules'}" (click)="handleRoute('Modules')"
-                class="topmenu-set-item-link active" [routerLink]="'/modules'" queryParamsHandling="merge">
-                Modules
-            </a>
-        </li>
-        <li class="topmenu-set-item">
+        <ng-container   *ngFor="let item of mainTabList">
+
+            <li class="topmenu-set-item" *ngIf="item.rolePrivilage.includes(1)">
+                
+                <a href="" [ngClass]="{'active': routeActive == item.routerLink}" (click)="handleRoute('Modules')"
+                    class="topmenu-set-item-link active" [routerLink]="item.routerLink" queryParamsHandling="merge">
+                    {{item.tabName}}
+                </a>
+            </li>
+        </ng-container>
+        <!-- <li class="topmenu-set-item">
             <a href="" [ngClass]="{'active': routeActive == 'Clients'}" (click)="handleRoute('Clients')"
                 class="topmenu-set-item-link" [routerLink]="'/clients'" queryParamsHandling="merge">
                 Clients
@@ -24,17 +28,17 @@
                 Implementors
             </a>
         </li>
-        <!-- <li class="topmenu-set-item">
+        <li class="topmenu-set-item">
             <a href="" [ngClass]="{'active': routeActive == 'Users'}" (click)="handleRoute('Users')"
                 class="topmenu-set-item-link" [routerLink]="'/users'" queryParamsHandling="merge">
                 Users
             </a>
-        </li> -->
+        </li>
         <li class="topmenu-set-item">
             <a href="" [ngClass]="{'active': routeActive == 'Logs'}" (click)="handleRoute('Logs')"
                 class="topmenu-set-item-link" [routerLink]="'/logs'" queryParamsHandling="merge">
                 Logs
             </a>
-        </li>
+        </li> -->
     </ul>
 </div>

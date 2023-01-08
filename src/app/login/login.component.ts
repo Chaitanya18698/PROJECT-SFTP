@@ -70,9 +70,10 @@ export class LoginComponent implements OnInit {
     this._commonService.loginapp(body).subscribe((response) => {
       response = this._encDec.decrypt(response.edc)
       if (!response.error) {
-        sessionStorage.setItem('token', response.token);
+        sessionStorage.setItem('token', response.data.current_token);
+        sessionStorage.setItem('loginType', response.data.loginType);
         //Decode token
-        let userData = this.JwtHelper.decodeToken(response.token)
+        let userData = this.JwtHelper.decodeToken(response.data.current_token)
         console.log(userData, ' userdata', response, 'response')
       }
       if (response.success) {

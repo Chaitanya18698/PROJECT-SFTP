@@ -34,10 +34,28 @@ export class CommonService {
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
 
+
+    // Module API's  functions
+    get_modules(body: any) {
+        const url = AppSettings.API.GET_MODULES;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
+
     add_module(body: any) {
         const url = AppSettings.API.ADD_MODULES;
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
+
+    update_module(body: any) {
+        const url = AppSettings.API.UPDATE_MODULES;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
+
+    acdc_module(body: any) {
+        const url = AppSettings.API.ACDC_MODULES;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
+    // Module API's END
 
     get_user(body: any) {
         const url = AppSettings.API.GET_USERS;
@@ -49,10 +67,7 @@ export class CommonService {
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
 
-    get_modules(body: any) {
-        const url = AppSettings.API.GET_MODULES;
-        return this._apiservice.callApi({ url, method: 'POST', body })
-    }
+
 
     get_implementors(body: any) {
         const url = AppSettings.API.GET_IMPLEMENTORS;

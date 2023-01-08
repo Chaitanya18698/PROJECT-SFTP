@@ -13,7 +13,8 @@ export class EncryptionService {
 
     decrypt(message: any) {
         const bytes = CryptoJS.AES.decrypt(message, environment.ENCRYPTION_KEY);
-        const dec  = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        const decode = bytes.toString(CryptoJS.enc.Utf8)
+        const dec  = JSON.parse(decode);
         return dec;
     }
 }

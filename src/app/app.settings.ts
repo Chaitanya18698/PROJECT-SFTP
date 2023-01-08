@@ -3,8 +3,10 @@ import { environment } from "src/environments/environment";
 export class AppSettings {
     public static API = {
         LOGIN_APP: environment.apiUrl + '/login',
-        GET_MODULES: environment.apiUrl + '/',
-        ADD_MODULES: environment.apiUrl + '/',
+        GET_MODULES: environment.apiUrl + '/dir/list',
+        ADD_MODULES: environment.apiUrl + '/dir/add',
+        UPDATE_MODULES: environment.apiUrl + '/dir/update',
+        ACDC_MODULES: environment.apiUrl + '/dir/acdc',
         GET_LOGS: environment.apiUrl + '/',
         GET_CLIENTS: environment.apiUrl + '/clients/list',
         GET_IMPLEMENTORS: environment.apiUrl + '/',

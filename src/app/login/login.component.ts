@@ -68,33 +68,16 @@ export class LoginComponent implements OnInit {
     }
     console.log(body);
     this._commonService.loginapp(body).subscribe((response) => {
-
       response = this._encDec.decrypt(response.edc)
-      console.log(response)
       if (!response.error) {
-        if(response.data) {
-          sessionStorage.setItem('token', response.data.current_token);
-          //Decode token
-          let userData = this.JwtHelper.decodeToken(response.data.current_token)
-          console.log(userData, ' userdata', response, 'response')
-          sessionStorage.setItem('role', response.data.role)
-          sessionStorage.setItem('login_type', response.data.loginType)
-          sessionStorage.setItem('displayname', response.data.current_client_name)
-          sessionStorage.setItem('linkedData',this._encDec.encrypt(JSON.stringify(response.data.linkedClients)))
-        }
-
+        sessionStorage.setItem('token', response.token);
+        //Decode token
+        let userData = this.JwtHelper.decodeToken(response.token)
+        console.log(userData, ' userdata', response, 'response')
       }
       if (response.success) {
         this.loading = false;
-        if(response.data.loginType == 1) {
-          this._route.navigate(['/modules'])
-        }
-        if(response.data.loginType == 2) {
-          this._route.navigate(['/modules'])
-        }
-        if(response.data.loginType == 3) {
-          this._route.navigate(['/modules'])
-        }
+        this._route.navigate(['/modules'])
       } else {
         this.errMsg = true;
         this.loading = false;

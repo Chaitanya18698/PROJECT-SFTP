@@ -61,7 +61,13 @@
               <span class="text-small"> 200 MB </span>
             </td> -->
             <td>
-              <span class="badge success">
+              <span
+                class="badge success"
+                [ngClass]="{
+                  success: item.status == 1,
+                  failed: item.status != 1
+                }"
+              >
                 {{ item.status == 1 ? "Active" : "Deactive" }}</span
               >
               <!-- <span class="badge failed">Failed</span>
@@ -78,7 +84,8 @@
                   <ul>
                     <li>
                       <a
-                        class="dropdown-item"   data-bs-toggle="modal"
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
                         data-bs-target="#addNewModal"
                         (click)="clickToAction('update', item)"
                       >

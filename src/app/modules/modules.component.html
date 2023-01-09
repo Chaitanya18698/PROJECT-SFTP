@@ -14,7 +14,34 @@
       </div>
       <div class="page-options">
         <div class="page-options-set">
+          <div class="dropdown">
+            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              (click)="onOpenForm('clients')">
+              {{
+              selectedClient
+              ? selectedClient
+              : "Select Client"
+              }}
+              <div class="clear" (click)="clear(selectedClient, $event)" *ngIf="selectedClient != ''">
+                <i class="fa-solid fa-times"></i>
+              </div>
+              <div class="clear" (click)="clear(selectedClient, $event)" *ngIf="selectedClient != ''">
+                <i class="fa-solid fa-times"></i>
+              </div>
+            </a>
 
+            <div class="dropdown-menu">
+              <ul>
+                <li *ngFor="let item of clientList; let i = index" [ngClass]="{
+                    active: item.itemName == selectedClient
+                  }">
+                  <a class="dropdown-item" (click)="selectClient(item)">
+                    {{ item.itemName }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="page-options-set">
           <button class="btn btn-icon btn-outline-primary btn-xs" tabindex="0" data-bs-toggle="modal"

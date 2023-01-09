@@ -55,7 +55,7 @@ export class UsersComponent implements OnInit {
   }
 
   openForm() {
-    this.actionType = 'form'
+    this._route.navigateByUrl('/add-form')
   }
 
   redirect(event: any) {

@@ -69,7 +69,7 @@ export class ApiService {
         return {
             headers : new HttpHeaders ({
                 'Content-Type': 'application/json',
-                Authorization : 'BEARER' + sessionStorage.getItem('token')
+                Authorization : 'BEARER ' + sessionStorage.getItem('token')
             })
         }
     }

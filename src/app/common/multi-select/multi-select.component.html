@@ -1,0 +1,57 @@
+<div class="dropdown multi-dropdown">
+  <a
+    type="button"
+    id="multiSelect"
+    data-bs-hover="dropdown"
+    data-bs-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="true"
+    class="dropdown-toggle"
+  >
+    <div class="multi-selective">
+      <div class="badge-white-filter" *ngFor="let item of value">
+        <span class="text-truncate multi-select-text">
+          {{ item.itemName }} </span
+        ><a name="filter_badge" (click)="onToggleValue($event, item)"
+          ><i class="fa-solid fa-times"></i
+        ></a>
+      </div>
+      <span *ngIf="!value.length">{{ placeholder }}</span>
+    </div>
+  </a>
+  <div aria-labelledby="multiSelect" class="dropdown-menu is-no-scroll">
+    <!-- <div class="multi-search">
+        <div class="input-group input-group-both">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+          </div>
+          <input autocomplete="off" type="text" placeholder="Search"
+            class="form-control ng-valid ng-dirty ng-touched" />
+          <div class="input-group-append">
+            <span class="input-group-text"></span>
+          </div>
+        </div>
+      </div> -->
+    <!-- <div class="multi-selection">
+        <div class="checkbox-wrap">
+          <input autocomplete="off" type="checkbox" id="mselect-kjn1x28n9-all"
+            class="ng-untouched ng-valid ng-dirty" /><label for="mselect-kjn1x28n9-all">Unselect
+            All</label>
+        </div>
+      </div> -->
+    <ul>
+      <li class="dropdown-item" *ngFor="let item of optionList; let i = index">
+        <div class="checkbox-wrap">
+          <input
+            type="checkbox"
+            id="mselect-{{randomId}}{{ i }}"
+            [checked]="set.has(item.id)"
+            (click)="onToggleValue($event, item)"
+          /><label for="mselect-{{randomId}}{{ i }}"
+            ><span class="break-word">{{ item.itemName }}</span></label
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -44,7 +44,7 @@
                   failed: item.status != 1
                 }"
               >
-                {{ item.status == 1 ? "Active" : "Deactive" }}</span
+                {{ item.status == 1 ? "Active" : "Inactive" }}</span
               >
               <!-- <span class="badge failed">Failed</span>
                             <span class="badge pending">Pending</span> -->
@@ -75,15 +75,15 @@
                         data-bs-target="#acdcNewModal"
                         (click)="clickToAction('acdc', item)"
                       >
-                        {{ item.status == 1 ? "Deactive" : "Active" }}
+                        {{ item.status == 1 ? "Deactivate" : "Activate" }}
                       </a>
                     </li>
                     <li *ngIf="loginType && loginType != 1">
                       <a
                         class="dropdown-item"
                        
-                        (click)="clickOnView(item)"
-                      >view 
+                        (click)="isFileView = true"
+                      >View 
                       </a>
                     </li>
                   </ul>
@@ -215,7 +215,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p>Are you sure..?</p>
+        <p>Are you sure you want to change the status of the module?</p>
       </div>
       <div class="modal-footer">
         <button

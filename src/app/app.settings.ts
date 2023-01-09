@@ -11,6 +11,7 @@ export class AppSettings {
         GET_CLIENTS: environment.apiUrl + '/clients/list',
         GET_IMPLEMENTORS: environment.apiUrl + '/',
         ADD_IMPLEMENTORS: environment.apiUrl + '/implementor/add',
+        ADD_CLIENTS_USERS: environment.apiUrl + '/client/add',
         ADD_CLIENTS: environment.apiUrl + '/clients/add',
         UPDATE_CLIENTS: environment.apiUrl + '/clients/update',
         ACDC_CLIENTS: environment.apiUrl + '/clients/acdc',

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { CommonService } from '../common.service';
 import { EncryptionService } from '../encryption.service';
 import { DOCUMENT } from '@angular/common'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 declare var $: any;
 
 @Injectable()
@@ -25,16 +25,17 @@ export class AddFormComponent implements OnInit {
   addUserForm: any = FormGroup;
   spinner = false;
 
-
+  parent_id: any = null
   // Form 
   clientForm: any = FormGroup
 
-  constructor(@Inject(Document) private document: Document, public _fb: FormBuilder, public _commonService: CommonService, public _encDec: EncryptionService, public _route: Router) {
+  constructor(@Inject(Document) private document: Document, public _fb: FormBuilder, public _commonService: CommonService, public _encDec: EncryptionService, public _route: Router, public route: ActivatedRoute) {
     // initaling  Form
     this.CreateClientForm()
   }
 
   ngOnInit(): void {
+    this.parent_id = this.route.snapshot.paramMap.get('form');
 
     // Request for data of from
     this.getClients();
@@ -66,7 +67,7 @@ export class AddFormComponent implements OnInit {
   //   })
   // }
 
-  
+
   // Get client list Data
   getClients() {
     this.spinner = true;
@@ -161,7 +162,7 @@ export class AddFormComponent implements OnInit {
 
   // Back to Imlementor screen
   backToUrl() {
-    this._route.navigateByUrl('/implementors')
+    this._route.navigateByUrl(`/${this.parent_id}`)
   }
 
 
@@ -204,34 +205,68 @@ export class AddFormComponent implements OnInit {
   // /implementor  add functionlity
   postImplementor() {
     const data = this.clientForm.value;
-    const body: any = {
-      display_id: data.display_id,
-      name: data.name,
-      password: data.password,
-      priv: []
-    }
+    if (this.parent_id == 'implementors') {
 
-    for (const item of data.priv) {
-      const subData = {
-        client_id: item.client_id ? item.client_id.id : null,
-        modules: item.modules.map((ele: any) => ele.id)
+      const body: any = {
+        display_id: data.display_id,
+        name: data.name,
+        password: data.password,
+        priv: []
       }
-      body.priv.push(subData)
-    }
 
-    this._commonService.add_implementors(body).subscribe((response: any) => {
-      response = this._encDec.decrypt(response.edc);
-      console.log("post response", response);
-      if (response.success) {
-        alert('Added successfully')
-        this.backToUrl()
-      } else {
+      for (const item of data.priv) {
+        const subData = {
+          client_id: item.client_id ? item.client_id.id : null,
+          modules: item.modules.map((ele: any) => ele.id)
+        }
+        body.priv.push(subData)
+      }
+      console.log(body)
+
+      this._commonService.add_implementors(body).subscribe((response: any) => {
+        response = this._encDec.decrypt(response.edc);
+        console.log("post response", response);
+        if (response.success) {
+          alert('Added successfully')
+          this.backToUrl()
+        } else {
+          alert('Something went to worng...!')
+        }
+      }, error => {
         alert('Something went to worng...!')
-      }
-    }, error => {
-      alert('Something went to worng...!')
 
-    })
-    console.log(body)
+      })
+    } else if (this.parent_id == 'users') {
+      const body: any = {
+        display_id: data.display_id,
+        name: data.name,
+        password: data.password,
+        
+      }
+
+      for (const item of data.priv) {
+        const subData = {
+          client_id: item.client_id ? item.client_id.id : null,
+          modules: item.modules.map((ele: any) => ele.id)
+        }
+        body['client_id'] = subData.client_id
+        body['modules'] = subData.modules
+      }
+      console.log(body)
+
+      this._commonService.add_clientUser(body).subscribe((response: any) => {
+        response = this._encDec.decrypt(response.edc);
+        console.log("post response", response);
+        if (response.success) {
+          alert('Added successfully')
+          this.backToUrl()
+        } else {
+          alert('Something went to worng...!')
+        }
+      }, error => {
+        alert('Something went to worng...!')
+
+      })
+    }
   }
 }

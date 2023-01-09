@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../common/services/shared.service';
 import { EncryptionService } from '../encryption.service'
 import { CommonService } from '../common.service'
-import {Router, ActivatedRoute} from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 declare var $: any;
 
 @Component({
@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
 
   addUsers() {
     const body = {
-      module_name : '',
+      module_name: '',
     }
     this._commonService.add_user(body).subscribe((response) => {
       response = this._encDec.decrypt(response.edc)
@@ -42,9 +42,12 @@ export class UsersComponent implements OnInit {
 
   getUsers() {
     this.spinner = true;
-    const body = {}
-    this._commonService.get_user(body).subscribe((response) => {
+    const body = {
+      loginType: 3
+    }
+    this._commonService.get_logs(body).subscribe((response) => {
       response = this._encDec.decrypt(response.edc)
+      console.log('response', response)
       if (response.success) {
         this.modulesData = response.data;
         this.spinner = false;
@@ -54,13 +57,17 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  openForm() {
-    this._route.navigateByUrl('/add-form')
-  }
+  
 
   redirect(event: any) {
     console.log(event, 'form close event')
     this.actionType === 'table'
+  }
+
+
+
+  openForm() {
+    this._route.navigate(['/add-form', {form: 'users'}])
   }
 
 }

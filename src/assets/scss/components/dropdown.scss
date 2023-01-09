@@ -1,8 +1,9 @@
-.dropdown-menu{
+.dropdown-menu {
     border: 0 !important;
     box-shadow: 0 6px 4px #2d2e4f1a;
     max-width: 200px;
-    .dropdown-item{
+
+    .dropdown-item {
         cursor: pointer;
         font-size: 12px;
         position: relative;
@@ -11,12 +12,15 @@
         overflow: visible;
         text-overflow: inherit;
         word-break: normal;
-        i,svg{
+
+        i,
+        svg {
             margin-inline-end: 6px;
         }
     }
 }
-.dropdown-toggle{
+
+.dropdown-toggle {
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -27,8 +31,8 @@
     // }
 }
 
-.dropdown{
-    a.dropdown-toggle{
+.dropdown {
+    a.dropdown-toggle {
         position: relative;
         border-width: 1px;
         border-style: solid;
@@ -40,7 +44,7 @@
         height: 44px;
         border-radius: $border-radius-reg;
         color: $base-text-600;
-        font-family: Poppins,sans-serif;
+        font-family: Poppins, sans-serif;
         font-size: $text-size-reg;
         line-height: $line-height-regular;
         font-weight: $font-weight-regular;
@@ -50,7 +54,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
-        &:after{
+
+        &:after {
             position: absolute;
             top: 18px;
             right: 10px;
@@ -60,12 +65,14 @@
             line-height: $line-height-sm;
             transition: all .2s ease;
         }
-        &[aria-expanded = true]{
-            &:after{
+
+        &[aria-expanded=true] {
+            &:after {
                 transform: rotate(180deg);
             }
         }
-        .clear{
+
+        .clear {
             position: absolute;
             right: 20px;
             text-align: center;
@@ -78,7 +85,8 @@
             height: 20px;
         }
     }
-    &-menu{
+
+    &-menu {
         width: 100%;
         min-width: 200px;
         border: none;
@@ -86,22 +94,27 @@
         max-height: 222px;
         overflow-y: auto;
         background: $base-white;
-        ul{
+
+        ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            li{
+
+            li {
                 position: relative;
                 cursor: pointer;
-                &:hover{
+
+                &:hover {
                     background: $base-gray-100;
                     color: $base-text-900;
                 }
-                &.active{
+
+                &.active {
                     background: $base-gray-100;
                     color: $base-text-900;
-                    .dropdown-item{
-                        &:after{
+
+                    .dropdown-item {
+                        &:after {
                             position: absolute;
                             top: 12px;
                             right: 12px;
@@ -115,7 +128,8 @@
                         }
                     }
                 }
-                .dropdown-item{
+
+                .dropdown-item {
                     font-size: $text-size-sm;
                     position: relative;
                     padding: 8px 30px 8px 10px;
@@ -124,14 +138,15 @@
                     text-overflow: inherit;
                     word-break: normal;
                     background-color: transparent;
-                    border: 0;    
+                    border: 0;
                     clear: both;
                     font-weight: 400;
                     color: #212529;
                     text-align: inherit;
                     display: block;
                     width: 100%;
-                    label{
+
+                    label {
                         display: block;
                     }
                 }
@@ -140,64 +155,103 @@
     }
 }
 
-.dropdown{
-    &.multi-dropdown{
-        .dropdown-toggle{
+.dropdown {
+    &.sm {
+        .dropdown-toggle {
+            height: 36px;
+            font-size: $text-size-sm;
+            font-weight: $font-weight-regular;
+            line-height: 16px;
+            padding: 10px 40px 10px 10px;
+
+            &:after {
+                top: 12px;
+            }
+
+            .clear {
+                top: 8px;
+            }
+        }
+
+        .dropdown-menu {
+            li {
+                .dropdown-item {
+                    font-size: $text-size-sm;
+                }
+            }
+        }
+    }
+
+    &.multi-dropdown {
+        .dropdown-toggle {
             padding: 8px 10px;
-            .multi-selective{
+
+            .multi-selective {
                 display: flex;
                 align-items: center;
                 position: relative;
-                .badge-white-filter{
+
+                .badge-white-filter {
                     margin-right: 3px;
                     max-width: calc(50% - 20px);
                 }
             }
         }
-        .dropdown-menu{
-            &.no-scroll{
+
+        .dropdown-menu {
+            &.no-scroll {
                 overflow-y: inherit;
                 max-height: inherit !important;
             }
-            .multi-search{
+
+            .multi-search {
                 padding: 8px 10px;
             }
-            .multi-selection{
+
+            .multi-selection {
                 border-bottom: 1px solid $base-gray;
-                .checkbox-wrap{
-                    label{
+
+                .checkbox-wrap {
+                    label {
                         padding: 14px 14px 14px 38px;
                         display: inline-block;
-                        &:before{
+
+                        &:before {
                             left: 14px;
                             top: 14px;
                         }
-                        &:after{
+
+                        &:after {
                             left: 14px;
                             top: 14px;
                         }
                     }
                 }
             }
-            ul{
+
+            ul {
                 list-style: none;
                 padding-left: 0;
                 margin-bottom: 0;
                 height: 200px;
                 overflow-y: auto;
-                .dropdown-item{
+
+                .dropdown-item {
                     font-size: 14px;
                     position: relative;
                     padding: 0;
                     white-space: initial;
-                    .checkbox-wrap{
-                        label{
+
+                    .checkbox-wrap {
+                        label {
                             padding: 14px 14px 14px 38px;
-                            &:before{
+
+                            &:before {
                                 left: 14px;
                                 top: 14px;
                             }
-                            &:after{
+
+                            &:after {
                                 left: 14px;
                                 top: 14px;
                             }

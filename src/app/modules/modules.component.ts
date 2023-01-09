@@ -19,6 +19,7 @@ export class ModulesComponent implements OnInit {
   selectedItem: any = null
   moduleForm: any = FormGroup
   selectedClient: any = '';
+  isTableView: any = false;
 
   constructor(
     public _sharedService: SharedService,
@@ -34,19 +35,19 @@ export class ModulesComponent implements OnInit {
     this.getModules();
     this.clientList = [
       {
-        itemName: 'Client 1',
+        name: 'Client 1',
         id: 1
       },
       {
-        itemName: 'Client 2',
+        name: 'Client 2',
         id: 2
       },
       {
-        itemName: 'Client 3',
+        name: 'Client 3',
         id: 3
       },
       {
-        itemName: 'Client 4',
+        name: 'Client 4',
         id: 4
       },
     ]

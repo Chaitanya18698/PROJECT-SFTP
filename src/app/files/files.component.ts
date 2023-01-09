@@ -14,6 +14,7 @@ export class FilesComponent implements OnInit {
   filesData: any = [];
   filesList: any = [];
   spinner = false;
+  isTableView = false;
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,

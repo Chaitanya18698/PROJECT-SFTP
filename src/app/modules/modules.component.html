@@ -1,57 +1,27 @@
 <div class="page-wrapper">
   <app-header></app-header>
   <div class="page-container">
-    <div class="page-header">
-      <div class="page-heading">
-        <div class="page-title">
-          <span [ngClass]="{ 'cursor-pointer': isFileView }" (click)="isFileView = false">
-            Modules
-          </span>
-          <span class="breadcrumb-set" *ngIf="isFileView">
-            <span class="breadcrumb-text">Files</span>
-          </span>
-        </div>
-      </div>
-      <div class="page-options">
-        <div class="page-options-set">
-          <div class="dropdown sm">
-            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-              (click)="onOpenForm('clients')">
-              {{
-              selectedClient
-              ? selectedClient
-              : "Select Client"
-              }}
-              <div class="clear" (click)="clear(selectedClient, $event)" *ngIf="selectedClient != ''">
-                <i class="fa-solid fa-times"></i>
-              </div>
-              <div class="clear" (click)="clear(selectedClient, $event)" *ngIf="selectedClient != ''">
-                <i class="fa-solid fa-times"></i>
-              </div>
-            </a>
+    <app-common-page-header></app-common-page-header>
 
-            <div class="dropdown-menu">
-              <ul>
-                <li *ngFor="let item of clientList; let i = index" [ngClass]="{
-                    active: item.itemName == selectedClient
-                  }">
-                  <a class="dropdown-item" (click)="selectClient(item)">
-                    {{ item.itemName }}
-                  </a>
-                </li>
-              </ul>
-            </div>
+    <div class="folder-wrap row" *ngIf="!isTableView && !isFileView">
+      <div
+        class="folder-item col-md-3"
+        *ngFor="let item of clientList; let i = index"
+      >
+        <div class="folder-card" (click)="isFileView = true">
+          <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
+          <div class="folder-card-icon">
+            <i class="fa-solid fa-folder"></i>
           </div>
-        </div>
-        <div class="page-options-set">
-          <button class="btn btn-icon btn-outline-primary btn-sm" tabindex="0" data-bs-toggle="modal"
-            data-bs-target="#addNewModal" (click)="clickToAction('add', null)">
-            <i class="fa-solid fa-plus"></i> Add New
-          </button>
+          <div class="folder-card-text">
+            {{ item.name }}
+          </div>
+          <!-- folder-card-status, active-1 -->
         </div>
       </div>
     </div>
-    <div class="table-card">
+
+    <div class="table-card" *ngIf="isTableView">
       <table class="table" *ngIf="!isFileView">
         <thead>
           <tr>
@@ -63,9 +33,11 @@
             <th class="table-action"></th>
           </tr>
         </thead>
-        <tbody [ngStyle]="{
+        <tbody
+          [ngStyle]="{
             'max-height': _sharedService.getTableMaxHeight() + 'px'
-          }">
+          }"
+        >
           <tr *ngFor="let item of modulesData; let i = index">
             <!-- <td>{{i + 1}}</td> -->
             <td>
@@ -81,11 +53,15 @@
               <span class="text-small"> 200 MB </span>
             </td> -->
             <td>
-              <span class="badge success" [ngClass]="{
+              <span
+                class="badge success"
+                [ngClass]="{
                   success: item.status == 1,
                   failed: item.status != 1
-                }">
-                {{ item.status == 1 ? "Active" : "Deactive" }}</span>
+                }"
+              >
+                {{ item.status == 1 ? "Active" : "Deactive" }}</span
+              >
               <!-- <span class="badge failed">Failed</span>
                             <span class="badge pending">Pending</span> -->
             </td>
@@ -99,14 +75,22 @@
                 <div class="dropdown-menu dropdown-menu-end">
                   <ul>
                     <li>
-                      <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addNewModal"
-                        (click)="clickToAction('update', item)">
+                      <a
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addNewModal"
+                        (click)="clickToAction('update', item)"
+                      >
                         Update
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#acdcNewModal"
-                        (click)="clickToAction('acdc', item)">
+                      <a
+                        class="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#acdcNewModal"
+                        (click)="clickToAction('acdc', item)"
+                      >
                         {{ item.status == 1 ? "Deactive" : "Active" }}
                       </a>
                     </li>
@@ -148,36 +132,63 @@
           </div>
         </tfoot>
       </table>
-      <app-files *ngIf="isFileView"></app-files>
     </div>
+    <app-files *ngIf="isFileView"></app-files>
   </div>
   <app-footer></app-footer>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addNewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="addNewModal" aria-hidden="true">
+<div
+  class="modal fade"
+  id="addNewModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="addNewModal"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="addNewModal">
           {{ selectedItem ? "Update" : "Add" }} Module
         </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="moduleForm">
           <div class="form-group">
-            <label for="module-name" class="form-label field-required">Module name</label>
-            <input type="text" class="form-control" formControlName="name" placeholder="Enter module name" />
+            <label for="module-name" class="form-label field-required"
+              >Module name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              placeholder="Enter module name"
+            />
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-tertiary-gray btn-sm" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-tertiary-gray btn-sm"
+          data-bs-dismiss="modal"
+        >
           Cancel
         </button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="addUpdateModules()">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="addUpdateModules()"
+        >
           Submit
         </button>
       </div>
@@ -186,27 +197,47 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="acdcNewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="acdcNewModal" aria-hidden="true">
+<div
+  class="modal fade"
+  id="acdcNewModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="acdcNewModal"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5">
           {{
-          selectedItem && selectedItem.status == 1 ? "Deactivate" : "Activate"
+            selectedItem && selectedItem.status == 1 ? "Deactivate" : "Activate"
           }}
           Module
         </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <p>Are you sure..?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-tertiary-gray btn-sm" data-bs-dismiss="modal">
+        <button
+          type="button"
+          class="btn btn-tertiary-gray btn-sm"
+          data-bs-dismiss="modal"
+        >
           Cancel
         </button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="acdcSubmit()">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="acdcSubmit()"
+        >
           Submit
         </button>
       </div>

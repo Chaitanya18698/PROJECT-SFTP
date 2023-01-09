@@ -1,17 +1,4 @@
 <div class="page-container">
-  <!-- <div class="page-header">
-        <div class="page-heading">
-            <div class="page-title"> IP Generation </div>
-        </div>
-        <div class="page-options">
-            <div class="page-options-set">
-                <button class="btn btn-icon btn-outline-primary btn-xs" tabindex="0" data-bs-toggle="modal"
-                    data-bs-target="#addNewModal">
-                    <i class="fa-solid fa-plus"></i> Add New
-                </button>
-            </div>
-        </div>
-    </div> -->
 
   <div class="page-header">
     <div class="page-header-title">
@@ -50,13 +37,19 @@
                     clientForm.controls['display_id'].dirty)
                 "
               >
-                <span *ngIf="clientForm.controls['display_id']?.errors.required">
+                <span
+                  *ngIf="clientForm.controls['display_id']?.errors.required"
+                >
                   Please provide an ID.
                 </span>
-                <span *ngIf="clientForm.controls['display_id']?.errors.maxlength">
+                <span
+                  *ngIf="clientForm.controls['display_id']?.errors.maxlength"
+                >
                   ID should be atleast 2 characters.
                 </span>
-                <span *ngIf="clientForm.controls['display_id']?.errors.minlength">
+                <span
+                  *ngIf="clientForm.controls['display_id']?.errors.minlength"
+                >
                   ID should not be more than 10 characters.
                 </span>
               </div>
@@ -152,7 +145,11 @@
               class="col-md-12"
               *ngFor="let clientIndex of priv.controls; let i = index"
             >
-              <div class="row form-group" [formGroupName]="i" [ngClass]="{'border-bottom': (i + 1) != priv.controls.length}">
+              <div
+                class="row form-group"
+                [formGroupName]="i"
+                [ngClass]="{ 'border-bottom': i + 1 != priv.controls.length }"
+              >
                 <!-- <div class="col-md-4">
                 <div class="form-group">
                   <label for="username" class="form-label field-required">Select Implementor</label>
@@ -224,10 +221,10 @@
                       </ul>
                     </div>
                   </div> -->
-                    <akv-single-select
+                    <!-- <akv-single-select
                       [optionList]="clientsList" placeholder="select client"
                       formControlName="client_id"
-                    ></akv-single-select>
+                    ></akv-single-select> -->
                     <!-- <div
                       class="invalid-feedback"
                       *ngIf="
@@ -247,7 +244,7 @@
                 <!-- Modules -->
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="module{{i}}" class="form-label field-required"
+                    <label for="module{{ i }}" class="form-label field-required"
                       >Select Module</label
                     >
                     <!-- <div class="dropdown multi-dropdown">
@@ -291,7 +288,9 @@
                     </div>
                   </div> -->
                     <akv-multi-select
-                      [optionList]="modulesList" placeholder="select modules" id="module{{i}}"
+                      [optionList]="modulesList"
+                      placeholder="select modules"
+                      id="module{{ i }}"
                       formControlName="modules"
                     ></akv-multi-select>
                     <!-- <div
@@ -310,11 +309,20 @@
                     </div> -->
                   </div>
                 </div>
-                <div class="col-md-12 form-group text-end"  >
-                  <button class="btn btn-xs btn-icon btn-tertiary btn-red" (click)="removeForm(i)">
+                <div class="col-md-12 form-group text-end">
+                  <button
+                    class="btn btn-xs btn-icon btn-tertiary btn-red"
+                    (click)="removeForm(i)"
+                  >
                     Delete
                   </button>
-                  <button class="btn btn-xs btn-icon btn-tertiary" *ngIf="i == (priv.length -1)" (click)="addaOneMore()">Add</button>
+                  <button
+                    class="btn btn-xs btn-icon btn-tertiary"
+                    *ngIf="i == priv.length - 1"
+                    (click)="addaOneMore()"
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
             </div>

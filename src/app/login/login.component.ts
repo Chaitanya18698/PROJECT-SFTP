@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { EncryptionService } from '../encryption.service'
-import { CommonService } from '../common.service'
-import { Router, ActivatedRoute } from '@angular/router'
+import { EncryptionService } from '../encryption.service';
+import { CommonService } from '../common.service';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  JwtHelper = new JwtHelperService
+  JwtHelper = new JwtHelperService();
   password_status: any = 'password';
   hidePassword: any = true;
   password_status1: any = 'password';
@@ -20,17 +20,21 @@ export class LoginComponent implements OnInit {
   loading = false;
   error = '';
   errMsg = true;
-  password1: any = ''
+  password1: any = '';
 
   constructor(
     public _encDec: EncryptionService,
     public _commonService: CommonService,
     public _route: Router,
-    public route: ActivatedRoute) { }
+    public route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    $('.otp-set-input').keyup((e: any) => {
-    });
+    $('.otp-set-input').keyup((e: any) => {});
+    sessionStorage.setItem(
+      'current_directory',
+      this._encDec.encrypt(JSON.stringify([]))
+    );
   }
   togglePassword() {
     this.hidePassword = !this.hidePassword;
@@ -64,26 +68,29 @@ export class LoginComponent implements OnInit {
     const body = {
       display_id: this.username,
       password: this._encDec.encrypt(this.password1),
-
-    }
+    };
     console.log(body);
     this._commonService.loginapp(body).subscribe((response) => {
-      response = this._encDec.decrypt(response.edc)
+      response = this._encDec.decrypt(response.edc);
       if (!response.error) {
         sessionStorage.setItem('token', response.data.current_token);
         sessionStorage.setItem('loginType', response.data.loginType);
         //Decode token
-        let userData = this.JwtHelper.decodeToken(response.data.current_token)
-        console.log(userData, ' userdata', response, 'response')
+        let userData = this.JwtHelper.decodeToken(response.data.current_token);
+        console.log(userData, ' userdata', response, 'response');
+        sessionStorage.setItem(
+          'current_directory',
+          this._encDec.encrypt(JSON.stringify([]))
+        );
       }
       if (response.success) {
         this.loading = false;
-        this._route.navigate(['/modules'])
+        this._route.navigate(['/modules']);
       } else {
         this.errMsg = true;
         this.loading = false;
-        this.error = 'Server timeout. Please try again'
+        this.error = 'Server timeout. Please try again';
       }
-    })
+    });
   }
 }

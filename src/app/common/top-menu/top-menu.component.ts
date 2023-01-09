@@ -10,7 +10,7 @@ export class TopMenuComponent implements OnInit {
   routeActive: any = 'modules'
   loginType: any;
   constructor(public routerlink: Router) {
-    this.loginType = sessionStorage.getItem('loginType')
+    this.loginType = Number(sessionStorage.getItem('loginType'))
   }
 
   ngOnInit(): void {

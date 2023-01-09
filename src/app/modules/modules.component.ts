@@ -31,7 +31,9 @@ export class ModulesComponent implements OnInit {
     this.createModuleForm()
   }
 
+  loginType : any  = null
   ngOnInit(): void {
+    this.loginType = sessionStorage.getItem('loginType')
     this.getModules();
     this.clientList = [
       {
@@ -188,6 +190,13 @@ export class ModulesComponent implements OnInit {
   }
   selectClient(item: any) {
 
+  }
+
+
+  // click on view 
+  valuePicked: any = null
+  clickOnView(item: any) {
+    this.valuePicked = item
   }
 
 }

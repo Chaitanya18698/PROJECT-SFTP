@@ -2,9 +2,9 @@
     <ul class="topmenu-set">
         <ng-container   *ngFor="let item of mainTabList">
 
-            <li class="topmenu-set-item" *ngIf="item.rolePrivilage.includes(1)">
+            <li class="topmenu-set-item" *ngIf="item.rolePrivilage.includes(loginType)">
                 
-                <a href="" [ngClass]="{'active': routeActive == item.routerLink}" (click)="handleRoute('Modules')"
+                <a href="" [ngClass]="{'active': routeActive == item.routerLink}" 
                     class="topmenu-set-item-link active" [routerLink]="item.routerLink" queryParamsHandling="merge">
                     {{item.tabName}}
                 </a>

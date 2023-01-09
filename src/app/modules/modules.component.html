@@ -3,26 +3,10 @@
   <div class="page-container">
     <app-common-page-header></app-common-page-header>
 
-    <div class="folder-wrap row" *ngIf="!isTableView && !isFileView">
-      <div
-        class="folder-item col-md-3"
-        *ngFor="let item of clientList; let i = index"
-      >
-        <div class="folder-card" (click)="isFileView = true">
-          <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
-          <div class="folder-card-icon">
-            <i class="fa-solid fa-folder"></i>
-          </div>
-          <div class="folder-card-text">
-            {{ item.name }}
-          </div>
-          <!-- folder-card-status, active-1 -->
-        </div>
-      </div>
-    </div>
+  
 
-    <div class="table-card" *ngIf="isTableView">
-      <table class="table" *ngIf="!isFileView">
+    <div class="table-card" *ngIf="!valuePicked">
+      <table class="table" >
         <thead>
           <tr>
             <!-- <th>#</th> -->
@@ -94,11 +78,11 @@
                         {{ item.status == 1 ? "Deactive" : "Active" }}
                       </a>
                     </li>
-                    <li>
+                    <li *ngIf="loginType && loginType != 1">
                       <a
                         class="dropdown-item"
                        
-                        (click)="isFileView = true"
+                        (click)="clickOnView(item)"
                       >view 
                       </a>
                     </li>
@@ -141,7 +125,7 @@
         </tfoot>
       </table>
     </div>
-    <app-files *ngIf="isFileView"></app-files>
+    <app-files  [inputData]="valuePicked" *ngIf="valuePicked"></app-files>
   </div>
   <app-footer></app-footer>
 </div>

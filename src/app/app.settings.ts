@@ -17,6 +17,9 @@ export class AppSettings {
         UPDATE_CLIENTS: environment.apiUrl + '/clients/update',
         ACDC_CLIENTS: environment.apiUrl + '/clients/acdc',
         GET_USERS: environment.apiUrl + '/',
-        ADD_USERS: environment.apiUrl + '/'
+        ADD_USERS: environment.apiUrl + '/',
+
+        // file Paths
+        GET_FILES_DIRS : environment.apiUrl + '/dirs/files'
     }
 }

@@ -15,6 +15,8 @@ import { LogsComponent } from './logs/logs.component';
 import { ImplementorsComponent } from './implementors/implementors.component';
 import { FilesComponent } from './files/files.component';
 import { FooterComponent } from './footer/footer.component';
+import { SingleSelectComponent } from './common/single-select/single-select.component';
+import { MultiSelectComponent } from './common/multi-select/multi-select.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { FooterComponent } from './footer/footer.component';
     LogsComponent,
     ImplementorsComponent,
     FilesComponent,
-    FooterComponent
+    FooterComponent,
+    SingleSelectComponent,
+    MultiSelectComponent
   ],
   imports: [
     BrowserModule,

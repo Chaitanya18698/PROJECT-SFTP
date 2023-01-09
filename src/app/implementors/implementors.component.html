@@ -11,6 +11,7 @@
             <button
               class="btn btn-icon btn-outline-primary btn-xs"
               tabindex="0"
+              (click)="openForm()"
             >
               <i class="fa-solid fa-plus"></i> Add New
             </button>
@@ -23,7 +24,7 @@
             <tr>
               <!-- <th>#</th> -->
               <th>Implementor</th>
-              <th>Last</th>
+              <th>Name</th>
               <th>Status</th>
               <th class="table-action"></th>
             </tr>
@@ -33,12 +34,19 @@
               'max-height': _sharedService.getTableMaxHeight() + 'px'
             }"
           >
-            <tr *ngFor="let item of [].constructor(15); let i = index">
+            <tr *ngFor="let item of implementorsData; let i = index">
               <!-- <td>{{ i + 1 }}</td> -->
-              <td>Mark Zuckerberg</td>
-              <td>Otto</td>
+              <td>{{item.display_id}}</td>
+              <td>{{ item.name }}</td>
               <td>
-                <span class="badge success">Active</span>
+                <span
+                  class="badge success"
+                  [ngClass]="{
+                    success: item.status == 1,
+                    failed: item.status == 0
+                  }"
+                  >{{ item.status == 1 ? "Active" : "Deactive" }}</span
+                >
                 <!-- <span class="badge failed">Failed</span>
                             <span class="badge pending">Pending</span> -->
               </td>
@@ -66,7 +74,8 @@
           <tfoot>
             <div class="pagination-set">
               <div class="pagination-set-results">
-                Entries 1 to 25 out of 52
+                Entries 1 to {{ implementorsData.length }} out of
+                {{ implementorsData.length }}
               </div>
               <div class="pagination-set-center">
                 <!-- <ul class="pagination-stage-set">
@@ -75,7 +84,7 @@
                                 </li>
                             </ul> -->
 
-                <ul class="pagination">
+                <!-- <ul class="pagination">
                   <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
@@ -89,7 +98,7 @@
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
-                </ul>
+                </ul> -->
               </div>
             </div>
           </tfoot>
@@ -97,8 +106,12 @@
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="actionType  === 'form'">
-      <app-add-form [userData]="userData", (closeForm)="redirect($event)"></app-add-form>
+  <ng-container *ngIf="actionType === 'form'">
+    <app-add-form
+      [userData]="userData"
+      ,
+      (closeForm)="redirect($event)"
+    ></app-add-form>
   </ng-container>
   <app-footer></app-footer>
 </div>

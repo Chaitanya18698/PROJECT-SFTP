@@ -68,7 +68,7 @@ export class CommonService {
     }
 
 
-
+    //  Implementors  API's functions
     get_implementors(body: any) {
         const url = AppSettings.API.GET_IMPLEMENTORS;
         return this._apiservice.callApi({ url, method: 'POST', body })
@@ -79,6 +79,9 @@ export class CommonService {
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
 
+
+
+    // get implementors || clients 
     get_logs(body: any) {
         const url = AppSettings.API.GET_LOGS;
         return this._apiservice.callApi({ url, method: 'POST', body })

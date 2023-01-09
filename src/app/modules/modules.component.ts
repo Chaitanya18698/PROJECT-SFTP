@@ -19,7 +19,7 @@ export class ModulesComponent implements OnInit {
   selectedItem: any = null
   moduleForm: any = FormGroup
   selectedClient: any = '';
-  isTableView: any = false;
+  isTableView: any = true;
 
   constructor(
     public _sharedService: SharedService,

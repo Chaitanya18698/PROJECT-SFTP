@@ -64,7 +64,7 @@ export class ImplementorsComponent implements OnInit {
 
 
   openForm() {
-    this._route.navigateByUrl('/add-form')
+    this._route.navigate(['/add-form', {form: 'implementors'}])
   }
 
 }

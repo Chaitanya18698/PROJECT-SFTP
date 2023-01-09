@@ -79,6 +79,18 @@ export class CommonService {
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
 
+    add_clientUser(body: any) {
+        const url = AppSettings.API.ADD_CLIENTS_USERS;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
+    
+    // Get module with path 
+    
+    getModulesPath(body: any) {
+        const url = AppSettings.API.GET_MODULES_WITH_PATH;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
+
 
 
     // get implementors || clients 

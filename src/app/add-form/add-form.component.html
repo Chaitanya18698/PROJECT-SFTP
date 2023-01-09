@@ -1,5 +1,4 @@
 <div class="page-container">
-
   <div class="page-header">
     <div class="page-header-title">
       <a class="page-header-title-icon" (click)="backToUrl()">
@@ -221,10 +220,11 @@
                       </ul>
                     </div>
                   </div> -->
-                    <!-- <akv-single-select
-                      [optionList]="clientsList" placeholder="select client"
+                    <akv-single-select
+                      [optionList]="clientsList"
+                      placeholder="select client"
                       formControlName="client_id"
-                    ></akv-single-select> -->
+                    ></akv-single-select>
                     <!-- <div
                       class="invalid-feedback"
                       *ngIf="
@@ -309,7 +309,10 @@
                     </div> -->
                   </div>
                 </div>
-                <div class="col-md-12 form-group text-end">
+                <div
+                  class="col-md-12 form-group text-end"
+                  *ngIf="parent_id != 'users'"
+                >
                   <button
                     class="btn btn-xs btn-icon btn-tertiary btn-red"
                     (click)="removeForm(i)"

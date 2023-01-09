@@ -47,16 +47,16 @@ export class TopMenuComponent implements OnInit {
     //   defaultRoute: false
     // },
     {
-      tabName: 'Implementors',
-      routerLink: '/implementors',
-      router: 'implementors',
+      tabName: 'Client Logins',
+      routerLink: '/users',
+      router: 'users',
       rolePrivilage: [1],
       defaultRoute: false
     },
     {
-      tabName: 'Users',
-      routerLink: '/users',
-      router: 'users',
+      tabName: 'Implementer Logins',
+      routerLink: '/implementors',
+      router: 'implementors',
       rolePrivilage: [1],
       defaultRoute: false
     },

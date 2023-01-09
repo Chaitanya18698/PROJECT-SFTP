@@ -24,9 +24,9 @@
                 <div class="login-card-body">
                     <div class="form-group lg">
                         <label for="username" class="form-label field-required">Username</label>
-                        <input id="username" type="text" class="form-control"
+                        <input id="username" type="text" class="form-control" autofocus 
                             placeholder="Enter your username" [(ngModel)]="username" 
-                            [ngClass]="{'is-invalid' : errMsg && error,  'disabled' : loading}">
+                            [ngClass]="{'is-invalid' : errMsg && error,  'disabled' : loading}" (keyup.enter)="login()">
                         <div class="invalid-feedback" *ngIf="error">
                             Please enter username.
                         </div>
@@ -35,7 +35,7 @@
                         <label for="password" class="form-label field-required">Password</label>
                         <div class="input-group-append">
                             <input id="password" type="{{hidePassword ? 'password' : 'text'}}" class="form-control"
-                                placeholder="Enter your password" [(ngModel)]="password1">
+                                placeholder="Enter your password" [(ngModel)]="password1" (keyup.enter)="login()">
                             <span id="toggle-password" class="icon" *ngIf="password1 != '' && !hidePassword"
                                 (click)="togglePassword()">
                                 <i class="fa-solid fa-eye"></i>

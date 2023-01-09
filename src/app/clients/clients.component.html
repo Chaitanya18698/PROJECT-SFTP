@@ -55,7 +55,7 @@
                   success: item.status == 1,
                   failed: item.status != 1
                 }"
-                >Active</span
+                >{{item.status == 1 ? 'Active' : 'Inactive'}}</span
               >
               <!-- <span class="badge failed">Failed</span>
                             <span class="badge pending">Pending</span> -->
@@ -85,7 +85,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#acdcNewModal"  (click)="clickToAction('acdc', item)"
                       >
-                        {{ item.status == 1 ? "Deactivated" : "Activated" }}
+                        {{ item.status == 1 ? "Deactivate" : "Activate" }}
                       </a>
                     </li>
                   </ul>
@@ -145,7 +145,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="addNewModal">
-          {{ selectedItem ? "Update" : "Add" }} Cient
+          {{ selectedItem ? "Update" : "Add" }} Client
         </h1>
         <button
           type="button"
@@ -158,12 +158,12 @@
         <form [formGroup]="clientForm">
           <div class="form-group">
             <label for="client-name" class="form-label field-required"
-              >Cient name</label
+              >Client name</label
             >
             <input
               type="text"
               class="form-control"
-              placeholder="Enter client name"
+              placeholder="Enter Client Name"
               formControlName="client_name"
             />
           </div>
@@ -207,7 +207,7 @@
           {{
             selectedItem && selectedItem.status == 1 ? "Deactivate" : "Activate"
           }}
-          Cient
+          Client
         </h1>
         <button
           type="button"
@@ -217,7 +217,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p>Are you sure about this client?</p>
+        <p>Are you sure you want to change the status of the client?</p>
       </div>
       <div class="modal-footer">
         <button

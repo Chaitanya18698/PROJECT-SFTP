@@ -17,7 +17,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="id-generation" class="form-label field-required"
-                >Generate ID</label
+                >Implementer ID</label
               >
               <input
                 id="id-generation"
@@ -63,7 +63,7 @@
                 id="username"
                 type="text"
                 class="form-control"
-                placeholder="Enter username"
+                placeholder="Enter Username"
                 name="userName"
                 formControlName="name"
                 ngClass="{'is-invalid': clientForm.controls['name'].invalid && (clientForm.controls['name'].touched || clientForm.controls['name'].dirty)}"
@@ -91,13 +91,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="password" class="form-label field-required"
-                >password</label
+                >Password</label
               >
               <input
                 id="password"
                 type="text"
                 class="form-control"
-                placeholder="Enter password"
+                placeholder="Enter Password"
                 name="password"
                 formControlName="password"
                 ngClass="{'is-invalid': clientForm.controls['password'].invalid && (clientForm.controls['password'].touched || clientForm.controls['password'].dirty)}"
@@ -111,13 +111,13 @@
                 "
               >
                 <span *ngIf="clientForm.controls['password']?.errors.required">
-                  password is required.
+                  Password is required.
                 </span>
                 <span *ngIf="clientForm.controls['password']?.errors.maxlength">
-                  password should be atleast 2 characters.
+                  Password should be atleast 2 characters.
                 </span>
                 <span *ngIf="clientForm.controls['password']?.errors.minlength">
-                  Username should not be more than 100 characters.
+                  Password should not be more than 100 characters.
                 </span>
               </div>
             </div>
@@ -222,7 +222,7 @@
                   </div> -->
                     <akv-single-select
                       [optionList]="clientsList"
-                      placeholder="select client"
+                      placeholder="Select Client"
                       formControlName="client_id"
                     ></akv-single-select>
                     <!-- <div
@@ -289,7 +289,7 @@
                   </div> -->
                     <akv-multi-select
                       [optionList]="modulesList"
-                      placeholder="select modules"
+                      placeholder="Select Modules"
                       id="module{{ i }}"
                       formControlName="modules"
                     ></akv-multi-select>

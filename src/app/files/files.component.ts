@@ -4,7 +4,8 @@ import { EncryptionService } from '../encryption.service';
 import { CommonService } from '../common.service';
 import { Router, ActivatedRoute } from '@angular/router';
 declare var $: any;
-
+import { saveAs } from 'file-saver'
+// import { saveAs } from 'file-saver'
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
@@ -131,5 +132,37 @@ export class FilesComponent implements OnInit, OnChanges {
         this.modulesData = response.data['directories']
       }
     })
+  }
+
+
+
+  clickOndownload(item: any) {
+
+    const body = {
+      id: item.id, // File ID
+      dir_id: item.dir_id,
+      // login_id: Joi.number().required(),
+      // client_id: Joi.number().required(),
+      s3_key: item.s3_key,
+      file_name: item.file_name,
+    }
+
+    this._commonService.downloadFile(body).subscribe((response: any) => {
+      console.log('before', response);
+      // response = this._encDec.decrypt(response.edc)
+      // const blob = new Blob(response.Body.data)
+      // saveAs(blob, item.file_name)
+
+
+      const ab = new ArrayBuffer(response.Body.data.length);
+      const view = new Uint8Array(ab);
+      for (let i = 0; i < response.Body.data.length; i++) {
+        view[i] = response.Body.data[i];
+      }
+      const file = new Blob([ab], { type: response.ContentType });
+      saveAs(file, item.file_name);
+      console.log(response);
+    })
+
   }
 }

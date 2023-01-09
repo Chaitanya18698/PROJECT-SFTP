@@ -1,7 +1,7 @@
 <div class="page-wrapper">
   <app-header></app-header>
   <div class="page-container">
-    <app-common-page-header [refresh]="refresh" (goBack)="backTo($event)" (sendonClickDirectory)="navigateTo($event)"></app-common-page-header>
+    <app-common-page-header [refresh]="refresh" (goBack)="backTo($event)" (sendonClickDirectory)="navigateTo($event)" (refreshOption)="checkcurrentFolder()"></app-common-page-header>
 
   
 

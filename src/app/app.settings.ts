@@ -9,7 +9,7 @@ export class AppSettings {
         ACDC_MODULES: environment.apiUrl + '/dir/acdc',
         GET_LOGS: environment.apiUrl + '/logins/list',
         GET_CLIENTS: environment.apiUrl + '/clients/list',
-        GET_MODULES_WITH_PATH : environment.apiUrl + '/dir/list/path',
+        GET_MODULES_WITH_PATH: environment.apiUrl + '/dir/list/path',
         GET_IMPLEMENTORS: environment.apiUrl + '/',
         ADD_IMPLEMENTORS: environment.apiUrl + '/implementor/add',
         ADD_CLIENTS_USERS: environment.apiUrl + '/client/add',
@@ -20,6 +20,8 @@ export class AppSettings {
         ADD_USERS: environment.apiUrl + '/',
 
         // file Paths
-        GET_FILES_DIRS : environment.apiUrl + '/dirs/files'
+        GET_FILES_DIRS: environment.apiUrl + '/dirs/files',
+        UPLOAD_FILES_DIRS: environment.apiUrl + '/fileupload',
+        DOWNLOAD_FILES: environment.apiUrl + '/downloadFile'
     }
 }

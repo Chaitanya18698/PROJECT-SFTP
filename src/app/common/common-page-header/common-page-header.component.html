@@ -32,7 +32,8 @@
             <li
               *ngFor="let item of optionsList; let i = index"
               [ngClass]="{
-                active: item.itemName == selectedOption,'has-sub': item?.children?.length
+                active: item.itemName == selectedOption,
+                'has-sub': item?.children?.length
               }"
             >
               <a class="dropdown-item" (click)="selectModuleOption(item)">
@@ -40,9 +41,7 @@
               </a>
               <ul class="sub-dropdown-menu" *ngIf="item?.children?.length">
                 <li>
-                    <a>
-                        Client {{i + 1}}
-                    </a>
+                  <a> Client {{ i + 1 }} </a>
                 </li>
               </ul>
             </li>
@@ -60,7 +59,7 @@
           aria-expanded="false"
           (click)="onDirectoryClick(item,i)"
         >
-          {{item.name}}
+          {{ item.name }}
           <!-- <div
             class="clear"
             (click)="clear(selectedOption, $event)"
@@ -77,7 +76,7 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu" *ngIf="i == (directoryData.length-1)">
+        <div class="dropdown-menu" *ngIf="i == directoryData.length - 1">
           <ul>
             <li
               *ngFor="let abc of optionsList; let i = index"
@@ -85,7 +84,10 @@
                 active: abc.itemName == selectedOption
               }"
             >
-              <a class="dropdown-item" (click)="selectDirectoryOption(abc, item)">
+              <a
+                class="dropdown-item"
+                (click)="selectDirectoryOption(abc, item)"
+              >
                 <i class="fa-solid fa-{{ abc.icon }}"></i> {{ abc.itemName }}
               </a>
             </li>
@@ -148,63 +150,112 @@
         </div>
       </div> -->
 
-
-      
 <!-- Modal -->
 <div
-class="modal fade"
-id="commonHeadModel"
-data-bs-backdrop="static"
-data-bs-keyboard="false"
-tabindex="-1"
-aria-labelledby="commonHeadModel"
-aria-hidden="true"
+  class="modal fade"
+  id="commonHeadModel"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="commonHeadModel"
+  aria-hidden="true"
 >
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h1 class="modal-title fs-5" id="commonHeadModel">
-       Add Module
-      </h1>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="commonHeadModel">Add Module</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="moduleForm">
+          <div class="form-group">
+            <label for="module-name" class="form-label field-required"
+              >Module name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              placeholder="Enter module name"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-tertiary-gray btn-sm"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="addUpdateModules()"
+        >
+          Submit
+        </button>
+      </div>
     </div>
-    <div class="modal-body">
-      <form [formGroup]="moduleForm">
+  </div>
+</div>
+
+<!-- File upload -->
+<div
+  class="modal fade"
+  id="fileUpload"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="commonHeadModel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="commonHeadModel">Upload file</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
         <div class="form-group">
           <label for="module-name" class="form-label field-required"
             >Module name</label
           >
           <input
-            type="text"
+            type="file"
             class="form-control"
-            formControlName="name"
+            (input)="fileupload($event)" [(ngModel)]="fileData"
             placeholder="Enter module name"
           />
         </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-tertiary-gray btn-sm"
-        data-bs-dismiss="modal"
-      >
-        Cancel
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary btn-sm"
-        (click)="addUpdateModules()"
-      >
-        Submit
-      </button>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-tertiary-gray btn-sm"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <!-- <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="addUpdateModules()"
+        >
+          Submit
+        </button> -->
+      </div>
     </div>
   </div>
 </div>
-</div>
-

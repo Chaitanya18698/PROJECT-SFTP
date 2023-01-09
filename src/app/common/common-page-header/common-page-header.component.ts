@@ -14,20 +14,20 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   isFileView: any = false;
   directoryData: any = [];
   @Input() refresh: any;
-  @Output() sendonClickDirectory : any = new EventEmitter();
+  @Output() sendonClickDirectory: any = new EventEmitter();
   @Output() moduleOption: any = new EventEmitter();
-  @Output() directoryOption: any = new EventEmitter();
+  @Output() refreshOption: any = new EventEmitter();
   @Output() goBack: any = new EventEmitter();
   moduleForm: any = FormGroup;
   spinner = false;
-  constructor(public _encDec: EncryptionService, public _fb: FormBuilder, public _commonService: CommonService,) { 
+  constructor(public _encDec: EncryptionService, public _fb: FormBuilder, public _commonService: CommonService,) {
     this.createModuleForm();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes , 'changes...')
+    console.log(changes, 'changes...')
     this.directoryData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
-    console.log(this.directoryData , 'current directory');
+    console.log(this.directoryData, 'current directory');
   }
 
   ngOnInit(): void {
@@ -67,7 +67,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
       },
     ]
     this.directoryData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
-    console.log(this.directoryData , 'current directory');
+    console.log(this.directoryData, 'current directory');
   }
 
 
@@ -92,7 +92,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
       });
       $('#commonHeadModel').modal('show')
     }
-    if(item.id == 2) {
+    if (item.id == 2) {
       this.moduleOption.emit('file')
     }
   }
@@ -106,8 +106,8 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
       });
       $('#commonHeadModel').modal('show')
     }
-    if(type.id == 2) {
-      this.directoryOption.emit('file')
+    if (type.id == 2) {
+      $('#fileUpload').modal('show')
     }
   }
 
@@ -119,34 +119,34 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
     this.goBack.emit(true)
   }
 
-    // Create form for module
-    createModuleForm() {
-      this.moduleForm = this._fb.group({
-        name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
-        status: 1,
-        dir_id: null
-      })
-    }
+  // Create form for module
+  createModuleForm() {
+    this.moduleForm = this._fb.group({
+      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+      status: 1,
+      dir_id: null
+    })
+  }
 
 
-      // Add || Update API's funtions
+  // Add || Update API's funtions
   addUpdateModules() {
     if (this.moduleForm.valid) {
       const data = this.moduleForm.value;
-        const body = {
-          name: data.name,
-          dir_id: data.dir_id
-        }
-        this._commonService.update_module(body).subscribe((response) => {
-          response = this._encDec.decrypt(response.edc)
-          console.log(response)
-          if (response.success) {
-            $('#commonHeadModel').modal('hide')
-          } else {
-            this.spinner = false
-          }
-        })
+      const body = {
+        name: data.name,
+        dir_id: data.dir_id
       }
+      this._commonService.update_module(body).subscribe((response) => {
+        response = this._encDec.decrypt(response.edc)
+        console.log(response)
+        if (response.success) {
+          $('#commonHeadModel').modal('hide')
+        } else {
+          this.spinner = false
+        }
+      })
+    }
   }
 
 
@@ -158,4 +158,50 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
     this.selectedOption = '';
   }
 
+
+  fileName: any = null
+  fileData: any = null
+  fileupload(event: any) {
+    console.log(event)
+
+
+    const file: File = event.target.files[0];
+
+    if (file) {
+
+      this.fileName = file.name;
+
+      const extention = this.fileName.split('.').pop()
+      const accept = ["csv", "doc", "docx", "jpeg", "jpg", "m4v", "mp3", "mp4", "mp4v", "pdf", "png", "ppt", "xls", "xlsx"]
+      if (accept.includes(extention)) {
+
+
+        const formData = new FormData();
+
+        formData.append("thumbnail", file);
+        const data = this.directoryData[this.directoryData.length - 1]
+        const body = {
+
+          id: null,
+          dir_id: data.dir_id,
+        }
+
+        const enc = this._encDec.encrypt(JSON.stringify(body))
+        formData.append('edc', enc)
+        this._commonService.fileUpload(formData).subscribe((response: any) => {
+          console.log('before', response)
+          response = this._encDec.decrypt(response.edc);
+          console.log('ec', response)
+          if (response.success) {
+            this.refreshOption.emit(true)
+            $('#fileUpload').modal('hide')
+          }
+        })
+      } else {
+        alert('invalid file upload')
+        this.fileName = null
+        this.fileData = null
+      }
+    }
+  }
 }

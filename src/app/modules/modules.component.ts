@@ -231,10 +231,14 @@ export class ModulesComponent implements OnInit {
   }
 
   checkcurrentFolder() {
-    const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
-    if (fileDirectory.length) {
-      this.valuePicked = fileDirectory.pop()
-    }
+    this.valuePicked = null
+    setTimeout(() => {
+
+      const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+      if (fileDirectory.length) {
+        this.valuePicked = fileDirectory.pop()
+      }
+    }, 10);
 
   }
 

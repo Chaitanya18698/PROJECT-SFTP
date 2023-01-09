@@ -71,14 +71,26 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   }
 
 
-  onDirectoryClick(item: any) {
-    console.log(item, 'on click')
-    this.sendonClickDirectory.emit(item)
+  onDirectoryClick(item: any, i: any) {
+    if(
+      i !== this.directoryData.length - 1
+    ) {
+      let dirData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+      dirData = dirData.slice(0, i + 1)
+      sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(dirData)))
+      console.log(item, 'on click',i, dirData)
+      this.sendonClickDirectory.emit(item)
+    }
+
   }
 
   selectModuleOption(item: any) {
-    if (item.id === 1) {
-      this.moduleOption.emit('add')
+    if(item.id === 1) {
+      this.createModuleForm();
+      this.moduleForm.patchValue({
+        dir_id: null
+      });
+      $('#commonHeadModel').modal('show')
     }
     if (item.id == 2) {
       this.moduleOption.emit('file')
@@ -87,7 +99,8 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
 
   selectDirectoryOption(type: any, item: any) {
     console.log(item);
-    if (type.id === 1) {
+    if(type.id === 1) {
+      this.createModuleForm();
       this.moduleForm.patchValue({
         dir_id: item.dir_id
       });

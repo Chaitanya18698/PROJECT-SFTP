@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { SharedService } from '../common/services/shared.service';
 import { EncryptionService } from '../encryption.service';
 import { CommonService } from '../common.service';
@@ -11,7 +11,7 @@ import { saveAs } from 'file-saver'
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.scss'],
 })
-export class FilesComponent implements OnInit {
+export class FilesComponent implements OnInit, OnChanges {
   filesData: any = [];
   filesList: any = [];
   spinner = false;
@@ -26,6 +26,13 @@ export class FilesComponent implements OnInit {
     public _route: Router,
     public route: ActivatedRoute
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.inputData && this.inputData.dir_id) {
+      // this.getModules();
+      this.getFilesDirs(this.inputData.dir_id)
+    }
+  }
 
   ngOnInit(): void {
     this.getfiles();

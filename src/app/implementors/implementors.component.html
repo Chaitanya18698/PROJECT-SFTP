@@ -4,7 +4,7 @@
     <div class="page-container">
       <div class="page-header">
         <div class="page-heading">
-          <div class="page-title">Implementors</div>
+          <div class="page-title">Implementers</div>
         </div>
         <div class="page-options">
           <div class="page-options-set">
@@ -23,7 +23,7 @@
           <thead>
             <tr>
               <!-- <th>#</th> -->
-              <th>Implementor</th>
+              <th>Implementer</th>
               <th>Name</th>
               <th>Status</th>
               <th class="table-action"></th>
@@ -45,7 +45,7 @@
                     success: item.status == 1,
                     failed: item.status == 0
                   }"
-                  >{{ item.status == 1 ? "Active" : "Deactive" }}</span
+                  >{{ item.status == 1 ? "Active" : "Inactive" }}</span
                 >
                 <!-- <span class="badge failed">Failed</span>
                             <span class="badge pending">Pending</span> -->
@@ -63,7 +63,7 @@
                         <a class="dropdown-item"> Update </a>
                       </li>
                       <li>
-                        <a class="dropdown-item"> Delete </a>
+                        <a class="dropdown-item"> Deactivate </a>
                       </li>
                     </ul>
                   </div>

@@ -26,7 +26,7 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu">
+        <div class="dropdown-menu" *ngIf="directoryData.length == 0">
           <ul>
             <li
               *ngFor="let item of optionsList; let i = index"
@@ -34,7 +34,7 @@
                 active: item.itemName == selectedOption,'has-sub': item?.children?.length
               }"
             >
-              <a class="dropdown-item" (click)="selectClient(item)">
+              <a class="dropdown-item" (click)="selectModuleOption(item)">
                 <i class="fa-solid fa-{{ item.icon }}"></i> {{ item.itemName }}
               </a>
               <ul class="sub-dropdown-menu" *ngIf="item?.children?.length">
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="page-child-title">
+    <div class="page-child-title" *ngFor="let item of directoryData">
       <div class="dropdown page-header-dropdown" [ngClass]="{'active': !isFileView}">
         <a
           class="dropdown-toggle"
@@ -57,8 +57,9 @@
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
+          (click)="onDirectoryClick(item)"
         >
-          Recruitment
+          {{item.name}}
           <!-- <div
             class="clear"
             (click)="clear(selectedOption, $event)"
@@ -83,7 +84,7 @@
                 active: item.itemName == selectedOption
               }"
             >
-              <a class="dropdown-item" (click)="selectClient(item)">
+              <a class="dropdown-item" (click)="selectDirectoryOption(item)">
                 <i class="fa-solid fa-{{ item.icon }}"></i> {{ item.itemName }}
               </a>
             </li>

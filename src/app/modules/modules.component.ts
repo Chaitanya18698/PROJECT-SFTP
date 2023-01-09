@@ -20,6 +20,7 @@ export class ModulesComponent implements OnInit {
   moduleForm: any = FormGroup
   selectedClient: any = '';
   isTableView: any = true;
+  refresh = false;
 
   constructor(
     public _sharedService: SharedService,
@@ -179,6 +180,20 @@ export class ModulesComponent implements OnInit {
         alert('Something went wrong...!')
       })
     }
+  }
+
+  openView(item: any) {
+    const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+    fileDirectory.push(item)
+    sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(fileDirectory)))
+    this.refresh = !this.refresh;
+    this.isFileView = true
+  }
+
+  backTo(event: any) {4
+    console.log(event)
+    this.isFileView = false;
+    this.refresh = !this.refresh
   }
   onOpenForm(val: any) {
 

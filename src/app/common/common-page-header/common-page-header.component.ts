@@ -1,20 +1,34 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/common.service';
 import { EncryptionService } from 'src/app/encryption.service';
+declare var $: any;
 @Component({
   selector: 'app-common-page-header',
   templateUrl: './common-page-header.component.html',
   styleUrls: ['./common-page-header.component.scss']
 })
-export class CommonPageHeaderComponent implements OnInit {
+export class CommonPageHeaderComponent implements OnInit, OnChanges {
   selectedOption: any = '';
   optionsList: any = [];
-  isFileView:any = false;
+  isFileView: any = false;
   directoryData: any = [];
   @Input() refresh: any;
   @Output() sendonClickDirectory : any = new EventEmitter();
   @Output() moduleOption: any = new EventEmitter();
   @Output() directoryOption: any = new EventEmitter();
-  constructor(public _encDec: EncryptionService) { }
+  @Output() goBack: any = new EventEmitter();
+  moduleForm: any = FormGroup;
+  spinner = false;
+  constructor(public _encDec: EncryptionService, public _fb: FormBuilder, public _commonService: CommonService,) { 
+    this.createModuleForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes , 'changes...')
+    this.directoryData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+    console.log(this.directoryData , 'current directory');
+  }
 
   ngOnInit(): void {
     this.optionsList = [
@@ -71,15 +85,56 @@ export class CommonPageHeaderComponent implements OnInit {
     }
   }
 
-  selectDirectoryOption(item: any) {
-    if(item.id === 1) {
-      this.directoryOption.emit('add')
+  selectDirectoryOption(type: any, item: any) {
+    console.log(item);
+    if(type.id === 1) {
+      this.moduleForm.patchValue({
+        dir_id: item.dir_id
+      });
+      $('#commonHeadModel').modal('show')
     }
-    if(item.id == 2) {
+    if(type.id == 2) {
       this.directoryOption.emit('file')
     }
   }
 
+  onModuleClick() {
+    sessionStorage.setItem(
+      'current_directory',
+      this._encDec.encrypt(JSON.stringify([]))
+    );
+    this.goBack.emit(true)
+  }
+
+    // Create form for module
+    createModuleForm() {
+      this.moduleForm = this._fb.group({
+        name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+        status: 1,
+        dir_id: null
+      })
+    }
+
+
+      // Add || Update API's funtions
+  addUpdateModules() {
+    if (this.moduleForm.valid) {
+      const data = this.moduleForm.value;
+        const body = {
+          name: data.name,
+          dir_id: data.dir_id
+        }
+        this._commonService.update_module(body).subscribe((response) => {
+          response = this._encDec.decrypt(response.edc)
+          console.log(response)
+          if (response.success) {
+            $('#commonHeadModel').modal('hide')
+          } else {
+            this.spinner = false
+          }
+        })
+      }
+  }
 
 
   selectClient(val: any) {

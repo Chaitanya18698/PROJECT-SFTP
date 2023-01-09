@@ -9,6 +9,7 @@ export class AppSettings {
         ACDC_MODULES: environment.apiUrl + '/dir/acdc',
         GET_LOGS: environment.apiUrl + '/logins/list',
         GET_CLIENTS: environment.apiUrl + '/clients/list',
+        GET_MODULES_WITH_PATH : environment.apiUrl + '/dir/list/path',
         GET_IMPLEMENTORS: environment.apiUrl + '/',
         ADD_IMPLEMENTORS: environment.apiUrl + '/implementor/add',
         ADD_CLIENTS_USERS: environment.apiUrl + '/client/add',

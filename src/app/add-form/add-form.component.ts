@@ -89,9 +89,9 @@ export class AddFormComponent implements OnInit {
     const body = {
       parent_id: null
     }
-    this._commonService.get_modules(body).subscribe((response) => {
+    this._commonService.getModulesPath(body).subscribe((response) => {
       response = this._encDec.decrypt(response.edc)
-      console.log(response)
+      console.log('module',response)
       if (response.success) {
         this.modulesList = response.data;
         this.spinner = false;

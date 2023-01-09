@@ -104,7 +104,10 @@ export class FilesComponent implements OnInit {
   clickToOpen(item: any) {
     console.log(item)
     this.getFilesDirs(item.dir_id)
-
+    const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+    fileDirectory.push(item)
+    sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(fileDirectory)))
+    this.outPutEmitter()
   }
 
   fileData: any[] = []

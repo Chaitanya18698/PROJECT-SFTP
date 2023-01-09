@@ -8,6 +8,7 @@
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
+          (click)="onModuleClick()"
         >
           Modules
           <!-- <div
@@ -49,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div class="page-child-title" *ngFor="let item of directoryData">
+    <div class="page-child-title" *ngFor="let item of directoryData; let i = index">
       <div class="dropdown page-header-dropdown" [ngClass]="{'active': !isFileView}">
         <a
           class="dropdown-toggle"
@@ -76,16 +77,16 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu">
+        <div class="dropdown-menu" *ngIf="i == (directoryData.length-1)">
           <ul>
             <li
-              *ngFor="let item of optionsList; let i = index"
+              *ngFor="let abc of optionsList; let i = index"
               [ngClass]="{
-                active: item.itemName == selectedOption
+                active: abc.itemName == selectedOption
               }"
             >
-              <a class="dropdown-item" (click)="selectDirectoryOption(item)">
-                <i class="fa-solid fa-{{ item.icon }}"></i> {{ item.itemName }}
+              <a class="dropdown-item" (click)="selectDirectoryOption(abc, item)">
+                <i class="fa-solid fa-{{ abc.icon }}"></i> {{ abc.itemName }}
               </a>
             </li>
           </ul>
@@ -146,3 +147,64 @@
           </div>
         </div>
       </div> -->
+
+
+      
+<!-- Modal -->
+<div
+class="modal fade"
+id="commonHeadModel"
+data-bs-backdrop="static"
+data-bs-keyboard="false"
+tabindex="-1"
+aria-labelledby="commonHeadModel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="commonHeadModel">
+       Add Module
+      </h1>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="moduleForm">
+        <div class="form-group">
+          <label for="module-name" class="form-label field-required"
+            >Module name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            placeholder="Enter module name"
+          />
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-tertiary-gray btn-sm"
+        data-bs-dismiss="modal"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        (click)="addUpdateModules()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+

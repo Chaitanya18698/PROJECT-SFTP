@@ -1,7 +1,7 @@
 <div class="page-wrapper">
   <app-header></app-header>
   <div class="page-container">
-    <app-common-page-header></app-common-page-header>
+    <app-common-page-header [refresh]="refresh" (goBack)="backTo($event)"></app-common-page-header>
 
   
 
@@ -125,7 +125,7 @@
         </tfoot>
       </table>
     </div>
-    <app-files  [inputData]="valuePicked" *ngIf="valuePicked"></app-files>
+    <app-files  [inputData]="valuePicked" *ngIf="valuePicked" (sendData)="filleEmitter()"></app-files>
   </div>
   <app-footer></app-footer>
 </div>

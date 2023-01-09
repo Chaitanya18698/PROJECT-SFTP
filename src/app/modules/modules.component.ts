@@ -13,10 +13,13 @@ declare var $: any;
 })
 export class ModulesComponent implements OnInit {
   modulesData: any = [];
+  clientList: any = [];
   spinner = false;
   isFileView = false;
   selectedItem: any = null
   moduleForm: any = FormGroup
+  selectedClient: any = '';
+  isTableView: any = false;
 
   constructor(
     public _sharedService: SharedService,
@@ -30,7 +33,24 @@ export class ModulesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getModules();
-
+    this.clientList = [
+      {
+        name: 'Client 1',
+        id: 1
+      },
+      {
+        name: 'Client 2',
+        id: 2
+      },
+      {
+        name: 'Client 3',
+        id: 3
+      },
+      {
+        name: 'Client 4',
+        id: 4
+      },
+    ]
   }
 
   // Create form for module
@@ -160,6 +180,14 @@ export class ModulesComponent implements OnInit {
       })
     }
   }
+  onOpenForm(val: any) {
 
+  }
+  clear(val: any, e: any) {
+
+  }
+  selectClient(item: any) {
+
+  }
 
 }

@@ -1,35 +1,27 @@
 <div class="page-wrapper">
   <app-header></app-header>
   <div class="page-container">
-    <div class="page-header">
-      <div class="page-heading">
-        <div class="page-title">
-          <span
-            [ngClass]="{ 'cursor-pointer': isFileView }"
-            (click)="isFileView = false"
-          >
-            Modules
-          </span>
-          <span class="breadcrumb-set" *ngIf="isFileView">
-            <span class="breadcrumb-text">Files</span>
-          </span>
-        </div>
-      </div>
-      <div class="page-options">
-        <div class="page-options-set">
-          <button
-            class="btn btn-icon btn-outline-primary btn-xs"
-            tabindex="0"
-            data-bs-toggle="modal"
-            data-bs-target="#addNewModal"
-            (click)="clickToAction('add', null)"
-          >
-            <i class="fa-solid fa-plus"></i> Add New
-          </button>
+    <app-common-page-header></app-common-page-header>
+
+    <div class="folder-wrap row" *ngIf="!isTableView && !isFileView">
+      <div
+        class="folder-item col-md-3"
+        *ngFor="let item of clientList; let i = index"
+      >
+        <div class="folder-card" (click)="isFileView = true">
+          <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
+          <div class="folder-card-icon">
+            <i class="fa-solid fa-folder"></i>
+          </div>
+          <div class="folder-card-text">
+            {{ item.name }}
+          </div>
+          <!-- folder-card-status, active-1 -->
         </div>
       </div>
     </div>
-    <div class="table-card">
+
+    <div class="table-card" *ngIf="isTableView">
       <table class="table" *ngIf="!isFileView">
         <thead>
           <tr>
@@ -148,8 +140,8 @@
           </div>
         </tfoot>
       </table>
-      <app-files *ngIf="isFileView"></app-files>
     </div>
+    <app-files *ngIf="isFileView"></app-files>
   </div>
   <app-footer></app-footer>
 </div>

@@ -1,0 +1,147 @@
+<div class="page-header">
+  <div class="page-heading">
+    <div class="page-title">
+      <div class="dropdown page-header-dropdown" [ngClass]="{'active': isFileView}">
+        <a
+          class="dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Modules
+          <!-- <div
+            class="clear"
+            (click)="clear(selectedOption, $event)"
+            *ngIf="selectedOption != ''"
+          >
+            <i class="fa-solid fa-times"></i>
+          </div> -->
+          <!-- <div
+            class="clear"
+            (click)="clear(selectedOption, $event)"
+            *ngIf="selectedOption != ''"
+          >
+            <i class="fa-solid fa-times"></i>
+          </div> -->
+        </a>
+
+        <div class="dropdown-menu">
+          <ul>
+            <li
+              *ngFor="let item of optionsList; let i = index"
+              [ngClass]="{
+                active: item.itemName == selectedOption,'has-sub': item?.children?.length
+              }"
+            >
+              <a class="dropdown-item" (click)="selectClient(item)">
+                <i class="fa-solid fa-{{ item.icon }}"></i> {{ item.itemName }}
+              </a>
+              <ul class="sub-dropdown-menu" *ngIf="item?.children?.length">
+                <li>
+                    <a>
+                        Client {{i + 1}}
+                    </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="page-child-title">
+      <div class="dropdown page-header-dropdown" [ngClass]="{'active': !isFileView}">
+        <a
+          class="dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Recruitment
+          <!-- <div
+            class="clear"
+            (click)="clear(selectedOption, $event)"
+            *ngIf="selectedOption != ''"
+          >
+            <i class="fa-solid fa-times"></i>
+          </div> -->
+          <!-- <div
+            class="clear"
+            (click)="clear(selectedOption, $event)"
+            *ngIf="selectedOption != ''"
+          >
+            <i class="fa-solid fa-times"></i>
+          </div> -->
+        </a>
+
+        <div class="dropdown-menu">
+          <ul>
+            <li
+              *ngFor="let item of optionsList; let i = index"
+              [ngClass]="{
+                active: item.itemName == selectedOption
+              }"
+            >
+              <a class="dropdown-item" (click)="selectClient(item)">
+                <i class="fa-solid fa-{{ item.icon }}"></i> {{ item.itemName }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+    <div class="page-header">
+        <div class="page-heading">
+          <div class="page-title">
+            <span [ngClass]="{ 'cursor-pointer': isFileView }" (click)="isFileView = false">
+              Modules
+            </span>
+            <span class="breadcrumb-set" *ngIf="isFileView">
+              <span class="breadcrumb-text">Files</span>
+            </span>
+          </div>
+        </div>
+        <div class="page-options">
+          <div class="page-options-set">
+            <div class="dropdown sm">
+              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                (click)="onOpenForm('clients')">
+                {{
+                selectedOption
+                ? selectedOption
+                : "Select Client"
+                }}
+                <div class="clear" (click)="clear(selectedOption, $event)" *ngIf="selectedOption != ''">
+                  <i class="fa-solid fa-times"></i>
+                </div>
+                <div class="clear" (click)="clear(selectedOption, $event)" *ngIf="selectedOption != ''">
+                  <i class="fa-solid fa-times"></i>
+                </div>
+              </a>
+  
+              <div class="dropdown-menu">
+                <ul>
+                  <li *ngFor="let item of clientList; let i = index" [ngClass]="{
+                      active: item.itemName == selectedOption
+                    }">
+                    <a class="dropdown-item" (click)="selectClient(item)">
+                      {{ item.itemName }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="page-options-set">
+            <button class="btn btn-icon btn-outline-primary btn-sm" tabindex="0" data-bs-toggle="modal"
+              data-bs-target="#addNewModal" (click)="clickToAction('add', null)">
+              <i class="fa-solid fa-plus"></i> Add New
+            </button>
+          </div>
+        </div>
+      </div> -->

@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div class="page-child-title" *ngFor="let item of directoryData">
+    <div class="page-child-title" *ngFor="let item of directoryData; let i = index">
       <div class="dropdown page-header-dropdown" [ngClass]="{'active': !isFileView}">
         <a
           class="dropdown-toggle"
@@ -77,7 +77,7 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu">
+        <div class="dropdown-menu" *ngIf="i == (directoryData.length-1)">
           <ul>
             <li
               *ngFor="let abc of optionsList; let i = index"

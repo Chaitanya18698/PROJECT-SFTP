@@ -10,8 +10,8 @@ import { EncryptionService } from 'src/app/encryption.service';
 export class TopMenuComponent implements OnInit {
   routeActive: any = 'modules'
   loginType: any;
-  constructor(public routerlink: Router, public _encDec: EncryptionService) {
-    this.loginType = sessionStorage.getItem('loginType')
+  constructor(public routerlink: Router,  public _encDec: EncryptionService) {
+    this.loginType = Number(sessionStorage.getItem('loginType'))
   }
 
   ngOnInit(): void {

@@ -107,4 +107,12 @@ export class CommonService {
         }
         return null
     }
+
+
+
+    // Files 
+    getFilesDirsData(body: any){
+        const url = AppSettings.API.GET_FILES_DIRS;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
 }

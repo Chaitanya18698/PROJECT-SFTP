@@ -83,9 +83,9 @@ export class CommonService {
         const url = AppSettings.API.ADD_CLIENTS_USERS;
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
-    
+
     // Get module with path 
-    
+
     getModulesPath(body: any) {
         const url = AppSettings.API.GET_MODULES_WITH_PATH;
         return this._apiservice.callApi({ url, method: 'POST', body })
@@ -111,8 +111,18 @@ export class CommonService {
 
 
     // Files 
-    getFilesDirsData(body: any){
+    getFilesDirsData(body: any) {
         const url = AppSettings.API.GET_FILES_DIRS;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
+
+
+    fileUpload(body: any) {
+        const url = AppSettings.API.UPLOAD_FILES_DIRS;
+        return this._apiservice.callApi({ url, method: 'FILE_UPLOAD', body })
+    }
+        downloadFile(body: any) {
+        const url = AppSettings.API.DOWNLOAD_FILES;
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
 }

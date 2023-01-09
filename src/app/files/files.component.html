@@ -22,7 +22,7 @@
     class="folder-item col-md-2"
     *ngFor="let item of fileData; let i = index"
   >
-    <div class="folder-card">
+    <div class="folder-card" (click)="clickOndownload(item)">
       <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
       <div class="folder-card-icon">
         <i class="fa-solid fa-file-alt"></i>

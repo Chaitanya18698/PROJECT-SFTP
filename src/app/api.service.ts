@@ -61,15 +61,55 @@ export class ApiService {
                             return of(false)
                         }));
                 break;
+            case 'FILE_UPLOAD':
+                return this._http.post(url, body, this.tokenFU())
+                    .pipe(map((response) => response),
+                        catchError((error: any) => {
+                            if (error.status === 401) {
+                                this.sessionTimeout.next(true)
+                            }
+                            return of(false)
+                        }));
+                break;
+            case 'BLOB':
+                return this._http.post(url, body, this.tokenBlob())
+                    .pipe(map((response) => response),
+                        catchError((error: any) => {
+                            if (error.status === 401) {
+                                this.sessionTimeout.next(true)
+                            }
+                            return of(false)
+                        }));
+                break;
         }
         return throwError(() => false)
     }
 
     token() {
         return {
-            headers : new HttpHeaders ({
+            headers: new HttpHeaders({
                 'Content-Type': 'application/json',
-                Authorization : 'BEARER ' + sessionStorage.getItem('token')
+                Authorization: 'BEARER ' + sessionStorage.getItem('token')
+            })
+        }
+    }
+    tokenFU() {
+        return {
+            headers: new HttpHeaders({
+                // 'Accept': 'application/json',
+                // 'Content-Type': 'multipart/form-data',
+                Authorization: 'BEARER ' + sessionStorage.getItem('token')
+            })
+        }
+    }
+    tokenBlob() {
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+
+                // 'Accept': 'application/json',
+                // 'Content-Type': 'blob',
+                Authorization: 'BEARER ' + sessionStorage.getItem('token')
             })
         }
     }

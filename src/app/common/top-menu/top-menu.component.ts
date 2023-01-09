@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EncryptionService } from 'src/app/encryption.service';
 
 @Component({
   selector: 'app-top-menu',
@@ -9,12 +10,18 @@ import { Router } from '@angular/router';
 export class TopMenuComponent implements OnInit {
   routeActive: any = 'modules'
   loginType: any;
-  constructor(public routerlink: Router) {
+  constructor(public routerlink: Router, public _encDec: EncryptionService) {
     this.loginType = sessionStorage.getItem('loginType')
   }
 
   ngOnInit(): void {
     this.routeActive = this.routerlink.url
+    if(this.routeActive !== '/modules') {
+      sessionStorage.setItem(
+        'current_directory',
+        this._encDec.encrypt(JSON.stringify([]))
+      );
+    }
     console.log(this.loginType, this.routerlink.url)
   }
 

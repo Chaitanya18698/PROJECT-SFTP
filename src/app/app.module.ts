@@ -17,6 +17,8 @@ import { FilesComponent } from './files/files.component';
 import { FooterComponent } from './footer/footer.component';
 import { SingleSelectComponent } from './common/single-select/single-select.component';
 import { MultiSelectComponent } from './common/multi-select/multi-select.component';
+import { CommonModule } from '@angular/common';
+import { CommonPageHeaderComponent } from './common/common-page-header/common-page-header.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +35,16 @@ import { MultiSelectComponent } from './common/multi-select/multi-select.compone
     FilesComponent,
     FooterComponent,
     SingleSelectComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
+    CommonPageHeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

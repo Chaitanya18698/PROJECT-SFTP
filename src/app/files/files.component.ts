@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { SharedService } from '../common/services/shared.service';
 import { EncryptionService } from '../encryption.service';
 import { CommonService } from '../common.service';
@@ -10,12 +10,12 @@ declare var $: any;
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.scss'],
 })
-export class FilesComponent implements OnInit {
+export class FilesComponent implements OnInit, OnChanges {
   filesData: any = [];
   filesList: any = [];
   spinner = false;
   isTableView = false;
-  @Input() inputData: any =  '';
+  @Input() inputData: any = '';
   @Output() sendData: any = new EventEmitter();
   modulesData: any = [];
   constructor(
@@ -24,7 +24,14 @@ export class FilesComponent implements OnInit {
     public _commonService: CommonService,
     public _route: Router,
     public route: ActivatedRoute
-  ) {}
+  ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.inputData && this.inputData.dir_id) {
+      // this.getModules();
+      this.getFilesDirs(this.inputData.dir_id)
+    }
+  }
 
   ngOnInit(): void {
     this.getfiles();
@@ -42,8 +49,9 @@ export class FilesComponent implements OnInit {
         file_id: 3,
       },
     ];
-    if(this.inputData && this.inputData.parent_id) {
-      this.getModules();
+    if (this.inputData && this.inputData.dir_id) {
+      // this.getModules();
+      this.getFilesDirs(this.inputData.dir_id)
     }
   }
 
@@ -61,11 +69,11 @@ export class FilesComponent implements OnInit {
     // })
   }
 
-   // Get modules list
-   getModules() {
+  // Get modules list
+  getModules() {
     this.spinner = true;
     const body = {
-      parent_id: this.inputData.parent_id
+      parent_id: this.inputData.dir_id
     }
 
     this._commonService.get_modules(body).subscribe((response) => {
@@ -98,5 +106,30 @@ export class FilesComponent implements OnInit {
     //     this.spinner = false;
     //   }
     // })
+  }
+
+  clickToOpen(item: any) {
+    console.log(item)
+    this.getFilesDirs(item.dir_id)
+    const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+    fileDirectory.push(item)
+    sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(fileDirectory)))
+    this.outPutEmitter()
+  }
+
+  fileData: any[] = []
+
+  getFilesDirs(parent_id: any) {
+    const body = {
+      parent_id
+    }
+    this._commonService.getFilesDirsData(body).subscribe((response: any) => {
+      response = this._encDec.decrypt(response.edc);
+      console.log("dirs ", response)
+      if (response.success) {
+        this.fileData = response.data['files']
+        this.modulesData = response.data['directories']
+      }
+    })
   }
 }

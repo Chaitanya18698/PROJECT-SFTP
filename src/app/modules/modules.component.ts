@@ -20,6 +20,7 @@ export class ModulesComponent implements OnInit {
   moduleForm: any = FormGroup
   selectedClient: any = '';
   isTableView: any = true;
+  refresh = false;
 
   constructor(
     public _sharedService: SharedService,
@@ -31,8 +32,11 @@ export class ModulesComponent implements OnInit {
     this.createModuleForm()
   }
 
+  loginType: any = null
   ngOnInit(): void {
+    this.loginType = sessionStorage.getItem('loginType')
     this.getModules();
+    this.checkcurrentFolder()
     this.clientList = [
       {
         name: 'Client 1',
@@ -180,6 +184,21 @@ export class ModulesComponent implements OnInit {
       })
     }
   }
+
+  openView(item: any) {
+    const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+    fileDirectory.push(item)
+    sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(fileDirectory)))
+    this.refresh = !this.refresh;
+    this.isFileView = true
+  }
+
+  backTo(event: any) {
+
+    console.log(event)
+    this.valuePicked = null;
+    this.refresh = !this.refresh
+  }
   onOpenForm(val: any) {
 
   }
@@ -188,6 +207,41 @@ export class ModulesComponent implements OnInit {
   }
   selectClient(item: any) {
 
+  }
+
+
+  // click on view 
+  valuePicked: any = null
+  clickOnView(item: any) {
+
+    const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+    fileDirectory.push(item)
+    sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(fileDirectory)))
+    this.refresh = !this.refresh;
+
+    this.valuePicked = item
+  }
+
+
+  filleEmitter() {
+    setTimeout(() => {
+      this.refresh = !this.refresh;
+
+    }, 100);
+  }
+
+  checkcurrentFolder() {
+    const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
+    if (fileDirectory.length) {
+      this.valuePicked = fileDirectory.pop()
+    }
+
+  }
+
+  navigateTo(event: any) {
+    this.valuePicked = event;
+    console.log(event, 'navigate to')
+    this.refresh = !this.refresh
   }
 
 }

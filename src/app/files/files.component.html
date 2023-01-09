@@ -1,5 +1,27 @@
+<div class="folder-wrap row" *ngIf="modulesData.length">
+  <div
+    class="folder-item col-md-3"
+    *ngFor="let item of modulesData; let i = index"
+  >
+    <div class="folder-card" (click)="clickToOpen(item)">
+      <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
+      <div class="folder-card-icon">
+        <i class="fa-solid fa-folder"></i>
+      </div>
+      <div class="folder-card-text">
+        {{ item.name }}
+      </div>
+      <!-- folder-card-status, active-1 -->
+    </div>
+  </div>
+</div>
+
+<!-- file data -->
 <div class="folder-wrap row is-file" *ngIf="!isTableView">
-  <div class="folder-item col-md-2" *ngFor="let item of filesList; let i = index">
+  <div
+    class="folder-item col-md-2"
+    *ngFor="let item of fileData; let i = index"
+  >
     <div class="folder-card">
       <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
       <div class="folder-card-icon">
@@ -17,7 +39,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="table-card" *ngIf="isTableView">
   <table class="table">

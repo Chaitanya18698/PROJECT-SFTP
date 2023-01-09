@@ -1,7 +1,7 @@
 <div class="page-header">
   <div class="page-heading">
     <div class="page-title">
-      <div class="dropdown page-header-dropdown" [ngClass]="{'active': isFileView}">
+      <div class="dropdown page-header-dropdown" [ngClass]="{'active': directoryData.length == 0}">
         <a
           class="dropdown-toggle"
           href="#"
@@ -51,14 +51,14 @@
       </div>
     </div>
     <div class="page-child-title" *ngFor="let item of directoryData; let i = index">
-      <div class="dropdown page-header-dropdown" [ngClass]="{'active': !isFileView}">
+      <div class="dropdown page-header-dropdown" [ngClass]="{'active': i == (directoryData.length-1)}">
         <a
           class="dropdown-toggle"
           href="#"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-          (click)="onDirectoryClick(item)"
+          (click)="onDirectoryClick(item,i)"
         >
           {{item.name}}
           <!-- <div

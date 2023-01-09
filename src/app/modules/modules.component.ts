@@ -238,4 +238,10 @@ export class ModulesComponent implements OnInit {
 
   }
 
+  navigateTo(event: any) {
+    this.valuePicked = event;
+    console.log(event, 'navigate to')
+    this.refresh = !this.refresh
+  }
+
 }

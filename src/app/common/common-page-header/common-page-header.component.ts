@@ -87,20 +87,20 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
 
 
   onDirectoryClick(item: any, i: any) {
-    if(
+    if (
       i !== this.directoryData.length - 1
     ) {
       let dirData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
       dirData = dirData.slice(0, i + 1)
       sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(dirData)))
-      console.log(item, 'on click',i, dirData)
+      console.log(item, 'on click', i, dirData)
       this.sendonClickDirectory.emit(item)
     }
 
   }
 
   selectModuleOption(item: any) {
-    if(item.id === 1) {
+    if (item.id === 1) {
       this.createModuleForm();
       this.moduleForm.patchValue({
         dir_id: null
@@ -114,7 +114,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
 
   selectDirectoryOption(type: any, item: any) {
     console.log(item);
-    if(type.id === 1) {
+    if (type.id === 1) {
       this.createModuleForm();
       this.moduleForm.patchValue({
         dir_id: item.dir_id
@@ -148,15 +148,20 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   addUpdateModules() {
     if (this.moduleForm.valid) {
       const data = this.moduleForm.value;
+      const currentDir = this.directoryData.length ? this.directoryData[this.directoryData.length - 1] : null
+
       const body = {
         name: data.name,
-        parent_id: null
+        // dir_id: data.dir_id,
+        parent_id : currentDir ? currentDir.dir_id : null
       }
+      console.log('body', body)
       this._commonService.add_module(body).subscribe((response) => {
         response = this._encDec.decrypt(response.edc)
         console.log(response)
         if (response.success) {
           $('#commonHeadModel').modal('hide')
+          this.refreshOption.emit(true)
         } else {
           this.spinner = false
         }

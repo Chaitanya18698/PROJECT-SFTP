@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="table-card">
-        <table class="table">
+        <table class="table" *ngIf="!spinner">
           <thead>
             <tr>
               <th>#</th>
@@ -110,6 +110,9 @@
             </div>
           </tfoot>
         </table>
+        
+      <app-shimmers *ngIf="spinner"></app-shimmers>
+      <app-empty-states *ngIf="!spinner && modulesData.length == 0"></app-empty-states>
       </div>
     </div>
   </ng-container>

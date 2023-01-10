@@ -19,8 +19,8 @@
         </div>
       </div>
     </div>
-    <div class="table-card">
-      <table class="table">
+    <div class="table-card"  >
+      <table class="table" *ngIf="!spinner">
         <thead>
           <tr>
             <!-- <th>#</th> -->
@@ -126,6 +126,9 @@
           </div>
         </tfoot>
       </table>
+
+      <app-shimmers *ngIf="spinner"></app-shimmers>
+      <app-empty-states *ngIf="!spinner && clientData.length == 0"></app-empty-states>
     </div>
   </div>
   <app-footer></app-footer>

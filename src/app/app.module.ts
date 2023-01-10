@@ -19,6 +19,8 @@ import { SingleSelectComponent } from './common/single-select/single-select.comp
 import { MultiSelectComponent } from './common/multi-select/multi-select.component';
 import { CommonModule } from '@angular/common';
 import { CommonPageHeaderComponent } from './common/common-page-header/common-page-header.component';
+import { EmptyStatesComponent } from './common/empty-states/empty-states.component';
+import { ShimmersComponent } from './common/shimmers/shimmers.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { CommonPageHeaderComponent } from './common/common-page-header/common-pa
     SingleSelectComponent,
     MultiSelectComponent,
     CommonPageHeaderComponent,
+    EmptyStatesComponent,
+    ShimmersComponent,
   ],
   imports: [
     BrowserModule,

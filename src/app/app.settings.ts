@@ -19,6 +19,9 @@ export class AppSettings {
         GET_USERS: environment.apiUrl + '/',
         ADD_USERS: environment.apiUrl + '/',
 
+        // CLIENT USER LOGIN
+        ACDC_LOGIN_USER: environment.apiUrl + '/login/acdc',
+
         // file Paths
         GET_FILES_DIRS: environment.apiUrl + '/dirs/files',
         UPLOAD_FILES_DIRS: environment.apiUrl + '/fileupload',

@@ -57,7 +57,7 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  
+
 
   redirect(event: any) {
     console.log(event, 'form close event')
@@ -67,7 +67,31 @@ export class UsersComponent implements OnInit {
 
 
   openForm() {
-    this._route.navigate(['/add-form', {form: 'users'}])
+    this._route.navigate(['/add-form', { form: 'users' }])
   }
+
+  // Click for actions
+  valuPicked: any = null
+  clickOnActions(item: any) {
+    this.valuPicked = item
+  }
+
+
+  acdcLoginUser() {
+    const body = {
+      id: this.valuPicked.id,
+      status: this.valuPicked.status == 1 ? 0 : 1
+    }
+    this._commonService.acdcLoginUser(body).subscribe((response: any) => {
+      response = this._encDec.decrypt(response.edc)
+      console.log('acdc', response)
+      if (response.success) {
+        alert('Update successfuly...!')
+        $('#acdcNewModal').modal('hide')
+        this.getUsers()
+      }
+    })
+  }
+
 
 }

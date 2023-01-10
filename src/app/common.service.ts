@@ -121,8 +121,16 @@ export class CommonService {
         const url = AppSettings.API.UPLOAD_FILES_DIRS;
         return this._apiservice.callApi({ url, method: 'FILE_UPLOAD', body })
     }
-        downloadFile(body: any) {
+
+    downloadFile(body: any) {
         const url = AppSettings.API.DOWNLOAD_FILES;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
+
+    // Client user login
+     
+    acdcLoginUser(body: any) {
+        const url = AppSettings.API.ACDC_LOGIN_USER;
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
 }

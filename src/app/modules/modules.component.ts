@@ -36,7 +36,11 @@ export class ModulesComponent implements OnInit {
   loginType: any = null
   ngOnInit(): void {
     this.loginType = sessionStorage.getItem('loginType')
-    this.getModules();
+    if(this.loginType === '1') {
+      this.getModules();
+    } else {
+      this.getFilesDirs(null)
+    }
     this.checkcurrentFolder()
     this.clientList = [
       {

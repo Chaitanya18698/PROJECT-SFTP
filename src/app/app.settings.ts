@@ -1,3 +1,4 @@
+import { env } from "process";
 import { environment } from "src/environments/environment";
 
 export class AppSettings {
@@ -22,6 +23,9 @@ export class AppSettings {
         // file Paths
         GET_FILES_DIRS: environment.apiUrl + '/dirs/files',
         UPLOAD_FILES_DIRS: environment.apiUrl + '/fileupload',
-        DOWNLOAD_FILES: environment.apiUrl + '/downloadFile'
+        DOWNLOAD_FILES: environment.apiUrl + '/downloadFile',
+        LOGIN_DETAILS: environment.apiUrl + '/login/details',
+        UPDATE_IMPLEMENTORS: environment.apiUrl + '/implementor/update',
+        UPDATE_CLIENT: environment.apiUrl + '/client/update'
     }
 }

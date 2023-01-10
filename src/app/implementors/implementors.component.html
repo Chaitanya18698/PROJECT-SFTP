@@ -60,7 +60,7 @@
                   <div class="dropdown-menu dropdown-menu-end">
                     <ul>
                       <li>
-                        <a class="dropdown-item"> Update </a>
+                        <a class="dropdown-item" (click)="onActionClick(item, 'update')"> Update </a>
                       </li>
                       <li>
                         <a class="dropdown-item"> Deactivate </a>
@@ -109,7 +109,7 @@
   <ng-container *ngIf="actionType === 'form'">
     <app-add-form
       [userData]="userData"
-      ,
+      [backTo]="'implementors'"
       (closeForm)="redirect($event)"
     ></app-add-form>
   </ng-container>

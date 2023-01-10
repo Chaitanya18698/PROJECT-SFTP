@@ -63,6 +63,9 @@
         overflow-y: auto;
         background: $base-white;
         max-width: 200px;
+        &.fixed-width{
+            width: 200px;
+        }
 
         ul {
             list-style: none;
@@ -74,12 +77,12 @@
                 cursor: pointer;
 
                 &:hover {
-                    background: $base-gray-100;
+                    background: #eeeeee;
                     color: $base-text-900;
                 }
 
                 &.active {
-                    background: $base-gray-100;
+                    background: #eeeeee;
                     color: $base-text-900;
 
                     .dropdown-item {
@@ -89,10 +92,10 @@
                             right: 12px;
                             font-size: 12px;
                             content: "\f00c";
+                            font: var(--fa-font-solid);
                             border: none;
                             vertical-align: top;
                             color: #3d76f7;
-                            font-family: "Font Awesome 6 Brands";
                             display: inline-block;
                         }
                     }
@@ -118,7 +121,7 @@
             
                     i,
                     svg {
-                        margin-inline-end: 6px;
+                        margin-inline-end: 10px;
                     }
 
                     label {
@@ -166,6 +169,16 @@
                 .badge-white-filter {
                     margin-right: 3px;
                     max-width: calc(50% - 20px);
+                    .multi-select-text{
+                        max-width: calc(100% - 10px);
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    a{
+                        margin-left: 6px;
+                        color: #adb2b8;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -270,6 +283,13 @@
             max-width: initial;
             width: 180px;
             .dropdown-item{
+                font-size: $text-size-reg;
+                i,svg{
+                    width: 14px;
+                    text-align: center;
+                    margin-inline-end: 10px;
+                    color: #6e6e6e;
+                }
                 ul{
                     margin: 0;
                     padding: 0;

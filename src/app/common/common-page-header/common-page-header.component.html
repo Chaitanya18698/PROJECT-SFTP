@@ -1,7 +1,10 @@
 <div class="page-header">
   <div class="page-heading">
     <div class="page-title">
-      <div class="dropdown page-header-dropdown" [ngClass]="{'active': directoryData.length == 0}">
+      <div
+        class="dropdown page-header-dropdown"
+        [ngClass]="{ active: directoryData.length == 0 }"
+      >
         <a
           class="dropdown-toggle"
           href="#"
@@ -49,15 +52,21 @@
         </div>
       </div>
     </div>
-    <div class="page-child-title" *ngFor="let item of directoryData; let i = index">
-      <div class="dropdown page-header-dropdown" [ngClass]="{'active': i == (directoryData.length-1)}">
+    <div
+      class="page-child-title"
+      *ngFor="let item of directoryData; let i = index"
+    >
+      <div
+        class="dropdown page-header-dropdown"
+        [ngClass]="{ active: i == directoryData.length - 1 }"
+      >
         <a
           class="dropdown-toggle"
           href="#"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-          (click)="onDirectoryClick(item,i)"
+          (click)="onDirectoryClick(item, i)"
         >
           {{ item.name }}
           <!-- <div
@@ -95,6 +104,58 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="page-options">
+    <div class="page-options-set">
+      <div class="dropdown">
+        <a
+          class="dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+          {{ selectedOption ? selectedOption : "Select Client" }}
+          <div
+            class="clear"
+            (click)="clear(selectedOption, $event)"
+            *ngIf="selectedOption != ''"
+          >
+            <i class="fa-solid fa-times"></i>
+          </div>
+          <div
+            class="clear"
+            (click)="clear(selectedOption, $event)"
+            *ngIf="selectedOption != ''"
+          >
+            <i class="fa-solid fa-times"></i>
+          </div>
+        </a>
+
+        <div class="dropdown-menu fixed-width dropdown-menu-end">
+          <ul>
+            <li
+              *ngFor="let item of optionsList; let i = index"
+              [ngClass]="{
+                active: item.itemName == selectedOption
+              }"
+            >
+              <a class="dropdown-item" (click)="selectClient(item)">
+                {{ item.itemName }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="page-options-set">
+      <button
+        class="btn btn-icon btn-outline-primary btn-sm"
+        tabindex="0"
+        data-bs-toggle="modal"
+        data-bs-target="#addNewModal">
+        <i class="fa-solid fa-plus"></i> Add New
+      </button>
+    </div> -->
   </div>
 </div>
 
@@ -235,7 +296,8 @@
           <input
             type="file"
             class="form-control"
-            (input)="fileupload($event)" [(ngModel)]="fileData"
+            (input)="fileupload($event)"
+            [(ngModel)]="fileData"
             placeholder="Enter module name"
           />
         </div>

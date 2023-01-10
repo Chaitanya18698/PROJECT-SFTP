@@ -1,131 +1,146 @@
-<div class="page-container">
-  <div class="page-header">
-    <div class="page-header-title">
-      <a class="page-header-title-icon" (click)="backToUrl()">
-        <i class="fa-solid fa-chevron-left"></i>
-      </a>
-      <div class="page-title">
-        <div class="title">Add User</div>
+<div class="page-wrapper">
+  <app-header></app-header>
+  <div class="page-container">
+    <div class="page-header">
+      <div class="page-header-title">
+        <a class="page-header-title-icon" (click)="backToUrl()">
+          <i class="fa-solid fa-chevron-left"></i>
+        </a>
+        <div class="page-title">
+          <div class="title">Add User</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-body">
-      <form novalidate role="form" autocomplete="off" [formGroup]="clientForm">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="id-generation" class="form-label field-required"
-                >Implementer ID</label
-              >
-              <input
-                id="id-generation"
-                type="text"
-                class="form-control"
-                placeholder="Enter ID"
-                name="userId"
-                formControlName="display_id"
-                ngClass="{'is-invalid': clientForm.controls['userId'].invalid && (clientForm.controls['userId'].touched || clientForm.controls['userId'].dirty)}"
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="
-                  clientForm.controls['display_id'].invalid &&
-                  (clientForm.controls['display_id'].touched ||
-                    clientForm.controls['display_id'].dirty)
-                "
-              >
-                <span
-                  *ngIf="clientForm.controls['display_id']?.errors.required"
+    <div class="card">
+      <div class="card-body">
+        <form
+          novalidate
+          role="form"
+          autocomplete="off"
+          [formGroup]="clientForm"
+        >
+          <div class="row form-group border-bottom">
+            <div class="col-md-4">
+              <div class="form-group lg">
+                <label for="id-generation" class="form-label field-required"
+                  >Implementer ID</label
                 >
-                  Please provide an ID.
-                </span>
-                <span
-                  *ngIf="clientForm.controls['display_id']?.errors.maxlength"
+                <input
+                  id="id-generation"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter ID"
+                  name="userId"
+                  formControlName="display_id"
+                  ngClass="{'is-invalid': clientForm.controls['userId'].invalid && (clientForm.controls['userId'].touched || clientForm.controls['userId'].dirty)}"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    clientForm.controls['display_id'].invalid &&
+                    (clientForm.controls['display_id'].touched ||
+                      clientForm.controls['display_id'].dirty)
+                  "
                 >
-                  ID should be atleast 2 characters.
-                </span>
-                <span
-                  *ngIf="clientForm.controls['display_id']?.errors.minlength"
+                  <span
+                    *ngIf="clientForm.controls['display_id']?.errors.required"
+                  >
+                    Please provide an ID.
+                  </span>
+                  <span
+                    *ngIf="clientForm.controls['display_id']?.errors.maxlength"
+                  >
+                    ID should be atleast 2 characters.
+                  </span>
+                  <span
+                    *ngIf="clientForm.controls['display_id']?.errors.minlength"
+                  >
+                    ID should not be more than 10 characters.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group lg">
+                <label for="username" class="form-label field-required"
+                  >Username</label
                 >
-                  ID should not be more than 10 characters.
-                </span>
+                <input
+                  id="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Username"
+                  name="userName"
+                  formControlName="name"
+                  ngClass="{'is-invalid': clientForm.controls['name'].invalid && (clientForm.controls['name'].touched || clientForm.controls['name'].dirty)}"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    clientForm.controls['name'].invalid &&
+                    (clientForm.controls['name'].touched ||
+                      clientForm.controls['name'].dirty)
+                  "
+                >
+                  <span *ngIf="clientForm.controls['name']?.errors.required">
+                    Username is required.
+                  </span>
+                  <span *ngIf="clientForm.controls['name']?.errors.maxlength">
+                    Username should be atleast 2 characters.
+                  </span>
+                  <span *ngIf="clientForm.controls['name']?.errors.minlength">
+                    Username should not be more than 100 characters.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group lg">
+                <label for="password" class="form-label field-required"
+                  >Password</label
+                >
+                <input
+                  id="password"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Password"
+                  name="password"
+                  formControlName="password"
+                  ngClass="{'is-invalid': clientForm.controls['password'].invalid && (clientForm.controls['password'].touched || clientForm.controls['password'].dirty)}"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    clientForm.controls['password'].invalid &&
+                    (clientForm.controls['password'].touched ||
+                      clientForm.controls['password'].dirty)
+                  "
+                >
+                  <span
+                    *ngIf="clientForm.controls['password']?.errors.required"
+                  >
+                    Password is required.
+                  </span>
+                  <span
+                    *ngIf="clientForm.controls['password']?.errors.maxlength"
+                  >
+                    Password should be atleast 2 characters.
+                  </span>
+                  <span
+                    *ngIf="clientForm.controls['password']?.errors.minlength"
+                  >
+                    Password should not be more than 100 characters.
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="username" class="form-label field-required"
-                >Username</label
-              >
-              <input
-                id="username"
-                type="text"
-                class="form-control"
-                placeholder="Enter Username"
-                name="userName"
-                formControlName="name"
-                ngClass="{'is-invalid': clientForm.controls['name'].invalid && (clientForm.controls['name'].touched || clientForm.controls['name'].dirty)}"
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="
-                  clientForm.controls['name'].invalid &&
-                  (clientForm.controls['name'].touched ||
-                    clientForm.controls['name'].dirty)
-                "
-              >
-                <span *ngIf="clientForm.controls['name']?.errors.required">
-                  Username is required.
-                </span>
-                <span *ngIf="clientForm.controls['name']?.errors.maxlength">
-                  Username should be atleast 2 characters.
-                </span>
-                <span *ngIf="clientForm.controls['name']?.errors.minlength">
-                  Username should not be more than 100 characters.
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="password" class="form-label field-required"
-                >Password</label
-              >
-              <input
-                id="password"
-                type="text"
-                class="form-control"
-                placeholder="Enter Password"
-                name="password"
-                formControlName="password"
-                ngClass="{'is-invalid': clientForm.controls['password'].invalid && (clientForm.controls['password'].touched || clientForm.controls['password'].dirty)}"
-              />
-              <div
-                class="invalid-feedback"
-                *ngIf="
-                  clientForm.controls['password'].invalid &&
-                  (clientForm.controls['password'].touched ||
-                    clientForm.controls['password'].dirty)
-                "
-              >
-                <span *ngIf="clientForm.controls['password']?.errors.required">
-                  Password is required.
-                </span>
-                <span *ngIf="clientForm.controls['password']?.errors.maxlength">
-                  Password should be atleast 2 characters.
-                </span>
-                <span *ngIf="clientForm.controls['password']?.errors.minlength">
-                  Password should not be more than 100 characters.
-                </span>
-              </div>
-            </div>
-          </div>
+
           <!-- <div class="col-md-12">
             <div class="row">
               <div class="col-md-4">
-                <div class="form-group">
+                <div class="form-group lg">
                   <label for="Generate for" class="form-label field-required">Generate For</label>
                   <div class="radio">
                     <input type="radio" name="generate-for" id="implementor" />
@@ -139,18 +154,21 @@
               </div>
             </div>
           </div> -->
-          <ng-container formArrayName="priv">
-            <div
-              class="col-md-12"
-              *ngFor="let clientIndex of priv.controls; let i = index"
-            >
+          <div class="row">
+            <ng-container formArrayName="priv">
               <div
-                class="row form-group"
-                [formGroupName]="i"
-                [ngClass]="{ 'border-bottom': i + 1 != priv.controls.length }"
+                class="col-md-12"
+                *ngFor="let clientIndex of priv.controls; let i = index"
               >
-                <!-- <div class="col-md-4">
-                <div class="form-group">
+                <div
+                  class="row"
+                  [formGroupName]="i"
+                  [ngClass]="{
+                    'border-bottom form-group': i + 1 != priv.controls.length
+                  }"
+                >
+                  <!-- <div class="col-md-4">
+                <div class="form-group lg">
                   <label for="username" class="form-label field-required">Select Implementor</label>
                   <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
@@ -194,13 +212,13 @@
                   <div></div>
                 </div>
               </div> -->
-                <!-- Client -->
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="client" class="form-label field-required"
-                      >Select Client</label
-                    >
-                    <!-- <div class="dropdown">
+                  <!-- Client -->
+                  <div class="col-md-4">
+                    <div class="form-group lg">
+                      <label for="client" class="form-label field-required"
+                        >Select Client</label
+                      >
+                      <!-- <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="onOpenForm('client')">
                       {{ selectedClient ? selectedClient : "Select Client" }}
                       <div class="clear" (click)="clear('Client', $event)" *ngIf="selectedClient != ''">
@@ -220,12 +238,12 @@
                       </ul>
                     </div>
                   </div> -->
-                    <akv-single-select
-                      [optionList]="clientsList"
-                      placeholder="Select Client"
-                      formControlName="client_id"
-                    ></akv-single-select>
-                    <!-- <div
+                      <akv-single-select
+                        [optionList]="clientsList"
+                        placeholder="Select Client"
+                        formControlName="client_id"
+                      ></akv-single-select>
+                      <!-- <div
                       class="invalid-feedback"
                       *ngIf="
                         clientIndex.controls['client_id'].invalid &&
@@ -239,15 +257,17 @@
                         Client is required.
                       </span>
                     </div> -->
+                    </div>
                   </div>
-                </div>
-                <!-- Modules -->
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="module{{ i }}" class="form-label field-required"
-                      >Select Module</label
-                    >
-                    <!-- <div class="dropdown multi-dropdown">
+                  <!-- Modules -->
+                  <div class="col-md-4">
+                    <div class="form-group lg">
+                      <label
+                        for="module{{ i }}"
+                        class="form-label field-required"
+                        >Select Module</label
+                      >
+                      <!-- <div class="dropdown multi-dropdown">
                     <a type="button" id="multiSelect" data-bs-hover="dropdown" data-bs-toggle="dropdown"
                       aria-haspopup="true" aria-expanded="true" class="dropdown-toggle">
                       <div class="multi-selective">
@@ -287,13 +307,13 @@
                       </ul>
                     </div>
                   </div> -->
-                    <akv-multi-select
-                      [optionList]="modulesList"
-                      placeholder="Select Modules"
-                      id="module{{ i }}"
-                      formControlName="modules"
-                    ></akv-multi-select>
-                    <!-- <div
+                      <akv-multi-select
+                        [optionList]="modulesList"
+                        placeholder="Select Modules"
+                        id="module{{ i }}"
+                        formControlName="modules"
+                      ></akv-multi-select>
+                      <!-- <div
                       class="invalid-feedback"
                       *ngIf="
                         clientIndex.controls['modules'].invalid &&
@@ -307,37 +327,39 @@
                         Module is required.
                       </span>
                     </div> -->
+                    </div>
+                  </div>
+                  <div
+                    class="col-md-12 text-end"
+                    [ngClass]="{ 'form-group': i + 1 != priv.controls.length }"
+                    *ngIf="parent_id != 'users'"
+                  >
+                    <button
+                      class="btn btn-xs btn-icon btn-tertiary btn-red"
+                      (click)="removeForm(i)"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      class="btn btn-xs btn-icon btn-tertiary"
+                      *ngIf="i == priv.length - 1"
+                      (click)="addaOneMore()"
+                    >
+                      Add
+                    </button>
                   </div>
                 </div>
-                <div
-                  class="col-md-12 form-group text-end"
-                  *ngIf="parent_id != 'users'"
-                >
-                  <button
-                    class="btn btn-xs btn-icon btn-tertiary btn-red"
-                    (click)="removeForm(i)"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    class="btn btn-xs btn-icon btn-tertiary"
-                    *ngIf="i == priv.length - 1"
-                    (click)="addaOneMore()"
-                  >
-                    Add
-                  </button>
-                </div>
               </div>
-            </div>
-          </ng-container>
-        </div>
-      </form>
-    </div>
-    <div class="card-footer">
-      <button class="btn btn-tertiary-gray">Cancel</button>
-      <button class="btn btn-primary" (click)="checkValidation()">
-        Submit
-      </button>
+            </ng-container>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-tertiary-gray">Cancel</button>
+        <button class="btn btn-primary" (click)="checkValidation()">
+          Submit
+        </button>
+      </div>
     </div>
   </div>
 </div>

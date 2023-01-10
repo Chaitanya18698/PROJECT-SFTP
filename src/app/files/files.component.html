@@ -1,111 +1,48 @@
-<div class="folder-wrap row" *ngIf="modulesData.length">
-  <div
-    class="folder-item col-md-3"
-    *ngFor="let item of modulesData; let i = index"
-  >
-    <div class="folder-card" (click)="clickToOpen(item)">
-      <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
-      <div class="folder-card-icon">
-        <i class="fa-solid fa-folder"></i>
+<ng-container *ngIf="modulesData.length != 0">
+  <div class="standlone-title">Folders</div>
+
+  <div class="folder-wrap row" *ngIf="modulesData.length">
+    <div
+      class="folder-item col-md-3"
+      *ngFor="let item of modulesData; let i = index"
+    >
+      <div class="folder-card" (click)="clickToOpen(item)">
+        <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
+        <div class="folder-card-icon">
+          <i class="fa-solid fa-folder"></i>
+        </div>
+        <div class="folder-card-text">
+          {{ item.name }}
+        </div>
+        <!-- folder-card-status, active-1 -->
       </div>
-      <div class="folder-card-text">
-        {{ item.name }}
-      </div>
-      <!-- folder-card-status, active-1 -->
     </div>
   </div>
-</div>
+</ng-container>
 
-<!-- file data -->
-<div class="folder-wrap row is-file" *ngIf="!isTableView">
-  <div
-    class="folder-item col-md-2"
-    *ngFor="let item of fileData; let i = index"
-  >
-    <div class="folder-card" (click)="clickOndownload(item)">
-      <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
-      <div class="folder-card-icon">
-        <i class="fa-solid fa-file-alt"></i>
-      </div>
-      <div class="folder-card-text">
-        <div class="icon">
+<ng-container *ngIf="fileData.length != 0">
+  <div class="standlone-title">Files</div>
+  <!-- file data -->
+  <div class="folder-wrap row is-file">
+    <div
+      class="folder-item col-md-2"
+      *ngFor="let item of fileData; let i = index"
+    >
+      <div class="folder-card" (click)="clickOndownload(item)">
+        <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
+        <div class="folder-card-icon">
           <i class="fa-solid fa-file-alt"></i>
         </div>
-        <div class="text">
-          {{ item.file_name }}
+        <div class="folder-card-text">
+          <div class="icon">
+            <i class="fa-solid fa-file-alt"></i>
+          </div>
+          <div class="text">
+            {{ item.file_name }}
+          </div>
         </div>
+        <!-- folder-card-status, active-1 -->
       </div>
-      <!-- folder-card-status, active-1 -->
     </div>
   </div>
-</div>
-
-<div class="table-card" *ngIf="isTableView">
-  <table class="table">
-    <thead>
-      <tr>
-        <!-- <th>#</th> -->
-        <th>File</th>
-        <!-- class="table-col-width" -->
-        <th>Size</th>
-        <th>Status</th>
-        <th class="table-action"></th>
-      </tr>
-    </thead>
-    <tbody
-      [ngStyle]="{ 'max-height': _sharedService.getTableMaxHeight() + 'px' }"
-    >
-      <tr *ngFor="let item of filesList; let i = index">
-        <!-- <td>{{i + 1}}</td> -->
-        <td>
-          <!-- class="table-col-width" -->
-          <div class="icon-text-set">
-            <div class="icon"><i class="fa-regular fa-file-alt"></i></div>
-            <div class="text">
-              {{ item.file_name }}
-            </div>
-          </div>
-        </td>
-        <td>
-          <span class="text-small"> 12 MB </span>
-        </td>
-        <td>
-          <span class="badge success">Active</span>
-          <!-- <span class="badge failed">Failed</span>
-                            <span class="badge pending">Pending</span> -->
-        </td>
-        <td class="table-action">
-          <button class="btn btn-xs btn-tertiary">Download</button>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <div class="pagination-set">
-        <div class="pagination-set-results">Entries 1 to 25 out of 52</div>
-        <div class="pagination-set-center">
-          <!-- <ul class="pagination-stage-set">
-                                <li class="pagination-stage-set-item">
-
-                                </li>
-                            </ul> -->
-
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </tfoot>
-  </table>
-</div>
+</ng-container>

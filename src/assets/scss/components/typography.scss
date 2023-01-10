@@ -1,37 +1,48 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    font-family: "Poppins" !important;
-    font-size: $text-size-reg !important;
-    font-weight: $font-weight-regular !important;
-    background: $base-bg !important;
-    height: 100%;
-    position: relative;
-  }
+  box-sizing: border-box;
+}
 
-  .border-bottom{
-    border-bottom: 1px solid #ececec;
-  }
+html,
+body {
+  font-family: "Poppins" !important;
+  font-size: $text-size-reg !important;
+  font-weight: $font-weight-regular !important;
+  background: $base-bg !important;
+  height: 100%;
+  position: relative;
+}
 
-  .text-truncate{
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+.border-bottom {
+  border-bottom: 1px solid #ececec;
+}
 
-  a{
-    text-decoration: none;
-  }
+.text-truncate {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
-  .text-small{
-    font-size: $text-size-sm;
-    font-weight: $font-weight-regular;
-    line-height: $line-height-sm;
-    color: $base-text-600;
-  }
+a {
+  text-decoration: none;
+}
 
-  .cursor-pointer{
-    cursor: pointer;
-  }
+.text-small {
+  font-size: $text-size-sm;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-sm;
+  color: $base-text-600;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+  opacity: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(60,60,60,.25);
+}

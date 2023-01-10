@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Injectable, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Injectable, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { CommonService } from '../common.service';
 import { EncryptionService } from '../encryption.service';
@@ -13,7 +13,7 @@ declare var $: any;
   styleUrls: ['./add-form.component.scss'],
   providers: [Document]
 })
-export class AddFormComponent implements OnInit {
+export class AddFormComponent implements OnInit, OnChanges {
   @Input() userData: any = '';
   @Output() closeForm: any = new EventEmitter()
   implementationList: any = [];
@@ -24,7 +24,7 @@ export class AddFormComponent implements OnInit {
   modulesList: any = [];
   addUserForm: any = FormGroup;
   spinner = false;
-
+  @Input() backTo: any = ''
   parent_id: any = null
   // Form 
   clientForm: any = FormGroup
@@ -34,8 +34,33 @@ export class AddFormComponent implements OnInit {
     this.CreateClientForm()
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.userData) {
+      this.CreateClientForm();
+      this.clientForm.patchValue({
+        display_id: this.userData.display_id,
+        name: this.userData.name,
+        password: this.userData.password,
+      })
+      if(this.userData.clients.length  > 1) {
+        this.userData.clients.forEach((arg: any, index: any) => {
+          if(index !== 0) {
+            this.addaOneMore();
+          }
+          this.clientForm.controls['priv'].controls[index].controls['client_id'].setValue(arg);
+          this.clientForm.controls['priv'].controls[index].controls['modules'].setValue(arg.modules);
+        })
+      } else {
+        this.clientForm.controls['priv'].controls[0].controls['client_id'].setValue(this.userData.clients[0]);
+        this.clientForm.controls['priv'].controls[0].controls['modules'].setValue(this.userData.clients[0].modules);
+      }
+    }
+    console.log(changes, 'userData', this.userData, this.clientForm);
+
+  }
+
   ngOnInit(): void {
-    this.parent_id = this.route.snapshot.paramMap.get('form');
+    this.parent_id = this.backTo;
 
     // Request for data of from
     this.getClients();
@@ -110,7 +135,11 @@ export class AddFormComponent implements OnInit {
 
     console.log(this.clientForm.value)
     if (this.clientForm.valid) {
-      this.postImplementor()
+      if(this.userData) {
+        this.updateImplementor()
+      } else {
+        this.postImplementor()
+      }
     } else {
       this.clientForm.markAllAsTouched();
       alert('Please fill requried fields...')
@@ -162,7 +191,7 @@ export class AddFormComponent implements OnInit {
 
   // Back to Imlementor screen
   backToUrl() {
-    this._route.navigateByUrl(`/${this.parent_id}`)
+    this.closeForm.emit(this.backTo)
   }
 
 
@@ -236,7 +265,7 @@ export class AddFormComponent implements OnInit {
         alert('Something went to worng...!')
 
       })
-    } else if (this.parent_id == 'users') {
+    } else if (this.parent_id == 'client') {
       const body: any = {
         display_id: data.display_id,
         name: data.name,
@@ -259,6 +288,77 @@ export class AddFormComponent implements OnInit {
         console.log("post response", response);
         if (response.success) {
           alert('Added successfully')
+          this.backToUrl()
+        } else {
+          alert('Something went to worng...!')
+        }
+      }, error => {
+        alert('Something went to worng...!')
+
+      })
+    }
+  }
+
+  // update functionality
+
+  updateImplementor() {
+    const data = this.clientForm.value;
+    if (this.parent_id == 'implementors') {
+
+      const body: any = {
+        id: this.userData.id,
+        display_id: data.display_id,
+        name: data.name,
+        password: data.password,
+        priv: []
+      }
+
+      for (const item of data.priv) {
+        const subData = {
+          client_id: item.client_id ? item.client_id.id : null,
+          modules: item.modules.map((ele: any) => ele.id)
+        }
+        body.priv.push(subData)
+      }
+      console.log(body)
+
+      this._commonService.update_implementors(body).subscribe((response: any) => {
+        response = this._encDec.decrypt(response.edc);
+        console.log("post response", response);
+        if (response.success) {
+          alert('Updated successfully')
+          this.backToUrl()
+        } else {
+          alert('Something went to worng...!')
+        }
+      }, error => {
+        alert('Something went to worng...!')
+
+      })
+    } else if (this.parent_id == 'client') {
+      const body: any = {
+        id: this.userData.id,
+        display_id: data.display_id,
+        name: data.name,
+        password: data.password,
+        
+      }
+
+      for (const item of data.priv) {
+        const subData = {
+          client_id: item.client_id ? item.client_id.id : null,
+          modules: item.modules.map((ele: any) => ele.id)
+        }
+        body['client_id'] = subData.client_id
+        body['modules'] = subData.modules
+      }
+      console.log(body)
+
+      this._commonService.update_clientUser(body).subscribe((response: any) => {
+        response = this._encDec.decrypt(response.edc);
+        console.log("post response", response);
+        if (response.success) {
+          alert('Updated successfully')
           this.backToUrl()
         } else {
           alert('Something went to worng...!')

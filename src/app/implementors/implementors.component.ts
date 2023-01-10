@@ -57,14 +57,43 @@ export class ImplementorsComponent implements OnInit {
     })
   }
 
+  onActionClick(item: any, type: any) {
+    console.log(item, type)
+    if(type === 'update') {
+      this.get_login_details(item)
+    }
+
+  }
+
+
+  get_login_details(item: any){
+    const body = {
+      id: item.id
+    }
+    this._commonService.get_login_details(body).subscribe((response) => {
+      response = this._encDec.decrypt(response.edc)
+      console.log(response)
+      if (response.success) {
+        this.userData = response.data;
+        this.actionType = 'form'
+      } else {
+        alert('Something went wrong...!')
+      }
+    })
+  }
+
   redirect(event: any) {
     console.log(event, 'form close event')
-    this.actionType === 'table'
+    this.actionType = 'table'
+    if(event === 'implementors') {
+      this.getImplementors();
+    }
   }
 
 
   openForm() {
-    this._route.navigate(['/add-form', {form: 'implementors'}])
+    this.userData = '';
+    this.actionType = 'form'
   }
 
 }

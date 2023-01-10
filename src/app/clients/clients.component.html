@@ -19,13 +19,13 @@
         </div>
       </div>
     </div>
-    <div class="table-card">
-      <table class="table">
+    <div class="table-card"  >
+      <table class="table" *ngIf="!spinner">
         <thead>
           <tr>
             <!-- <th>#</th> -->
             <th>Client</th>
-            <th>Last</th>
+            <th>Code</th>
             <th>Status</th>
             <th class="table-action"></th>
           </tr>
@@ -126,6 +126,9 @@
           </div>
         </tfoot>
       </table>
+
+      <app-shimmers *ngIf="spinner"></app-shimmers>
+      <app-empty-states *ngIf="!spinner && clientData.length == 0"></app-empty-states>
     </div>
   </div>
   <app-footer></app-footer>

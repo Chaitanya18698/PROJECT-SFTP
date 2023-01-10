@@ -61,6 +61,7 @@ export class ClientsComponent implements OnInit {
 
   // click button for ADD, Update, Active  & Deactive
   clickToAction(type: string, item: any = null) {
+    console.log(item, 'client item')
     this.createClientForm()
     this.selectedItem = item
     switch (type) {

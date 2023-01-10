@@ -19,18 +19,33 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   @Output() refreshOption: any = new EventEmitter();
   @Output() goBack: any = new EventEmitter();
   moduleForm: any = FormGroup;
-  spinner = false;
+  spinner = false;;
+  loginType: any = '';
+  linkedClients: any = [];
   constructor(public _encDec: EncryptionService, public _fb: FormBuilder, public _commonService: CommonService,) {
     this.createModuleForm();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes, 'changes...')
+    this.loginType = sessionStorage.getItem('loginType');
     this.directoryData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
     console.log(this.directoryData, 'current directory');
   }
 
   ngOnInit(): void {
+    this.loginType = sessionStorage.getItem('loginType');
+    if(this.loginType === '2') {
+      this.linkedClients = this._encDec.decrypt(sessionStorage.getItem('linked_tokens'))
+      console.log(this.linkedClients, 'linked c lients');
+      this.linkedClients.forEach((arg: any, index: any) => {
+        arg['selected'] = index == 0 ? true : false
+        if(index === 0) {
+          this.selectedOption = arg.name
+        }
+      })
+    }
+    console.log(this.loginType)
     this.optionsList = [
       {
         itemName: 'New Module',
@@ -72,20 +87,20 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
 
 
   onDirectoryClick(item: any, i: any) {
-    if(
+    if (
       i !== this.directoryData.length - 1
     ) {
       let dirData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
       dirData = dirData.slice(0, i + 1)
       sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(dirData)))
-      console.log(item, 'on click',i, dirData)
+      console.log(item, 'on click', i, dirData)
       this.sendonClickDirectory.emit(item)
     }
 
   }
 
   selectModuleOption(item: any) {
-    if(item.id === 1) {
+    if (item.id === 1) {
       this.createModuleForm();
       this.moduleForm.patchValue({
         dir_id: null
@@ -99,7 +114,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
 
   selectDirectoryOption(type: any, item: any) {
     console.log(item);
-    if(type.id === 1) {
+    if (type.id === 1) {
       this.createModuleForm();
       this.moduleForm.patchValue({
         dir_id: item.dir_id
@@ -133,15 +148,20 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   addUpdateModules() {
     if (this.moduleForm.valid) {
       const data = this.moduleForm.value;
+      const currentDir = this.directoryData.length ? this.directoryData[this.directoryData.length - 1] : null
+
       const body = {
         name: data.name,
-        dir_id: data.dir_id
+        // dir_id: data.dir_id,
+        parent_id : currentDir ? currentDir.dir_id : null
       }
-      this._commonService.update_module(body).subscribe((response) => {
+      console.log('body', body)
+      this._commonService.add_module(body).subscribe((response) => {
         response = this._encDec.decrypt(response.edc)
         console.log(response)
         if (response.success) {
           $('#commonHeadModel').modal('hide')
+          this.refreshOption.emit(true)
         } else {
           this.spinner = false
         }
@@ -151,7 +171,12 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
 
 
   selectClient(val: any) {
-    this.selectedOption = val;
+    this.selectedOption = val.name;
+    this.linkedClients.forEach((arg: any) => {
+      arg['selected'] = arg.client_id === val.client_id ? true : false;
+    })
+    sessionStorage.setItem('token', val.token)
+    this.onModuleClick();
   }
 
   clear(val: any, e: any) {

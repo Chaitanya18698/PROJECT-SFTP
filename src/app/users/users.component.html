@@ -19,12 +19,12 @@
         </div>
       </div>
       <div class="table-card">
-        <table class="table">
+        <table class="table" *ngIf="!spinner">
           <thead>
             <tr>
               <th>#</th>
-              <th>First</th>
-              <th>Last</th>
+              <th>Name</th>
+              <th>Code</th>
               <th>Status</th>
               <th class="table-action"></th>
             </tr>
@@ -60,7 +60,7 @@
                   <div class="dropdown-menu dropdown-menu-end">
                     <ul>
                       <li>
-                        <a class="dropdown-item"> Update </a>
+                        <a class="dropdown-item" (click)="onActionClick(item, 'update')"> Update </a>
                       </li>
                       <li>
                         <a
@@ -110,14 +110,17 @@
             </div>
           </tfoot>
         </table>
+        
+      <app-shimmers *ngIf="spinner"></app-shimmers>
+      <app-empty-states *ngIf="!spinner && modulesData.length == 0"></app-empty-states>
       </div>
     </div>
   </ng-container>
   <ng-container *ngIf="actionType === 'form'">
     <app-add-form
       [userData]="userData"
-      ,
       (closeForm)="redirect($event)"
+      [backTo]="'client'"
     ></app-add-form>
   </ng-container>
 </div>

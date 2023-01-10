@@ -72,9 +72,13 @@ export class LoginComponent implements OnInit {
     console.log(body);
     this._commonService.loginapp(body).subscribe((response) => {
       response = this._encDec.decrypt(response.edc);
+      console.log('response', response)
       if (!response.error) {
         sessionStorage.setItem('token', response.data.current_token);
         sessionStorage.setItem('loginType', response.data.loginType);
+        if(response.data.loginType === 2) {
+          sessionStorage.setItem('linked_tokens', this._encDec.encrypt(JSON.stringify(response.data.linkedClients)))
+        }
         //Decode token
         let userData = this.JwtHelper.decodeToken(response.data.current_token);
         console.log(userData, ' userdata', response, 'response');

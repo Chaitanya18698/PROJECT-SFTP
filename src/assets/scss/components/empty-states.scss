@@ -1,0 +1,49 @@
+.empty_state {
+    position: relative;
+    top: -20px;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .icon {
+        i,svg{
+            margin: auto;
+            margin-bottom: 40px;
+            font-size: 50px;
+            color: #ccc;
+        }
+    }
+
+    .title {
+        margin: 8px 0px 12px 0;
+        text-align: center;
+        font-weight: normal;
+        font-size: $text-size-xl;
+    }
+
+    .text {
+        font-size: 14px;
+        margin: 0px;
+        color: #999;
+        text-align: center;
+    }
+
+    .action {
+        outline: none;
+        border: none;
+        border-radius: 3px;
+        padding: 8px 8px;
+        margin: 20px auto auto auto;
+        width: 50%;
+        max-width: 200px;
+        background: #348AC7;
+        color: white;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        font-size: 12px;
+
+    }
+}

@@ -1,0 +1,44 @@
+.table-shimmer{
+    &>thead>tr>th{
+        padding: 12px 25px;
+    }
+
+    &>tbody>tr>td{
+        padding: 18px 25px;
+
+        .shimmer-line{
+            opacity: 0.5;
+        }
+    }
+
+    .shimmer-line{
+        display: table-cell;
+        height: 10px;
+        width: 300px;
+        border-radius: 5px;
+        background: $shimmer-bg;
+        background-size: 500px 100px;
+        animation-name: moving-gradient;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+    }
+}
+
+.shimmer{
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    i,svg{
+        font-size: 60px;
+        color: #d8d8d8;
+    }
+    .text{
+        margin-top: 30px;
+        font-size: $text-size-lg;
+        color: $base-text-600;
+    }
+}

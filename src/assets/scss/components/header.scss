@@ -46,6 +46,14 @@
                     padding: 0 16px 0 0;
                     list-style: none;
                     margin: 0 0 0 auto;
+                    &-item{
+                        &.dropdown{
+                            .dropdown-toggle{
+                                border: 0;
+                                padding-right: 25px;
+                            }
+                        }
+                    }
                     .profile-set{
                         width: 24px;
                         height: 24px;
@@ -73,7 +81,7 @@
     align-items: center;
     justify-content: space-between;
     margin-block-end: 8px;
-    padding: 12px 8px;
+    padding: 12px 8px 12px 0;
     .page-title{
         font-size: $text-size-lg;
         font-weight: $font-weight-medium;
@@ -97,9 +105,6 @@
 }
 
 .page-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     .page-heading{
         width: 65%;
         display: flex;
@@ -138,4 +143,13 @@
     .page-child-title{
         margin-inline-end: 14px;
     }
+}
+
+.standlone-title{
+    font-size: $text-size-sm;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-sm;
+    color: $base-text-600;
+    margin-block-end: 24px;
+    padding-inline-start: 10px;
 }

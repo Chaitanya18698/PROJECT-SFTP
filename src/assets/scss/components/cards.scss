@@ -22,16 +22,18 @@ div.card{
         align-items: center;
         justify-content: space-between;
         background: $base-white;
+        border-radius: $border-radius-card $border-radius-card 0 0 !important;
     }
     &-body{
         padding: 24px;
     }
     &-footer{
-        padding: 20px 24px;
+        padding: 12px 24px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
         background: $base-white;
+        border-radius: 0 0 $border-radius-card $border-radius-card !important;
         button{
             &:not(:last-child){
                 margin-right: 10px;

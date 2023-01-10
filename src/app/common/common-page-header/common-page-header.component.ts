@@ -42,29 +42,29 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
         id: 2,
         icon: 'file-arrow-up'
       },
-      {
-        itemName: 'Clients',
-        id: 3,
-        icon: 'user-check',
-        children: [
-          {
-            id: 1,
-            itemName: 'Client 1'
-          },
-          {
-            id: 2,
-            itemName: 'Client 2'
-          },
-          {
-            id: 3,
-            itemName: 'Client 3'
-          },
-          {
-            id: 4,
-            itemName: 'Client 4'
-          },
-        ]
-      },
+      // {
+      //   itemName: 'Clients',
+      //   id: 3,
+      //   icon: 'user-check',
+      //   children: [
+      //     {
+      //       id: 1,
+      //       itemName: 'Client 1'
+      //     },
+      //     {
+      //       id: 2,
+      //       itemName: 'Client 2'
+      //     },
+      //     {
+      //       id: 3,
+      //       itemName: 'Client 3'
+      //     },
+      //     {
+      //       id: 4,
+      //       itemName: 'Client 4'
+      //     },
+      //   ]
+      // },
     ]
     this.directoryData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
     console.log(this.directoryData, 'current directory');

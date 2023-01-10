@@ -2,8 +2,24 @@
   <app-header></app-header>
   <div class="page-container">
     <app-common-page-header [refresh]="refresh" (goBack)="backTo($event)" (sendonClickDirectory)="navigateTo($event)" (refreshOption)="checkcurrentFolder()"></app-common-page-header>
-
-  
+<!-- 
+    <div class="folder-wrap row" *ngIf="modulesData.length">
+      <div
+        class="folder-item col-md-3"
+        *ngFor="let item of modulesData; let i = index"
+      >
+        <div class="folder-card" (click)="isFileView = true">
+         
+          <div class="folder-card-icon">
+            <i class="fa-solid fa-folder"></i>
+          </div>
+          <div class="folder-card-text">
+            {{ item.name }}
+          </div>
+         
+        </div>
+      </div>
+    </div> -->
 
     <div class="table-card" *ngIf="!valuePicked">
       <table class="table" >
@@ -58,6 +74,14 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                   <ul>
+                    <li *ngIf="loginType && loginType != 1">
+                      <a
+                        class="dropdown-item"
+                       
+                        (click)="clickOnView(item)"
+                      >View 
+                      </a>
+                    </li>     
                     <li>
                       <a
                         class="dropdown-item"
@@ -76,14 +100,6 @@
                         (click)="clickToAction('acdc', item)"
                       >
                         {{ item.status == 1 ? "Deactivate" : "Activate" }}
-                      </a>
-                    </li>
-                    <li *ngIf="loginType && loginType != 1">
-                      <a
-                        class="dropdown-item"
-                       
-                        (click)="isFileView = true"
-                      >View 
                       </a>
                     </li>
                   </ul>

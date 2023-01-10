@@ -21,6 +21,7 @@ export class ModulesComponent implements OnInit {
   selectedClient: any = '';
   isTableView: any = true;
   refresh = false;
+  shimmer = false;
 
   constructor(
     public _sharedService: SharedService,

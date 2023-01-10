@@ -1,8 +1,13 @@
 <div class="page-wrapper">
   <app-header></app-header>
   <div class="page-container">
-    <app-common-page-header [refresh]="refresh" (goBack)="backTo($event)" (sendonClickDirectory)="navigateTo($event)" (refreshOption)="checkcurrentFolder()"></app-common-page-header>
-<!-- 
+    <app-common-page-header
+      [refresh]="refresh"
+      (goBack)="backTo($event)"
+      (sendonClickDirectory)="navigateTo($event)"
+      (refreshOption)="checkcurrentFolder()"
+    ></app-common-page-header>
+    <!-- 
     <div class="folder-wrap row" *ngIf="modulesData.length">
       <div
         class="folder-item col-md-3"
@@ -22,7 +27,7 @@
     </div> -->
 
     <div class="table-card" *ngIf="!valuePicked">
-      <table class="table" >
+      <table class="table" *ngIf="!spinner && modulesData.length != 0">
         <thead>
           <tr>
             <!-- <th>#</th> -->
@@ -50,8 +55,8 @@
               </div>
             </td>
             <!-- <td>
-              <span class="text-small"> 200 MB </span>
-            </td> -->
+            <span class="text-small"> 200 MB </span>
+          </td> -->
             <td>
               <span
                 class="badge success"
@@ -63,7 +68,7 @@
                 {{ item.status == 1 ? "Active" : "Inactive" }}</span
               >
               <!-- <span class="badge failed">Failed</span>
-                            <span class="badge pending">Pending</span> -->
+                          <span class="badge pending">Pending</span> -->
             </td>
             <td class="table-action">
               <div class="table-action-dropdown dropdown">
@@ -75,13 +80,10 @@
                 <div class="dropdown-menu dropdown-menu-end">
                   <ul>
                     <li *ngIf="loginType && loginType != 1">
-                      <a
-                        class="dropdown-item"
-                       
-                        (click)="clickOnView(item)"
-                      >View 
+                      <a class="dropdown-item" (click)="clickOnView(item)"
+                        >View
                       </a>
-                    </li>     
+                    </li>
                     <li>
                       <a
                         class="dropdown-item"
@@ -116,32 +118,38 @@
             </div>
             <div class="pagination-set-center">
               <!-- <ul class="pagination-stage-set">
-                                <li class="pagination-stage-set-item">
+                              <li class="pagination-stage-set-item">
 
-                                </li>
-                            </ul> -->
+                              </li>
+                          </ul> -->
 
               <!-- <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul> -->
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul> -->
             </div>
           </div>
         </tfoot>
       </table>
+      <app-shimmers *ngIf="spinner"></app-shimmers>
+      <app-empty-states *ngIf="!spinner && modulesData.length == 0"></app-empty-states>
     </div>
-    <app-files  [inputData]="valuePicked" *ngIf="valuePicked" (sendData)="filleEmitter()"></app-files>
+    <app-files
+      [inputData]="valuePicked"
+      *ngIf="valuePicked"
+      (sendData)="filleEmitter()"
+    ></app-files>
   </div>
   <app-footer></app-footer>
 </div>

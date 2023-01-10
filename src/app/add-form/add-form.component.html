@@ -24,7 +24,7 @@
             <div class="col-md-4">
               <div class="form-group lg">
                 <label for="id-generation" class="form-label field-required"
-                  >Implementer ID</label
+                  >{{parent_id === 'client' ? 'Client' : 'Implementor'}} ID</label
                 >
                 <input
                   id="id-generation"
@@ -95,7 +95,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="!userData">
               <div class="form-group lg">
                 <label for="password" class="form-label field-required"
                   >Password</label
@@ -332,7 +332,7 @@
                   <div
                     class="col-md-12 text-end"
                     [ngClass]="{ 'form-group': i + 1 != priv.controls.length }"
-                    *ngIf="parent_id != 'users'"
+                    *ngIf="parent_id != 'client'"
                   >
                     <button
                       class="btn btn-xs btn-icon btn-tertiary btn-red"

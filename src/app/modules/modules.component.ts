@@ -36,7 +36,11 @@ export class ModulesComponent implements OnInit {
   loginType: any = null
   ngOnInit(): void {
     this.loginType = sessionStorage.getItem('loginType')
-    this.getModules();
+    if(this.loginType === '1') {
+      this.getModules();
+    } else {
+      this.getFilesDirs(null)
+    }
     this.checkcurrentFolder()
     this.clientList = [
       {
@@ -195,10 +199,28 @@ export class ModulesComponent implements OnInit {
   }
 
   backTo(event: any) {
-
     console.log(event)
     this.valuePicked = null;
-    this.refresh = !this.refresh
+    this.refresh = !this.refresh;
+    if(this.loginType === '1') {
+      this.getModules();
+    } else {
+      this.getFilesDirs(null)
+    }
+
+  }
+
+  getFilesDirs(parent_id: any) {
+    const body = {
+      parent_id
+    }
+    this._commonService.getFilesDirsData(body).subscribe((response: any) => {
+      response = this._encDec.decrypt(response.edc);
+      console.log("dirs ", response)
+      if (response.success) {
+        this.modulesData = response.data['directories']
+      }
+    })
   }
   onOpenForm(val: any) {
 

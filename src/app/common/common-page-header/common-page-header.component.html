@@ -23,7 +23,7 @@
 
         <div class="dropdown-menu" *ngIf="directoryData.length == 0">
           <ul>
-            <ng-container *ngFor="let item of optionsList; let i = index">
+            <ng-container *ngFor="let item of optionsList1; let i = index">
               <li *ngIf="loginType === '1'" [ngClass]="{
                 active: item.itemName == selectedOption,
                 'has-sub': item?.children?.length
@@ -176,14 +176,29 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="commonHeadModel">Add Module</h1>
+        <h1 class="modal-title fs-5" id="commonHeadModel">
+          Add Module
+        </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="moduleForm">
           <div class="form-group">
             <label for="module-name" class="form-label field-required">Module name</label>
-            <input type="text" class="form-control" formControlName="name" placeholder="Enter module name" />
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter module name" 
+            [ngClass]="{'is-invalid' : moduleForm.controls['name'].invalid && (moduleForm.controls['name'].touched || moduleForm.controls['name'].dirty)}"/>
+            <div class="invalid-feedback"
+              *ngIf="moduleForm.controls['name'].invalid && (moduleForm.controls['name'].touched || moduleForm.controls['name'].dirty)">
+              <span *ngIf="moduleForm.controls['name'].errors.required">
+                Module name is required.
+              </span>
+              <span *ngIf="moduleForm.controls['name'].errors.maxlength">
+                Module name should not be more than 100 characters.
+              </span>
+              <span *ngIf="moduleForm.controls['name'].errors.minlength">
+                Module name should be atleast 2 characters.
+              </span>
+            </div>
           </div>
         </form>
       </div>

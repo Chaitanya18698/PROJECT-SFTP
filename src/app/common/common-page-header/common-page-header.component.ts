@@ -11,6 +11,7 @@ declare var $: any;
 export class CommonPageHeaderComponent implements OnInit, OnChanges {
   selectedOption: any = '';
   optionsList: any = [];
+  optionsList1: any = [];
   isFileView: any = false;
   directoryData: any = [];
   @Input() refresh: any;
@@ -56,30 +57,14 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
         itemName: 'File Upload',
         id: 2,
         icon: 'file-arrow-up'
-      },
-      // {
-      //   itemName: 'Clients',
-      //   id: 3,
-      //   icon: 'user-check',
-      //   children: [
-      //     {
-      //       id: 1,
-      //       itemName: 'Client 1'
-      //     },
-      //     {
-      //       id: 2,
-      //       itemName: 'Client 2'
-      //     },
-      //     {
-      //       id: 3,
-      //       itemName: 'Client 3'
-      //     },
-      //     {
-      //       id: 4,
-      //       itemName: 'Client 4'
-      //     },
-      //   ]
-      // },
+      }
+    ]
+    this.optionsList1 = [
+      {
+        itemName: 'New Module',
+        id: 1,
+        icon: 'folder-plus'
+      }
     ]
     this.directoryData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
     console.log(this.directoryData, 'current directory');
@@ -137,7 +122,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   // Create form for module
   createModuleForm() {
     this.moduleForm = this._fb.group({
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       status: 1,
       dir_id: null
     })
@@ -166,6 +151,8 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
           this.spinner = false
         }
       })
+    } else {
+      this.moduleForm.markAllAsTouched();
     }
   }
 

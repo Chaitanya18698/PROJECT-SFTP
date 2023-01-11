@@ -35,6 +35,7 @@ export class AddFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.parent_id = this.backTo;
     if(this.userData) {
       this.CreateClientForm();
       this.clientForm.patchValue({
@@ -67,30 +68,6 @@ export class AddFormComponent implements OnInit, OnChanges {
     this.getModules()
   };
 
-  // resetForm() {
-  //   this.addUserForm = this._fb.group({
-  //     userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-  //     userId: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
-  //     generateFor: ['', [Validators.required]],
-  //     module: ['', [Validators.required]],
-  //     implementors: ['', [Validators.required]],
-  //     client: ['', [Validators.required]]
-  //   })
-  // }
-
-  // getImplementors() {
-  //   this.spinner = true;
-  //   const body = {}
-  //   this._commonService.get_implementors(body).subscribe((response) => {
-  //     response = this._encDec.decrypt(response.edc)
-  //     if (response.success) {
-  //       this.implementationList = response.data;
-  //       this.spinner = false;
-  //     } else {
-  //       this.spinner = false;
-  //     }
-  //   })
-  // }
 
 
   // Get client list Data
@@ -142,7 +119,7 @@ export class AddFormComponent implements OnInit, OnChanges {
       }
     } else {
       this.clientForm.markAllAsTouched();
-      alert('Please fill requried fields...')
+      console.log(this.clientForm , 'form client')
     }
 
   }
@@ -200,9 +177,9 @@ export class AddFormComponent implements OnInit, OnChanges {
   // Create Client login
   CreateClientForm() {
     this.clientForm = this._fb.group({
-      display_id: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+      display_id: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(10)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
       priv: this._fb.array([this.creatFormArray()])
     })
 
@@ -216,8 +193,8 @@ export class AddFormComponent implements OnInit, OnChanges {
   // Creating form group in array
   creatFormArray() {
     return this._fb.group({
-      client_id: [null, Validators.required],
-      modules: [[], Validators.required]
+      client_id: [null, [Validators.required]],
+      modules: [[], [Validators.required]]
     })
   }
 

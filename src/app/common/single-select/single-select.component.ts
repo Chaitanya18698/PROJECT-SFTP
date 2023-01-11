@@ -1,3 +1,4 @@
+
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -16,10 +17,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SingleSelectComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder!: string;
   @Input() optionList: Array<{id: number | string, itemName: string }> = []
-
+  @Input() invalid: any = false; 
   value!: any;
-  onTouched = () =>{};
-  onChanged = (value: any) => {};
+  onTouched!: () => void;
+  onChanged!: (value: any) => void;
   disable = false;
   
   constructor() { }
@@ -31,6 +32,10 @@ export class SingleSelectComponent implements OnInit, ControlValueAccessor {
   onClearValue() {
     this.value = null;
     this.onChanged(null);
+  }
+
+  onFormTouched() {
+    this.onTouched();
   }
 
   onValueChanged(item: any) {

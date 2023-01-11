@@ -36,7 +36,7 @@ export class ClientsComponent implements OnInit {
   // Form creation
   createClientForm() {
     this.clientForm = this._fb.group({
-      client_name: ['', [Validators.required, Validators.min(4), Validators.max(200)]],
+      client_name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       code: null,
       id: null,
       status: 1
@@ -131,7 +131,7 @@ export class ClientsComponent implements OnInit {
         })
       }
     } else {
-      alert('Please fill all requried fields')
+      this.clientForm.markAllAsTouched();
     }
   }
 

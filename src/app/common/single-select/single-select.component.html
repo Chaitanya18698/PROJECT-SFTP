@@ -1,20 +1,26 @@
 <div class="dropdown">
-    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="onTouched()">
-      {{ value ? value.itemName : placeholder }}
-      <div class="clear" (click)="onClearValue()" *ngIf="value">
-        <i class="fa-solid fa-times"></i>
-      </div>
-    </a>
+  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+    (click)="onFormTouched()" (blur)="onFormTouched()" [ngClass]="{'is-invalid': invalid}">
+    {{ value ? value.itemName : placeholder }}
+    <div class="clear" (click)="onClearValue()" *ngIf="value">
+      <i class="fa-solid fa-times"></i>
+    </div>
+  </a>
 
-    <div class="dropdown-menu">
-      <ul>
-        <li *ngFor="let item of optionList; let i = index" [ngClass]="{
+  <div class="dropdown-menu">
+    <ul>
+      <li *ngFor="let item of optionList; let i = index" [ngClass]="{
             active: value && (item.id === value.id) 
           }">
-          <a class="dropdown-item" (click)="onValueChanged(item)">
-            {{ item.itemName }}
-          </a>
-        </li>
-      </ul>
-    </div>
+        <a class="dropdown-item" (click)="onValueChanged(item)">
+          {{ item.itemName }}
+        </a>
+      </li>
+    </ul>
   </div>
+  <div class="invalid-feedback" *ngIf="invalid">
+    <span *ngIf="!value">
+      Client is required.
+    </span>
+  </div>
+</div>

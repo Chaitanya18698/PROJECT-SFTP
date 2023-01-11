@@ -23,6 +23,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   spinner = false;;
   loginType: any = '';
   linkedClients: any = [];
+  Number = Number
   constructor(public _encDec: EncryptionService, public _fb: FormBuilder, public _commonService: CommonService,) {
     this.createModuleForm();
   }
@@ -51,12 +52,15 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
       {
         itemName: 'New Module',
         id: 1,
-        icon: 'folder-plus'
+        icon: 'folder-plus',
+        privilage : [1 ]
       },
       {
         itemName: 'File Upload',
         id: 2,
-        icon: 'file-arrow-up'
+        icon: 'file-arrow-up',
+        privilage : [2, 3]
+
       }
     ]
     this.optionsList1 = [

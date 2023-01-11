@@ -95,7 +95,6 @@ export class UsersComponent implements OnInit {
 
 
   openForm() {
-    this._route.navigate(['/add-form', { form: 'users' }])
     this.userData = '';
     this.actionType = 'form'
   }

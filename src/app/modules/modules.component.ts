@@ -65,7 +65,7 @@ export class ModulesComponent implements OnInit {
   // Create form for module
   createModuleForm() {
     this.moduleForm = this._fb.group({
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       status: 1,
       dir_id: null
     })
@@ -161,6 +161,8 @@ export class ModulesComponent implements OnInit {
           }
         })
       }
+    } else {
+      this.moduleForm.markAllAsTouched();
     }
   }
 
@@ -262,7 +264,7 @@ export class ModulesComponent implements OnInit {
         this.valuePicked = fileDirectory.pop()
       }
     }, 10);
-
+    this.getModules();
   }
 
   navigateTo(event: any) {

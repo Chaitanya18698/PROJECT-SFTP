@@ -15,7 +15,7 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
 
   @Input() placeholder!: string;
   @Input() optionList: Array<{ id: any, itemName: string }> = []
-
+  @Input() invalid: any = false
 
   value: any[] = []
   onTouched = () => { };

@@ -19,6 +19,7 @@ export class FilesComponent implements OnInit, OnChanges {
   @Input() inputData: any = '';
   @Output() sendData: any = new EventEmitter();
   modulesData: any = [];
+  loginType: any = '';
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -28,13 +29,18 @@ export class FilesComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.loginType = sessionStorage.getItem('loginType')
     if (this.inputData && this.inputData.dir_id) {
-      // this.getModules();
-      this.getFilesDirs(this.inputData.dir_id)
+      if(this.loginType === '1') {
+        this.getModules();
+      } else {
+        this.getFilesDirs(this.inputData.dir_id)
+      }
     }
   }
 
   ngOnInit(): void {
+    this.loginType = sessionStorage.getItem('loginType')
     this.getfiles();
     this.filesList = [
       {
@@ -51,8 +57,11 @@ export class FilesComponent implements OnInit, OnChanges {
       },
     ];
     if (this.inputData && this.inputData.dir_id) {
-      // this.getModules();
-      this.getFilesDirs(this.inputData.dir_id)
+      if(this.loginType === '1') {
+        this.getModules();
+      } else {
+        this.getFilesDirs(this.inputData.dir_id)
+      }
     }
   }
 
@@ -111,7 +120,12 @@ export class FilesComponent implements OnInit, OnChanges {
 
   clickToOpen(item: any) {
     console.log(item)
-    this.getFilesDirs(item.dir_id)
+    this.inputData = item
+    if(this.loginType === '1') {
+      this.getModules();
+    } else {
+      this.getFilesDirs(item.dir_id)
+    }
     const fileDirectory = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
     fileDirectory.push(item)
     sessionStorage.setItem('current_directory', this._encDec.encrypt(JSON.stringify(fileDirectory)))

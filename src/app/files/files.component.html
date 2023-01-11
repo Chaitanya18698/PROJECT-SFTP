@@ -1,4 +1,4 @@
-<ng-container *ngIf="modulesData.length != 0">
+<ng-container *ngIf="modulesData.length != 0 && !spinner">
   <div class="standlone-title">Folders</div>
 
   <div class="folder-wrap row" *ngIf="modulesData.length">
@@ -20,7 +20,7 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="fileData.length != 0">
+<ng-container *ngIf="fileData.length != 0 && !spinner">
   <div class="standlone-title">Files</div>
   <!-- file data -->
   <div class="folder-wrap row is-file">
@@ -46,3 +46,7 @@
     </div>
   </div>
 </ng-container>
+
+<app-shimmers *ngIf="spinner"></app-shimmers>
+
+<app-empty-states *ngIf="!spinner && ((loginType === '1' && modulesData.length == 0) ||(loginType !== '1' && modulesData.length == 0 && fileData.length == 0))"></app-empty-states>

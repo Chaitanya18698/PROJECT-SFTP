@@ -38,6 +38,9 @@ export class AddFormComponent implements OnInit, OnChanges {
     this.parent_id = this.backTo;
     if(this.userData) {
       this.CreateClientForm();
+      this.clientForm.controls['password'].setErrors(null);
+      this.clientForm.controls['password'].clearValidators();
+      // this.clientForm.controls['password'].updateValueandValidity();
       this.clientForm.patchValue({
         display_id: this.userData.display_id,
         name: this.userData.name,
@@ -109,9 +112,10 @@ export class AddFormComponent implements OnInit, OnChanges {
 
   // Click submit that before wheather its valid or not?
   checkValidation() {
-
-    console.log(this.clientForm.value)
-    if (this.clientForm.valid) {
+    console.log(this.clientForm.controls.display_id.valid, this.clientForm.controls.password.valid,
+      this.clientForm.controls.name.valid)
+    if (this.clientForm.controls.display_id.valid && this.clientForm.controls.password.valid &&
+       this.clientForm.controls.name.valid && this.checkFormArray()) {
       if(this.userData) {
         this.updateImplementor()
       } else {
@@ -121,7 +125,13 @@ export class AddFormComponent implements OnInit, OnChanges {
       this.clientForm.markAllAsTouched();
       console.log(this.clientForm , 'form client')
     }
+  }
 
+  checkFormArray() {
+    const output = this.clientForm.value.priv.every((ele: any) => {
+      return ele.modules.length && ele.client_id.id
+    })
+    return output;
   }
 
   // addUser() {

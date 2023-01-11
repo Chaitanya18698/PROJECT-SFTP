@@ -21,10 +21,10 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu" *ngIf="directoryData.length == 0">
+        <div class="dropdown-menu" *ngIf="directoryData.length == 0 && loginType === '1'">
           <ul>
             <ng-container *ngFor="let item of optionsList1; let i = index">
-              <li *ngIf="loginType === '1'" [ngClass]="{
+              <li [ngClass]="{
                 active: item.itemName == selectedOption,
                 'has-sub': item?.children?.length
               }">
@@ -67,7 +67,7 @@
         <div class="dropdown-menu" *ngIf="i == directoryData.length - 1">
           <ul>
             <ng-container *ngFor="let abc of optionsList; let i = index">
-              <li *ngIf="loginType !== '2' || item.id !== 1" [ngClass]="{
+              <li *ngIf=" abc.privilage.includes(Number(loginType))" [ngClass]="{
                 active: abc.itemName == selectedOption
               }">
                 <a class="dropdown-item" (click)="selectDirectoryOption(abc, item)">

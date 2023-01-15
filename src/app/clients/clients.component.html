@@ -26,7 +26,7 @@
           </tr>
         </thead>
         <tbody [ngStyle]="{
-            'max-height': _sharedService.getTableMaxHeight() + 'px'
+            'max-height': _sharedService.getTableMaxHeight() + 'px', 'min-height': '200px'
           }">
           <tr *ngFor="let item of clientData; let i = index">
             <!-- <td>{{i + 1}}</td> -->

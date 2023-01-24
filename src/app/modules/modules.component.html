@@ -124,6 +124,7 @@
         </tfoot>
       </table>
       <app-shimmers *ngIf="spinner"></app-shimmers>
+      <app-shimmers type="full" *ngIf="spinner"></app-shimmers>
       <app-empty-states *ngIf="!spinner && modulesData.length == 0"></app-empty-states>
     </div>
     <app-files [inputData]="valuePicked" *ngIf="valuePicked" (sendData)="filleEmitter()"></app-files>

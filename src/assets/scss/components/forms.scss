@@ -42,6 +42,12 @@ input {
 
 .form-group {
     margin-block-end: 16px;
+    .dropdown{
+        .dropdown-menu{
+            max-width: initial;
+            width: 100%;
+        }
+    }
 
     &.lg {
         margin-block-end: 24px;

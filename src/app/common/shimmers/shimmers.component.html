@@ -15,7 +15,12 @@
     </tbody>
 </table> -->
 
-<div class="shimmer">
+<div class="shimmer" *ngIf="type == 'default'">
     <i class="fa-solid fa-spinner fa-spin"></i>
     <div class="text">Fetching...</div>
+</div>
+
+<div class="shimmer full" *ngIf="type == 'full'">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    <div class="text">Uploading...</div>
 </div>

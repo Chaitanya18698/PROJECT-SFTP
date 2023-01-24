@@ -25,13 +25,37 @@
   <!-- file data -->
   <div class="folder-wrap row is-file">
     <div
-      class="folder-item col-md-2"
+      class="folder-item dropdown col-md-2"
       *ngFor="let item of fileData; let i = index"
     >
-      <div class="folder-card" (click)="clickOndownload(item)">
+      <div class="folder-card"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
         <!-- [ngClass]="{'active': i < 3, 'deactive': i >= 3}" -->
-        <div class="folder-card-icon">
+        <div
+          class="folder-card-icon"
+        >
           <i class="fa-solid fa-file-alt"></i>
+        </div>
+        <div class="dropdown-menu">
+          <ul>
+            <li>
+              <a
+                class="dropdown-item" (click)="clickOndownload(item)"
+              >
+                Download
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#acdcNewModal"
+              >
+                Delete
+              </a>
+            </li>
+          </ul>
         </div>
         <div class="folder-card-text">
           <div class="icon">
@@ -49,4 +73,10 @@
 
 <app-shimmers *ngIf="spinner"></app-shimmers>
 
-<app-empty-states *ngIf="!spinner && ((loginType === '1' && modulesData.length == 0) ||(loginType !== '1' && modulesData.length == 0 && fileData.length == 0))"></app-empty-states>
+<app-empty-states
+  *ngIf="
+    !spinner &&
+    ((loginType === '1' && modulesData.length == 0) ||
+      (loginType !== '1' && modulesData.length == 0 && fileData.length == 0))
+  "
+></app-empty-states>

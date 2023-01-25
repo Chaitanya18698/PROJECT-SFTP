@@ -7,12 +7,12 @@ import {Router, ActivatedRoute} from '@angular/router'
 })
 export class HeaderComponent implements OnInit {
 
-  userName : any= 'Unknow'
+  userName : any= 'Admin'
   constructor( public _route: Router,
     public route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userName = sessionStorage.getItem('userName') || 'unknow'
+    this.userName = sessionStorage.getItem('userName') ? sessionStorage.getItem('userName') : 'Admin'
   }
 
   logOut() {

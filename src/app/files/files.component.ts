@@ -20,6 +20,8 @@ export class FilesComponent implements OnInit, OnChanges {
   @Output() sendData: any = new EventEmitter();
   modulesData: any = [];
   loginType: any = '';
+  selectedFile: any = null
+  modalSpinner: any = false
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -184,5 +186,38 @@ export class FilesComponent implements OnInit, OnChanges {
       console.log(response);
     })
 
+  }
+
+  clickToDelete(item: any) {
+    this.selectedFile = item
+  }
+
+  deletFileAPI() {
+    if (this.selectedFile) {
+      this.modalSpinner = true;
+      const body = {
+        file_id: this.selectedFile ? this.selectedFile.dir_id : null
+      }
+      this._commonService.deleteFile(body).subscribe((response: any) => {
+        response = this._encDec.decrypt(response.edc)
+        console.log('delete file response', response)
+        if (response.success) {
+          alert('Delete successfully...')
+          this.modalSpinner = false;
+          $("#deletFileModel").modal("hide")
+          if (this.loginType === '1') {
+            this.getModules();
+          } else {
+            this.getFilesDirs(this.inputData.dir_id)
+          }
+        } else {
+          this.modalSpinner = false;
+          alert(response.message)
+        }
+      }, _error => {
+        this.modalSpinner = false;
+
+      })
+    }
   }
 }

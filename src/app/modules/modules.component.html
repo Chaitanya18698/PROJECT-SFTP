@@ -85,7 +85,7 @@
                         >View
                       </a>
                     </li>
-                    <li>
+                    <li *ngIf="loginType == '1'">
                       <a
                         class="dropdown-item"
                         data-bs-toggle="modal"
@@ -95,7 +95,7 @@
                         Update
                       </a>
                     </li>
-                    <li>
+                    <li *ngIf="loginType == '1'">
                       <a
                         class="dropdown-item"
                         data-bs-toggle="modal"

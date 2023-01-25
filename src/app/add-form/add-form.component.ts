@@ -249,7 +249,8 @@ export class AddFormComponent implements OnInit, OnChanges {
           this.backToUrl()
         } else {
           this.cardSpinner = false
-          alert('Something went to worng...!')
+          alert(response.message)
+
         }
       }, error => {
         this.cardSpinner = false
@@ -284,7 +285,8 @@ export class AddFormComponent implements OnInit, OnChanges {
           this.backToUrl()
         } else {
           this.cardSpinner = false
-          alert('Something went to worng...!')
+          alert(response.message)
+
         }
       }, error => {
         alert('Something went to worng...!')
@@ -326,7 +328,8 @@ export class AddFormComponent implements OnInit, OnChanges {
           this.backToUrl()
         } else {
           this.cardSpinner = false
-          alert('Something went to worng...!')
+          alert(response.message)
+
         }
       }, error => {
         this.cardSpinner = false
@@ -364,7 +367,7 @@ export class AddFormComponent implements OnInit, OnChanges {
           this.backToUrl()
         } else {
           this.cardSpinner = false
-          alert('Something went to worng...!')
+          alert(response.message)
         }
       }, error => {
         alert('Something went to worng...!')
@@ -373,7 +376,7 @@ export class AddFormComponent implements OnInit, OnChanges {
     }
   }
 
-  whiteSpace(event: any){
+  whiteSpace(event: any) {
     // event.target.value = event.target.value.trim()
     event.target.value = event.target.value.replace(/\s{2,}/g, ' ');
   }

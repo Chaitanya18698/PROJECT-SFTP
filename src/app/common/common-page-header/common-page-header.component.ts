@@ -20,7 +20,8 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   @Output() refreshOption: any = new EventEmitter();
   @Output() goBack: any = new EventEmitter();
   moduleForm: any = FormGroup;
-  spinner = false;;
+  spinner = false;
+  modalSpinner = false;
   loginType: any = '';
   linkedClients: any = [];
   Number = Number
@@ -37,12 +38,12 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.loginType = sessionStorage.getItem('loginType');
-    if(this.loginType === '2') {
+    if (this.loginType === '2') {
       this.linkedClients = this._encDec.decrypt(sessionStorage.getItem('linked_tokens'))
       console.log(this.linkedClients, 'linked c lients');
       this.linkedClients.forEach((arg: any, index: any) => {
         arg['selected'] = index == 0 ? true : false
-        if(index === 0) {
+        if (index === 0) {
           this.selectedOption = arg.name
         }
       })
@@ -53,13 +54,13 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
         itemName: 'New Module',
         id: 1,
         icon: 'folder-plus',
-        privilage : [1 ]
+        privilage: [1]
       },
       {
         itemName: 'File Upload',
         id: 2,
         icon: 'file-arrow-up',
-        privilage : [2, 3]
+        privilage: [2, 3]
 
       }
     ]
@@ -112,15 +113,20 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
     }
     if (type.id == 2) {
       $('#fileUpload').modal('show')
+      this.fileData = null
     }
   }
 
   onModuleClick() {
-    sessionStorage.setItem(
-      'current_directory',
-      this._encDec.encrypt(JSON.stringify([]))
-    );
-    this.goBack.emit(true)
+    // const Cd = this._encDec.decrypt(sessionStorage.getItem('current_directory'))
+    // if (Cd && Cd.length) {
+
+      sessionStorage.setItem(
+        'current_directory',
+        this._encDec.encrypt(JSON.stringify([]))
+      );
+      this.goBack.emit(true)
+    // }
   }
 
   // Create form for module
@@ -142,7 +148,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
       const body = {
         name: data.name,
         // dir_id: data.dir_id,
-        parent_id : currentDir ? currentDir.dir_id : null
+        parent_id: currentDir ? currentDir.dir_id : null
       }
       console.log('body', body)
       this._commonService.add_module(body).subscribe((response) => {
@@ -179,7 +185,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
   fileData: any = null
   fileupload(event: any) {
     console.log(event)
-
+    this.modalSpinner = true;
 
     const file: File = event.target.files[0];
 
@@ -210,13 +216,15 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
           console.log('ec', response)
           if (response.success) {
             this.refreshOption.emit(true)
+            this.modalSpinner = false
             $('#fileUpload').modal('hide')
           }
         })
       } else {
         alert('invalid file upload')
-        this.fileName = null
-        this.fileData = null
+        this.fileName = null;
+        this.fileData = null;
+        this.modalSpinner = false;
       }
     }
   }

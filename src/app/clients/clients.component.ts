@@ -15,6 +15,7 @@ export class ClientsComponent implements OnInit {
   clientData: any = [];
   selectedItem: any = null
   spinner = false;
+  modalSpinner = false;
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -138,6 +139,7 @@ export class ClientsComponent implements OnInit {
 
   acdcSubmit() {
     if (this.clientForm.valid) {
+      this.modalSpinner = true
       const data = this.clientForm.value;
       const body = {
         id: data.id,
@@ -147,10 +149,12 @@ export class ClientsComponent implements OnInit {
         response = this._encDec.decrypt(response.edc)
         console.log(response)
         if (response.success) {
+          this.modalSpinner = false
           alert('Updated successfully...!')
           $('#acdcNewModal').modal('hide')
           this.getClients();
         } else {
+          this.modalSpinner = false
           alert('Something went wrong...!')
         }
       })

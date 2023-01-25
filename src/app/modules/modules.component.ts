@@ -22,6 +22,7 @@ export class ModulesComponent implements OnInit {
   isTableView: any = true;
   refresh = false;
   shimmer = false;
+  modalSpinner = false;
 
   constructor(
     public _sharedService: SharedService,
@@ -36,7 +37,7 @@ export class ModulesComponent implements OnInit {
   loginType: any = null
   ngOnInit(): void {
     this.loginType = sessionStorage.getItem('loginType')
-    if(this.loginType === '1') {
+    if (this.loginType === '1') {
       this.getModules();
     } else {
       this.getFilesDirs(null)
@@ -130,6 +131,8 @@ export class ModulesComponent implements OnInit {
     if (this.moduleForm.valid) {
       const data = this.moduleForm.value;
       if (!this.selectedItem) {
+        this.modalSpinner = true
+
         const body = {
           name: data.name,
           parent_id: null
@@ -139,12 +142,18 @@ export class ModulesComponent implements OnInit {
           console.log(response)
           if (response.success) {
             this.getModules();
+            alert('Added successfully...!')
+
             $('#addNewModal').modal('hide')
+            this.modalSpinner = false
           } else {
+            this.modalSpinner = false
             this.spinner = false
           }
         })
       } else {
+        this.modalSpinner = true
+
         const body = {
           name: data.name,
           dir_id: data.dir_id
@@ -154,9 +163,12 @@ export class ModulesComponent implements OnInit {
           console.log(response)
 
           if (response.success) {
+            alert('Updated successfully...!')
             $('#addNewModal').modal('hide')
+            this.modalSpinner = false
             this.getModules();
           } else {
+            this.modalSpinner = false
             this.spinner = false
           }
         })
@@ -169,6 +181,7 @@ export class ModulesComponent implements OnInit {
   // Activate ||  Deactivate API's function
   acdcSubmit() {
     if (this.moduleForm.valid) {
+      this.modalSpinner = true;
       const data = this.moduleForm.value;
       const body = {
         dir_id: data.dir_id,
@@ -180,13 +193,16 @@ export class ModulesComponent implements OnInit {
         response = this._encDec.decrypt(response.edc)
         console.log(response)
         if (response.success) {
+          this.modalSpinner = false
           alert('Updated successfully...!')
           $('#acdcNewModal').modal('hide')
           this.getModules();
         } else {
+          this.modalSpinner = false
           alert('Something went wrong...!')
         }
       }, (error: any) => {
+        this.modalSpinner = false
         alert('Something went wrong...!')
       })
     }
@@ -204,7 +220,7 @@ export class ModulesComponent implements OnInit {
     console.log(event)
     this.valuePicked = null;
     this.refresh = !this.refresh;
-    if(this.loginType === '1') {
+    if (this.loginType === '1') {
       this.getModules();
     } else {
       this.getFilesDirs(null)

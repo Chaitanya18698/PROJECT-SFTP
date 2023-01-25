@@ -24,6 +24,7 @@ export class AddFormComponent implements OnInit, OnChanges {
   modulesList: any = [];
   addUserForm: any = FormGroup;
   spinner = false;
+  cardSpinner = false;
   @Input() backTo: any = ''
   parent_id: any = null
   // Form 
@@ -36,7 +37,7 @@ export class AddFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.parent_id = this.backTo;
-    if(this.userData) {
+    if (this.userData) {
       this.CreateClientForm();
       this.clientForm.controls['password'].setErrors(null);
       this.clientForm.controls['password'].clearValidators();
@@ -46,9 +47,9 @@ export class AddFormComponent implements OnInit, OnChanges {
         name: this.userData.name,
         password: this.userData.password,
       })
-      if(this.userData.clients.length  > 1) {
+      if (this.userData.clients.length > 1) {
         this.userData.clients.forEach((arg: any, index: any) => {
-          if(index !== 0) {
+          if (index !== 0) {
             this.addaOneMore();
           }
           this.clientForm.controls['priv'].controls[index].controls['client_id'].setValue(arg);
@@ -96,7 +97,7 @@ export class AddFormComponent implements OnInit, OnChanges {
     }
     this._commonService.getModulesPath(body).subscribe((response) => {
       response = this._encDec.decrypt(response.edc)
-      console.log('module',response)
+      console.log('module', response)
       if (response.success) {
         this.modulesList = response.data;
         this.spinner = false;
@@ -115,15 +116,15 @@ export class AddFormComponent implements OnInit, OnChanges {
     console.log(this.clientForm.controls.display_id.valid, this.clientForm.controls.password.valid,
       this.clientForm.controls.name.valid)
     if (this.clientForm.controls.display_id.valid && this.clientForm.controls.password.valid &&
-       this.clientForm.controls.name.valid && this.checkFormArray()) {
-      if(this.userData) {
+      this.clientForm.controls.name.valid && this.checkFormArray()) {
+      if (this.userData) {
         this.updateImplementor()
       } else {
         this.postImplementor()
       }
     } else {
       this.clientForm.markAllAsTouched();
-      console.log(this.clientForm , 'form client')
+      console.log(this.clientForm, 'form client')
     }
   }
 
@@ -222,7 +223,7 @@ export class AddFormComponent implements OnInit, OnChanges {
   postImplementor() {
     const data = this.clientForm.value;
     if (this.parent_id == 'implementors') {
-
+      this.cardSpinner = true
       const body: any = {
         display_id: data.display_id,
         name: data.name,
@@ -243,21 +244,25 @@ export class AddFormComponent implements OnInit, OnChanges {
         response = this._encDec.decrypt(response.edc);
         console.log("post response", response);
         if (response.success) {
+          this.cardSpinner = false
           alert('Added successfully')
           this.backToUrl()
         } else {
+          this.cardSpinner = false
           alert('Something went to worng...!')
         }
       }, error => {
+        this.cardSpinner = false
         alert('Something went to worng...!')
 
       })
     } else if (this.parent_id == 'client') {
+      this.cardSpinner = true
       const body: any = {
         display_id: data.display_id,
         name: data.name,
         password: data.password,
-        
+
       }
 
       for (const item of data.priv) {
@@ -274,9 +279,11 @@ export class AddFormComponent implements OnInit, OnChanges {
         response = this._encDec.decrypt(response.edc);
         console.log("post response", response);
         if (response.success) {
-          alert('Added successfully')
+          this.cardSpinner = false
+          alert(`Added successfully`)
           this.backToUrl()
         } else {
+          this.cardSpinner = false
           alert('Something went to worng...!')
         }
       }, error => {
@@ -291,7 +298,7 @@ export class AddFormComponent implements OnInit, OnChanges {
   updateImplementor() {
     const data = this.clientForm.value;
     if (this.parent_id == 'implementors') {
-
+      this.cardSpinner = true
       const body: any = {
         id: this.userData.id,
         display_id: data.display_id,
@@ -314,21 +321,27 @@ export class AddFormComponent implements OnInit, OnChanges {
         console.log("post response", response);
         if (response.success) {
           alert('Updated successfully')
+          this.cardSpinner = false
+
           this.backToUrl()
         } else {
+          this.cardSpinner = false
           alert('Something went to worng...!')
         }
       }, error => {
+        this.cardSpinner = false
         alert('Something went to worng...!')
 
       })
     } else if (this.parent_id == 'client') {
+      this.cardSpinner = true
+
       const body: any = {
         id: this.userData.id,
         display_id: data.display_id,
         name: data.name,
         password: data.password,
-        
+
       }
 
       for (const item of data.priv) {
@@ -345,9 +358,12 @@ export class AddFormComponent implements OnInit, OnChanges {
         response = this._encDec.decrypt(response.edc);
         console.log("post response", response);
         if (response.success) {
+          this.cardSpinner = false
+
           alert('Updated successfully')
           this.backToUrl()
         } else {
+          this.cardSpinner = false
           alert('Something went to worng...!')
         }
       }, error => {
@@ -355,5 +371,10 @@ export class AddFormComponent implements OnInit, OnChanges {
 
       })
     }
+  }
+
+  whiteSpace(event: any){
+    // event.target.value = event.target.value.trim()
+    event.target.value = event.target.value.replace(/\s{2,}/g, ' ');
   }
 }

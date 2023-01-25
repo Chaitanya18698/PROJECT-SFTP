@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="table-card">
-      <table class="table" *ngIf="!spinner">
+      <table class="table" *ngIf="!spinner && clientData.length">
         <thead>
           <tr>
             <!-- <th>#</th> -->
@@ -175,10 +175,14 @@
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="!modalSpinner">
         <p>Are you sure you want to change the status of the client?</p>
       </div>
-      <div class="modal-footer">
+      <div class="modal-body" *ngIf="modalSpinner">
+        <app-shimmers contentText="uploading..." *ngIf="modalSpinner"></app-shimmers>
+
+      </div>
+      <div class="modal-footer" *ngIf="!modalSpinner">
         <button type="button" class="btn btn-tertiary-gray btn-sm" data-bs-dismiss="modal">
           Cancel
         </button>

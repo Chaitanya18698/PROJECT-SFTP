@@ -21,7 +21,7 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu" *ngIf="directoryData.length == 0 && loginType === '1'">
+        <div class="dropdown-menu" *ngIf="directoryData.length == 0 && loginType == '1'">
           <ul>
             <ng-container *ngFor="let item of optionsList1; let i = index">
               <li [ngClass]="{
@@ -223,14 +223,18 @@
         <h1 class="modal-title fs-5" id="commonHeadModel">Upload file</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="!modalSpinner">
         <div class="form-group">
           <label for="module-name" class="form-label field-required">Module name</label>
           <input type="file" class="form-control" (input)="fileupload($event)" [(ngModel)]="fileData"
             placeholder="Enter module name" />
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-body" *ngIf="modalSpinner">
+        <app-shimmers contentText="uploading..." ></app-shimmers>
+
+      </div>
+      <div class="modal-footer" *ngIf="!modalSpinner">
         <button type="button" class="btn btn-tertiary-gray btn-sm" data-bs-dismiss="modal">
           Cancel
         </button>

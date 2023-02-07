@@ -1,5 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+declare var $:any;
 
 @Component({
   selector: 'akv-multi-select',
@@ -30,11 +31,19 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
 
 
   ngOnInit(): void {
-    this.randomId = Math.random().toString()
+    this.randomId = Math.random().toString();
+
+    
+    $(document).on('click','.multi-dropdown .dropdown-menu',(event:any)=>{
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    });
   }
 
   onToggleValue(event: Event,item: any) {
-    event.preventDefault();
+    // event.preventDefault();
+    event.stopPropagation();
+    // event.stopImmediatePropagation
     if (this.set.has(item.id)) {
       this.set.delete(item.id);
       this.value = this.value.filter(el => el.id !== item.id);
@@ -68,6 +77,10 @@ export class MultiSelectComponent implements OnInit, ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
     this.disable = isDisabled;
+  }
+
+  stopProp(e:any){
+    e.stopPropagation();
   }
 
 }

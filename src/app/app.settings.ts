@@ -29,6 +29,7 @@ export class AppSettings {
         DOWNLOAD_FILES: environment.apiUrl + '/downloadFile',
         LOGIN_DETAILS: environment.apiUrl + '/login/details',
         UPDATE_IMPLEMENTORS: environment.apiUrl + '/implementor/update',
-        UPDATE_CLIENT: environment.apiUrl + '/client/update'
+        UPDATE_CLIENT: environment.apiUrl + '/client/update',
+        DELETE_FILE_IN_FOLDER : environment.apiUrl + '/delete_file'
     }
 }

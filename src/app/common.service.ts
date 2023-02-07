@@ -138,4 +138,11 @@ export class CommonService {
         const url = AppSettings.API.ACDC_LOGIN_USER;
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
+    
+    // delet file in folder
+    
+    deleteFile(body: any) {
+        const url = AppSettings.API.DELETE_FILE_IN_FOLDER;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
 }

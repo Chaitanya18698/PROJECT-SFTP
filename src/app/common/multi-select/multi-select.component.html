@@ -1,4 +1,4 @@
-<div class="dropdown multi-dropdown">
+<div class="dropdown multi-dropdown" id="{{randomId}}">
   <a
     type="button"
     id="multiSelect"
@@ -10,17 +10,26 @@
     [ngClass]="{'is-invalid': invalid}"
   >
     <div class="multi-selective">
-      <div class="badge-white-filter" *ngFor="let item of value">
-        <span class="text-truncate multi-select-text">
-          {{ item.itemName }} </span
-        ><a name="filter_badge" (click)="onToggleValue($event, item)"
-          ><i class="fa-solid fa-times"></i
-        ></a>
+      
+
+        <div class="badge-white-filter" *ngFor="let item of value.slice(0,2)">
+          <span class="text-truncate multi-select-text">
+            {{ item.itemName }} </span
+          ><a name="filter_badge" (click)="onToggleValue($event, item)"
+            ><i class="fa-solid fa-times"></i
+          ></a>
+        </div>
+     <ng-container *ngIf="value.length > 2">
+      <div class="ah-multi-selective-options">
+        <div class="ah-multi-count">
+          + {{value.length - 2}}
+        </div>
       </div>
+     </ng-container>
       <span *ngIf="!value.length">{{ placeholder }}</span>
     </div>
   </a>
-  <div aria-labelledby="multiSelect" class="dropdown-menu is-no-scroll">
+  <div aria-labelledby="multiSelect" class="dropdown-menu is-no-scroll" (click)="stopProp($event)">
     <!-- <div class="multi-search">
         <div class="input-group input-group-both">
           <div class="input-group-prepend">

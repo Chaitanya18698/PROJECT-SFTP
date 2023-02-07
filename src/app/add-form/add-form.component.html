@@ -6,80 +6,153 @@
           <i class="fa-solid fa-chevron-left"></i>
         </a>
         <div class="page-title">
-          <div class="title">Add User</div>
+          <div class="title">
+            {{ userData ? "Update" : "Add" }}
+            {{ parent_id === "client" ? "Client" : "Implementer" }}
+          </div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-body">
-        <form novalidate role="form" autocomplete="off" [formGroup]="clientForm">
+      <div class="card-body" *ngIf="!cardSpinner">
+        <form
+          novalidate
+          role="form"
+          autocomplete="off"
+          [formGroup]="clientForm"
+        >
           <div class="row form-group border-bottom">
             <div class="col-md-4">
               <div class="form-group lg">
-                <label for="id-generation" class="form-label field-required">{{parent_id === 'client' ? 'Client' :
-                  'Implementer'}} ID</label>
-                <input id="id-generation" type="text" class="form-control" placeholder="Enter ID" name="userId"
+                <label for="id-generation" class="form-label field-required">
+                  Username</label
+                >
+                <input
+                  id="id-generation"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter ID"
+                  name="userId"
+                  (input)="whiteSpace($event)"
                   formControlName="display_id"
-                  [ngClass]="{'is-invalid': clientForm.controls['display_id'].invalid && (clientForm.controls['display_id'].touched || clientForm.controls['display_id'].dirty)}" />
-                <div class="invalid-feedback" *ngIf="
+                  [ngClass]="{
+                    'is-invalid':
+                      clientForm.controls['display_id'].invalid &&
+                      (clientForm.controls['display_id'].touched ||
+                        clientForm.controls['display_id'].dirty)
+                  }"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
                     clientForm.controls['display_id'].invalid &&
                     (clientForm.controls['display_id'].touched ||
                       clientForm.controls['display_id'].dirty)
-                  ">
-                  <span *ngIf="clientForm.controls['display_id']?.errors.required">
-                    {{parent_id === 'client' ? 'Client' : 'Implementer'}} ID is required.
+                  "
+                >
+                  <span
+                    *ngIf="clientForm.controls['display_id']?.errors.required"
+                  >
+                   Username
+                    is required.
                   </span>
-                  <span *ngIf="clientForm.controls['display_id']?.errors.maxlength">
-                    {{parent_id === 'client' ? 'Client' : 'Implementer'}} ID should be atleast 2 characters.
+                  <span
+                    *ngIf="clientForm.controls['display_id']?.errors.minlength"
+                  >
+                    Username
+                    should be atleast 2 characters.
                   </span>
-                  <span *ngIf="clientForm.controls['display_id']?.errors.minlength">
-                    {{parent_id === 'client' ? 'Client' : 'Implementer'}} ID should not be more than 10 characters.
+                  <span
+                    *ngIf="clientForm.controls['display_id']?.errors.maxlength"
+                  >
+                   Username
+                    should not be more than 10 characters.
                   </span>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group lg">
-                <label for="username" class="form-label field-required">Username</label>
-                <input id="username" type="text" class="form-control" placeholder="Enter Username" name="userName"
+                <label for="username" class="form-label field-required"
+                  >{{ parent_id === "client" ? "Authorised Person Name" : "Implementer Name" }}</label
+                >
+                <input
+                  id="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Username"
+                  name="userName"
                   formControlName="name"
-                  [ngClass]="{'is-invalid': clientForm.controls['name'].invalid && (clientForm.controls['name'].touched || clientForm.controls['name'].dirty)}" />
-                <div class="invalid-feedback" *ngIf="
+                  (input)="whiteSpace($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      clientForm.controls['name'].invalid &&
+                      (clientForm.controls['name'].touched ||
+                        clientForm.controls['name'].dirty)
+                  }"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
                     clientForm.controls['name'].invalid &&
                     (clientForm.controls['name'].touched ||
                       clientForm.controls['name'].dirty)
-                  ">
+                  "
+                >
                   <span *ngIf="clientForm.controls['name']?.errors.required">
-                    Username is required.
-                  </span>
-                  <span *ngIf="clientForm.controls['name']?.errors.maxlength">
-                    Username should be atleast 2 characters.
+                    Name is required.
                   </span>
                   <span *ngIf="clientForm.controls['name']?.errors.minlength">
-                    Username should not be more than 100 characters.
+                    Name should be atleast 2 characters.
+                  </span>
+                  <span *ngIf="clientForm.controls['name']?.errors.maxlength">
+                    Name should not be more than 100 characters.
                   </span>
                 </div>
               </div>
             </div>
             <div class="col-md-4" *ngIf="!userData">
               <div class="form-group lg">
-                <label for="password" class="form-label field-required">Password</label>
-                <input id="password" type="text" class="form-control" placeholder="Enter Password" name="password"
+                <label for="password" class="form-label field-required"
+                  >Password</label
+                >
+                <input
+                  id="password"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Password"
+                  name="password"
                   formControlName="password"
-                  [ngClass]="{'is-invalid': clientForm.controls['password'].invalid && (clientForm.controls['password'].touched || clientForm.controls['password'].dirty)}" />
-                <div class="invalid-feedback" *ngIf="
+                  (input)="whiteSpace($event)"
+                  [ngClass]="{
+                    'is-invalid':
+                      clientForm.controls['password'].invalid &&
+                      (clientForm.controls['password'].touched ||
+                        clientForm.controls['password'].dirty)
+                  }"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
                     clientForm.controls['password'].invalid &&
                     (clientForm.controls['password'].touched ||
                       clientForm.controls['password'].dirty)
-                  ">
-                  <span *ngIf="clientForm.controls['password']?.errors.required">
+                  "
+                >
+                  <span
+                    *ngIf="clientForm.controls['password']?.errors.required"
+                  >
                     Password is required.
                   </span>
-                  <span *ngIf="clientForm.controls['password']?.errors.maxlength">
+                  <span
+                    *ngIf="clientForm.controls['password']?.errors.minlength"
+                  >
                     Password should be atleast 2 characters.
                   </span>
-                  <span *ngIf="clientForm.controls['password']?.errors.minlength">
+                  <span
+                    *ngIf="clientForm.controls['password']?.errors.maxlength"
+                  >
                     Password should not be more than 100 characters.
                   </span>
                 </div>
@@ -106,29 +179,54 @@
           </div> -->
           <div class="row">
             <ng-container formArrayName="priv">
-              <div class="col-md-12" *ngFor="let clientIndex of clientForm.controls?.priv?.['controls']; let i = index">
-                <div class="row" [formGroupName]="i" [ngClass]="{
+              <div
+                class="col-md-12"
+                *ngFor="let clientIndex of clientForm.controls?.priv?.['controls']; let i = index"
+              >
+                <div
+                  class="row"
+                  [formGroupName]="i"
+                  [ngClass]="{
                     'border-bottom form-group': i + 1 != priv.controls.length
-                  }">
+                  }"
+                >
                   <!-- Client -->
                   <div class="col-md-4">
                     <div class="form-group lg">
-                      <label for="client" class="form-label field-required">Select Client</label>
-                      <akv-single-select [optionList]="clientsList" placeholder="Select Client"
-                        formControlName="client_id" [invalid]="clientIndex.controls['client_id'].invalid &&
-                        (clientIndex.controls['client_id'].touched ||
-                          clientIndex.controls['client_id'].dirty)"></akv-single-select>
-
+                      <label for="client" class="form-label field-required"
+                        >Select Client</label
+                      >
+                      <akv-single-select
+                        [optionList]="clientsList"
+                        placeholder="Select Client"
+                        formControlName="client_id"
+                        [invalid]="
+                          clientIndex.controls['client_id'].invalid &&
+                          (clientIndex.controls['client_id'].touched ||
+                            clientIndex.controls['client_id'].dirty)
+                        "
+                      ></akv-single-select>
                     </div>
                   </div>
                   <!-- Modules -->
                   <div class="col-md-4">
                     <div class="form-group lg">
-                      <label for="module{{ i }}" class="form-label field-required">Select Module</label>
-                      <akv-multi-select [optionList]="modulesList" placeholder="Select Modules" id="module{{ i }}"
-                        formControlName="modules" [invalid]="clientIndex.controls['modules'].invalid &&
-                        (clientIndex.controls['modules'].touched ||
-                          clientIndex.controls['modules'].dirty)"></akv-multi-select>
+                      <label
+                        for="module{{ i }}"
+                        class="form-label field-required"
+                        >Select Module(s)</label
+                      >
+                      <akv-multi-select
+                        [optionList]="modulesList"
+                        placeholder="Select Modules"
+                        id="module{{ i }}"
+                        formControlName="modules"
+                        [invalid]="
+                          clientIndex.controls['modules'].invalid &&
+                          (clientIndex.controls['modules'].touched ||
+                            clientIndex.controls['modules'].dirty)
+                        "
+                      ></akv-multi-select>
                       <!-- <div
                       class="invalid-feedback"
                       *ngIf="
@@ -145,13 +243,22 @@
                     </div> -->
                     </div>
                   </div>
-                  <div class="col-md-12 text-end" [ngClass]="{ 'form-group': i + 1 != priv.controls.length }"
-                    *ngIf="parent_id != 'client'">
-                    <button class="btn btn-xs btn-icon btn-tertiary btn-red" (click)="removeForm(i)">
+                  <div
+                    class="col-md-12 text-end"
+                    [ngClass]="{ 'form-group': i + 1 != priv.controls.length }"
+                    *ngIf="parent_id != 'client'"
+                  >
+                    <button
+                      class="btn btn-xs btn-icon btn-tertiary btn-red"
+                      (click)="removeForm(i)"
+                    >
                       Delete
                     </button>
-                    <button class="btn btn-xs btn-icon btn-tertiary" *ngIf="i == priv.length - 1"
-                      (click)="addaOneMore()">
+                    <button
+                      class="btn btn-xs btn-icon btn-tertiary"
+                      *ngIf="i == priv.length - 1"
+                      (click)="addaOneMore()"
+                    >
                       Add
                     </button>
                   </div>
@@ -161,7 +268,10 @@
           </div>
         </form>
       </div>
-      <div class="card-footer">
+      <div class="card-body" *ngIf="cardSpinner">
+        <app-shimmers type="full"></app-shimmers>
+      </div>
+      <div class="card-footer" *ngIf="!cardSpinner">
         <button class="btn btn-tertiary-gray">Cancel</button>
         <button class="btn btn-primary" (click)="checkValidation()">
           Submit

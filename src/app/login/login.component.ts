@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
     public _commonService: CommonService,
     public _route: Router,
     public route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    $('.otp-set-input').keyup((e: any) => {});
+    $('.otp-set-input').keyup((e: any) => { });
     sessionStorage.setItem(
       'current_directory',
       this._encDec.encrypt(JSON.stringify([]))
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       if (!response.error) {
         sessionStorage.setItem('token', response.data.current_token);
         sessionStorage.setItem('loginType', response.data.loginType);
-        if(response.data.loginType === 2) {
+        if (response.data.loginType === 2) {
           sessionStorage.setItem('linked_tokens', this._encDec.encrypt(JSON.stringify(response.data.linkedClients)))
         }
         //Decode token
@@ -86,6 +86,13 @@ export class LoginComponent implements OnInit {
           'current_directory',
           this._encDec.encrypt(JSON.stringify([]))
         );
+        if (userData) {
+
+          sessionStorage.setItem(
+            'userName',
+            userData.name
+          );
+        }
       }
       if (response.success) {
         this.loading = false;

@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ShimmersComponent implements OnInit {
   numOfCols:any = 5;
   @Input() type:any = 'default';
+  @Input() contentText:any =  null;
 
   constructor() { }
 

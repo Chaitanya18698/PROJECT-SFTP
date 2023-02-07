@@ -1,9 +1,10 @@
 <div class="page-header">
   <div class="page-heading">
     <div class="page-title">
-      <div class="dropdown page-header-dropdown" [ngClass]="{ active: directoryData.length == 0 && loginType !== '1'}">
-        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+      <div class="dropdown page-header-dropdown" id="moduleDropMenu" [ngClass]="{ active: directoryData.length == 0 && loginType !== '1'}">
+        <a class="dropdown-toggle" 
           (click)="onModuleClick()">
+          <!-- role="button" data-bs-toggle="dropdown" aria-expanded="false" -->
           Modules
           <!-- <div
             class="clear"
@@ -21,7 +22,8 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu" *ngIf="directoryData.length == 0 && loginType == '1'">
+        <div class="dropdown-menu admin">
+          <!-- *ngIf="directoryData.length == 0 && loginType == '1'" -->
           <ul>
             <ng-container *ngFor="let item of optionsList1; let i = index">
               <li [ngClass]="{
@@ -43,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="page-child-title" *ngFor="let item of directoryData; let i = index">
+    <div class="page-child-title  one" *ngFor="let item of directoryData; let i = index">
       <div class="dropdown page-header-dropdown" [ngClass]="{ active: i == directoryData.length - 1 }">
         <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
           (click)="onDirectoryClick(item, i)">
@@ -64,7 +66,7 @@
           </div> -->
         </a>
 
-        <div class="dropdown-menu" *ngIf="i == directoryData.length - 1">
+        <div class="dropdown-menu  two" *ngIf="i == directoryData.length - 1">
           <ul>
             <ng-container *ngFor="let abc of optionsList; let i = index">
               <li *ngIf=" abc.privilage.includes(Number(loginType))" [ngClass]="{

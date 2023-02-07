@@ -1,4 +1,11 @@
 .dropdown {
+    &.show {
+        .dropdown-toggle{
+            &:after{
+                transform: rotate(-180deg) !important;
+            }
+        }
+    }
     a.dropdown-toggle {
         position: relative;
         border-width: 1px;
@@ -34,9 +41,9 @@
             transition: all .2s ease;
         }
 
-        &[aria-expanded=true] {
+        &[aria-expanded=true]{
             &:after {
-                transform: rotate(180deg);
+                transform: rotate(-180deg);
             }
         }
 
@@ -165,6 +172,7 @@
                 display: flex;
                 align-items: center;
                 position: relative;
+                width: 100%;
 
                 .badge-white-filter {
                     margin-right: 3px;
@@ -230,6 +238,7 @@
                     .checkbox-wrap {
                         label {
                             padding: 14px 14px 14px 38px;
+                            display: block;
 
                             &:before {
                                 left: 14px;
@@ -252,9 +261,9 @@
             .dropdown-toggle{
                 color: $base-text-900;
                 font-size: $base-text-700;
-                &:after{
-                    transform: none;
-                }
+                // &:after{
+                //     transform: none;
+                // }
             }
         }
         .dropdown-toggle{

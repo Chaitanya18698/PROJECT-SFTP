@@ -280,7 +280,7 @@ export class ModulesComponent implements OnInit {
         this.valuePicked = fileDirectory.pop()
       }
     }, 10);
-    this.getModules();
+    // this.getModules();
   }
 
   navigateTo(event: any) {

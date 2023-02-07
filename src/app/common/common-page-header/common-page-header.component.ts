@@ -34,10 +34,25 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
     this.loginType = sessionStorage.getItem('loginType');
     this.directoryData = this._encDec.decrypt(sessionStorage.getItem('current_directory'));
     console.log(this.directoryData, 'current directory');
+
+    if(this.directoryData.length){
+      $('#moduleDropMenu').hasClass('hide')
+    };
   }
 
   ngOnInit(): void {
+    $(document).on('click',(event:any)=>{
+
+      if(!$(event.target).closest('#moduleDropMenu').length){
+        $('#moduleDropMenu').dropdown('hide')
+      }
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+    });
     this.loginType = sessionStorage.getItem('loginType');
+    if(this.directoryData.length){
+      $('#moduleDropMenu').hasClass('hide')
+    }
     if (this.loginType === '2') {
       this.linkedClients = this._encDec.decrypt(sessionStorage.getItem('linked_tokens'))
       console.log(this.linkedClients, 'linked c lients');
@@ -121,12 +136,22 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
     // const Cd = this._encDec.decrypt(sessionStorage.getItem('current_directory'))
     // if (Cd && Cd.length) {
 
-      sessionStorage.setItem(
-        'current_directory',
-        this._encDec.encrypt(JSON.stringify([]))
-      );
-      this.goBack.emit(true)
+      
+    sessionStorage.setItem(
+      'current_directory',
+      this._encDec.encrypt(JSON.stringify([]))
+    );
+    this.goBack.emit(true)
     // }
+
+    if(this.directoryData.length == 0 && this.loginType == '1'){
+      if($('#moduleDropMenu').hasClass('show')){
+        $('#moduleDropMenu').dropdown('hide');
+      }else{
+        $('#moduleDropMenu').dropdown('show')
+      }
+    }else{
+    }
   }
 
   // Create form for module
@@ -228,4 +253,6 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
       }
     }
   }
+
+  
 }

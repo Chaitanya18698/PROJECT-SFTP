@@ -48,7 +48,8 @@
             transition: all .2s ease-in-out;
         }
         &:after{
-            content: "\f00c";
+            content: '\f00c';
+            font: var(--fa-font-solid);
             display: block;
             left: 0;
             top: 0;
@@ -61,7 +62,7 @@
             opacity: 0;
             color: #fff;
             cursor: pointer;
-            font-family: "Font Awesome 5 Pro";
+            // font-family: "Font Awesome 5 Pro";
             transition: all .2s ease-in-out;
         }
     }

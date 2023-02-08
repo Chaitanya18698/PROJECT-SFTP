@@ -67,13 +67,13 @@ export class TopMenuComponent implements OnInit {
       rolePrivilage: [1],
       defaultRoute: false
     },
-    {
-      tabName: 'Logs',
-      routerLink: '/logs',
-      router: 'logs',
-      rolePrivilage: [1],
-      defaultRoute: false
-    }
+    // {
+    //   tabName: 'Logs',
+    //   routerLink: '/logs',
+    //   router: 'logs',
+    //   rolePrivilage: [1],
+    //   defaultRoute: false
+    // }
 
   ]
 

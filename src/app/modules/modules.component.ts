@@ -280,6 +280,12 @@ export class ModulesComponent implements OnInit {
         this.valuePicked = fileDirectory.pop()
       }
     }, 10);
+
+    if (this.loginType === '1') {
+      this.getModules();
+    } else {
+      this.getFilesDirs(null)
+    }
     // this.getModules();
   }
 

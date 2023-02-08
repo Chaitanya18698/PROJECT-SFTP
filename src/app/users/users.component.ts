@@ -118,6 +118,9 @@ export class UsersComponent implements OnInit {
         alert('Update successfuly...!')
         $('#acdcNewModal').modal('hide')
         this.getUsers()
+      }else{
+        alert(response.message)
+
       }
     })
   }

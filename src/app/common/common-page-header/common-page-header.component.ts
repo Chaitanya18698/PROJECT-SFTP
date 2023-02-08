@@ -181,8 +181,10 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
         console.log(response)
         if (response.success) {
           $('#commonHeadModel').modal('hide')
+          alert("Added successfully...!")
           this.refreshOption.emit(true)
         } else {
+          alert(response.message)
           this.spinner = false
         }
       })
@@ -241,6 +243,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
           console.log('ec', response)
           if (response.success) {
             this.refreshOption.emit(true)
+            alert('Upload successfully...!')
             this.modalSpinner = false
             $('#fileUpload').modal('hide')
           }

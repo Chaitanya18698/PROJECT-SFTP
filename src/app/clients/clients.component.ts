@@ -110,7 +110,8 @@ export class ClientsComponent implements OnInit {
             $('#addNewModal').modal('hide')
             this.getClients();
           } else {
-            alert('Something went wrong...!')
+            alert(response.message)
+
           }
         })
       } else {
@@ -127,7 +128,7 @@ export class ClientsComponent implements OnInit {
             $('#addNewModal').modal('hide')
 
           } else {
-            alert('Something went wrong...!')
+            alert(response.message)
           }
         })
       }
@@ -155,7 +156,7 @@ export class ClientsComponent implements OnInit {
           this.getClients();
         } else {
           this.modalSpinner = false
-          alert('Something went wrong...!')
+          alert(response.message)
         }
       })
     }

@@ -196,13 +196,13 @@ export class FilesComponent implements OnInit, OnChanges {
     if (this.selectedFile) {
       this.modalSpinner = true;
       const body = {
-        file_id: this.selectedFile ? this.selectedFile.dir_id : null
+        file_id: this.selectedFile ? this.selectedFile.id : null
       }
       this._commonService.deleteFile(body).subscribe((response: any) => {
         response = this._encDec.decrypt(response.edc)
         console.log('delete file response', response)
         if (response.success) {
-          alert('Delete successfully...')
+          alert('File deleted successfully...')
           this.modalSpinner = false;
           $("#deletFileModel").modal("hide")
           if (this.loginType === '1') {

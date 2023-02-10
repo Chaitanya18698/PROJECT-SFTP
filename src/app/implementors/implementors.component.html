@@ -238,7 +238,7 @@
         >
           Cancel
         </button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="changePassword()">Submit</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="changePassword()" [disabled]="!newPassword || !confirmPassword">Submit</button>
       </div>
     </div>
   </div>

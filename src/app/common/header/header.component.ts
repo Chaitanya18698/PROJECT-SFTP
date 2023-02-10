@@ -31,6 +31,12 @@ export class HeaderComponent implements OnInit {
       event.stopImmediatePropagation();
     });
     this.userName = sessionStorage.getItem('userName') ? sessionStorage.getItem('userName') : 'Admin';
+    if(this.userName) {
+      this.userName = this.userName.trim();
+      if(this.userName.split('').length > 0) {
+        this.userName =  this.userName.split('').map((e: any) => e[0]).join('').substr(0,1).toUpperCase()
+      }
+    }
   }
 
   logOut() {

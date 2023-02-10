@@ -2,7 +2,7 @@ import { env } from "process";
 import { environment } from "src/environments/environment";
 
 export class AppSettings {
-    public static API = {
+    public static API: any = {
         LOGIN_APP: environment.apiUrl + '/login',
         GET_MODULES: environment.apiUrl + '/dir/list',
         ADD_MODULES: environment.apiUrl + '/dir/add',

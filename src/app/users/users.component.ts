@@ -15,6 +15,13 @@ export class UsersComponent implements OnInit {
   spinner = false;
   actionType: any = 'table';
   userData: any = '';
+  currentPassword: any = '';
+  newPassword: any = '';
+  confirmPassword: any = '';
+  loginType: any = '';
+  hidePassword = true;
+  hidePassword1 = true;
+  displayID = '';
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -23,6 +30,7 @@ export class UsersComponent implements OnInit {
     public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loginType = sessionStorage.getItem('loginType')
     this.getUsers();
   }
 
@@ -99,6 +107,13 @@ export class UsersComponent implements OnInit {
     this.actionType = 'form'
   }
 
+  resetPassword(item: any){
+    this.displayID = item.display_id
+    this.confirmPassword = '';
+    this.currentPassword = '';
+    this.newPassword = '';
+  }
+
   // Click for actions
   valuPicked: any = null
   clickOnActions(item: any) {
@@ -125,5 +140,32 @@ export class UsersComponent implements OnInit {
     })
   }
 
+
+  togglePassword() {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  togglePassword1() {
+    this.hidePassword1 = !this.hidePassword1;
+  }
+
+  changePassword() {
+    const body = {
+      display_id: this.displayID,
+      new_password: this.newPassword,
+      confirm_password: this.confirmPassword
+    }
+    this._commonService.resetPassword(body).subscribe((response: any) => {
+      response = this._encDec.decrypt(response.edc)
+      console.log('acdc', response)
+      if (response.success) {
+        $('#passwordModal2').modal('hide')
+        alert('Update successfuly...!')
+      }else{
+        alert(response.message)
+
+      }
+    })
+  }
 
 }

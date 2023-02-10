@@ -16,6 +16,8 @@ export class ClientsComponent implements OnInit {
   selectedItem: any = null
   spinner = false;
   modalSpinner = false;
+  isReset = false;
+  loginType: any = ''
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -29,7 +31,7 @@ export class ClientsComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.loginType = sessionStorage.getItem('loginType')
     this.getClients();
 
   }
@@ -160,6 +162,10 @@ export class ClientsComponent implements OnInit {
         }
       })
     }
+  }
+
+  showReset(){
+    this.isReset = true;
   }
 
 }

@@ -30,6 +30,7 @@ export class AppSettings {
         LOGIN_DETAILS: environment.apiUrl + '/login/details',
         UPDATE_IMPLEMENTORS: environment.apiUrl + '/implementor/update',
         UPDATE_CLIENT: environment.apiUrl + '/client/update',
-        DELETE_FILE_IN_FOLDER : environment.apiUrl + '/delete_file'
+        DELETE_FILE_IN_FOLDER : environment.apiUrl + '/delete_file',
+        RESET_PASSWORD: environment.apiUrl + '/password/reset'
     }
 }

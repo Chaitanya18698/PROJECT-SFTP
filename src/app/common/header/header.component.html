@@ -18,6 +18,11 @@
             </a>
             <div class="dropdown-menu">
               <ul>
+                <li id="changepassword" (click)="resetPassword()" *ngIf="loginType !== '1'">
+                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#passwordModal">
+                    Change Password
+                  </a>
+                </li>
                 <li id="logout" (click)="logOut()">
                   <a class="dropdown-item">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i> Logout
@@ -26,9 +31,98 @@
               </ul>
             </div>
           </li>
+          
         </ul>
       </div>
     </nav>
     <app-top-menu></app-top-menu>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="passwordModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="addNewModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="passwordModal">Change Password</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="implementor-name" class="form-label field-required"
+            >Current Password</label
+          >
+          <div class="input-group-append">
+            <input id="password" type="{{hidePassword2 ? 'password' : 'text'}}" class="form-control"
+                placeholder="Current password" [(ngModel)]="currentPassword">
+            <span id="toggle-password" class="icon" *ngIf="currentPassword != '' && !hidePassword2"
+                (click)="togglePassword2()">
+                <i class="fa-solid fa-eye"></i>
+            </span>
+            <span id="toggle-password" class="icon" *ngIf="currentPassword != '' && hidePassword2"
+                (click)="togglePassword2()">
+                <i class="fa-solid fa-eye-slash"></i>
+            </span>
+        </div>
+        </div>
+        <div class="form-group">
+          <label for="implementor-name" class="form-label field-required"
+            >New Password</label
+          >
+          <div class="input-group-append">
+            <input id="password" type="{{hidePassword1 ? 'password' : 'text'}}" class="form-control"
+                placeholder="Confirm password" [(ngModel)]="newPassword">
+            <span id="toggle-password" class="icon" *ngIf="newPassword != '' && !hidePassword1"
+                (click)="togglePassword1()">
+                <i class="fa-solid fa-eye"></i>
+            </span>
+            <span id="toggle-password" class="icon" *ngIf="newPassword != '' && hidePassword1"
+                (click)="togglePassword1()">
+                <i class="fa-solid fa-eye-slash"></i>
+            </span>
+        </div>
+        </div>
+        <div class="form-group">
+          <label for="implementor-name" class="form-label field-required"
+            >Confirm Password</label
+          >
+          <div class="input-group-append">
+            <input id="password" type="{{hidePassword ? 'password' : 'text'}}" class="form-control"
+                placeholder="Confirm password" [(ngModel)]="confirmPassword">
+            <span id="toggle-password" class="icon" *ngIf="confirmPassword != '' && !hidePassword"
+                (click)="togglePassword()">
+                <i class="fa-solid fa-eye"></i>
+            </span>
+            <span id="toggle-password" class="icon" *ngIf="confirmPassword != '' && hidePassword"
+                (click)="togglePassword()">
+                <i class="fa-solid fa-eye-slash"></i>
+            </span>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-tertiary-gray btn-sm"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="changePassword()">Submit</button>
+      </div>
+    </div>
   </div>
 </div>

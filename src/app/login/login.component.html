@@ -7,12 +7,12 @@
 
     <div class="login-wrapper">
         <div class="login-set">
-            <div class="login-logo">
+            <div class="login-logo" *ngIf="type == 'default'">
                 <img src="../../assets/images/akrivia_logo2.png" alt="Company Name">
             </div>
 
             <!-- LOGIN -->
-            <div class="login-card" *ngIf="login_type == 'login'">
+            <div class="login-card" *ngIf="login_type == 'login' && type == 'default'">
                 <div class="login-card-head">
                     <div class="login-card-head-title">
                         Welcome Back
@@ -63,19 +63,19 @@
                 </div>
                 <div class="login-footer">
                     <div class="login-footer-left">
-                        <button class="btn btn-text btn-sm" id="forgot-password"
+                        <!-- <button class="btn btn-text btn-sm" id="forgot-password"
                             (click)="handleLogin('forgot_password')">Forgot
-                            password</button>
+                            password</button> -->
                     </div>
                     <div class="login-footer-right">
-                        <button class="btn btn-text btn-sm" id="new-user" (click)="handleLogin('register')">New
-                            user?</button>
+                        <!-- <button class="btn btn-text btn-sm" id="new-user" (click)="handleLogin('register')">New
+                            user?</button> -->
                     </div>
                 </div>
             </div>
 
             <!-- FORGOT PASSWORD -->
-            <div class="login-card" *ngIf="login_type == 'forgot_password'">
+            <div class="login-card" *ngIf="login_type == 'forgot_password' || type == 'forgot'">
                 <div class="login-card-head">
                     <div class="login-card-head-title">
                         Password Reset
@@ -102,7 +102,7 @@
             </div>
 
             <!-- OTP -->
-            <div class="login-card" *ngIf="login_type == 'otp'">
+            <div class="login-card" *ngIf="login_type == 'otp' && type == 'default'">
                 <div class="login-card-head">
                     <div class="login-card-head-title">
                         Enter OTP
@@ -152,7 +152,7 @@
             </div>
 
             <!-- CREATE NEW PASSWORD -->
-            <div class="login-card" *ngIf="login_type == 'new_password'">
+            <div class="login-card" *ngIf="login_type == 'new_password' || type == 'reset'">
                 <div class="login-card-head">
                     <div class="login-card-head-title">
                         Create new password
@@ -207,7 +207,7 @@
             </div>
 
             <!-- NEW USER -->
-            <div class="login-card" *ngIf="login_type == 'register'">
+            <div class="login-card" *ngIf="login_type == 'register' && type == 'default'">
                 <div class="login-card-head">
                     <div class="login-card-head-title">
                         Create an account

@@ -15,6 +15,13 @@ export class ImplementorsComponent implements OnInit {
   spinner = false;
   actionType = 'table';
   userData: any = '';
+  currentPassword: any = '';
+  newPassword: any = '';
+  confirmPassword: any = '';
+  loginType: any = '';
+  hidePassword = true;
+  hidePassword1 = true;
+  displayID: any = ''
   constructor(
     public _sharedService: SharedService,
     public _encDec: EncryptionService,
@@ -23,6 +30,7 @@ export class ImplementorsComponent implements OnInit {
     public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loginType = sessionStorage.getItem('loginType')
     this.getImplementors();
   }
 
@@ -96,4 +104,37 @@ export class ImplementorsComponent implements OnInit {
     this.actionType = 'form'
   }
 
+  resetPassword(item: any){
+    this.displayID = item.display_id
+    this.confirmPassword = '';
+    this.currentPassword = '';
+    this.newPassword = '';
+  }
+
+  togglePassword() {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  togglePassword1() {
+    this.hidePassword1 = !this.hidePassword1;
+  }
+
+  changePassword() {
+    const body = {
+      display_id: this.displayID,
+      new_password: this.newPassword,
+      confirm_password: this.confirmPassword
+    }
+    this._commonService.resetPassword(body).subscribe((response: any) => {
+      response = this._encDec.decrypt(response.edc)
+      console.log('acdc', response)
+      if (response.success) {
+        $('#passwordModal1').modal('hide')
+        alert('Update successfuly...!')
+      }else{
+        alert(response.message)
+
+      }
+    })
+  }
 }

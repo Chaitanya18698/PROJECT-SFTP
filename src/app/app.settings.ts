@@ -2,7 +2,7 @@ import { env } from "process";
 import { environment } from "src/environments/environment";
 
 export class AppSettings {
-    public static API = {
+    public static API: any = {
         LOGIN_APP: environment.apiUrl + '/login',
         GET_MODULES: environment.apiUrl + '/dir/list',
         ADD_MODULES: environment.apiUrl + '/dir/add',
@@ -30,6 +30,7 @@ export class AppSettings {
         LOGIN_DETAILS: environment.apiUrl + '/login/details',
         UPDATE_IMPLEMENTORS: environment.apiUrl + '/implementor/update',
         UPDATE_CLIENT: environment.apiUrl + '/client/update',
-        DELETE_FILE_IN_FOLDER : environment.apiUrl + '/delete_file'
+        DELETE_FILE_IN_FOLDER : environment.apiUrl + '/delete_file',
+        RESET_PASSWORD: environment.apiUrl + '/password/reset'
     }
 }

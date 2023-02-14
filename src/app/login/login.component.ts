@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 declare var $: any;
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { EncryptionService } from '../encryption.service';
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   error = '';
   errMsg = true;
   password1: any = '';
+  @Input() type:any = 'default';
 
   constructor(
     public _encDec: EncryptionService,
@@ -90,7 +91,7 @@ export class LoginComponent implements OnInit {
 
           sessionStorage.setItem(
             'userName',
-            userData.name
+            userData.name ? userData.name : 'Admin'
           );
         }
       }

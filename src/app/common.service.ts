@@ -145,4 +145,11 @@ export class CommonService {
         const url = AppSettings.API.DELETE_FILE_IN_FOLDER;
         return this._apiservice.callApi({ url, method: 'POST', body })
     }
+
+    // change password
+
+    resetPassword(body: any) {
+        const url = AppSettings.API.RESET_PASSWORD;
+        return this._apiservice.callApi({ url, method: 'POST', body })
+    }
 }

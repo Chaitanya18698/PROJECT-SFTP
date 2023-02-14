@@ -1,7 +1,7 @@
 <div class="page-wrapper">
   <app-header></app-header>
   <div class="page-container">
-    <div class="page-header">
+    <div class="page-header" *ngIf="!isReset">
       <div class="page-heading">
         <div class="page-title">Clients</div>
       </div>
@@ -14,6 +14,22 @@
         </div>
       </div>
     </div>
+
+    
+    <div class="page-header" *ngIf="isReset">
+      <div class="page-header-title">
+        <a class="page-header-title-icon">
+          <i class="fa-solid fa-chevron-left"></i>
+        </a>
+        <div class="page-title">
+          <div class="title">
+            Reset Password
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="table-card">
       <table class="table" *ngIf="!spinner && clientData.length">
         <thead>
@@ -67,7 +83,7 @@
                     <li>
                       <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#acdcNewModal"
                         (click)="clickToAction('acdc', item)">
-                        {{ item.status == 1 ? "Deactivate" : "Activate" }}
+                        {{ item.status == 1 ? "Deactivate" : "Restore" }}
                       </a>
                     </li>
                   </ul>
@@ -112,6 +128,7 @@
       <app-shimmers *ngIf="spinner"></app-shimmers>
       <app-empty-states *ngIf="!spinner && clientData.length == 0"></app-empty-states>
     </div>
+    <app-login [type]="'reset'"></app-login>
   </div>
   <app-footer></app-footer>
 </div>

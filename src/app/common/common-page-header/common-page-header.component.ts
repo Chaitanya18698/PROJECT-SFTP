@@ -128,6 +128,8 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
     }
     if (type.id == 2) {
       $('#fileUpload').modal('show')
+      this.modalSpinner = false
+
       this.fileData = null
     }
   }
@@ -245,6 +247,7 @@ export class CommonPageHeaderComponent implements OnInit, OnChanges {
             this.refreshOption.emit(true)
             alert('Upload successfully...!')
             this.modalSpinner = false
+            this.fileData = '';
             $('#fileUpload').modal('hide')
           }
         })
